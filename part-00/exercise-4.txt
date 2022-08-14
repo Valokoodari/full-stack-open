@@ -1,0 +1,21 @@
+title Creating a new note
+
+Browser -> Server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note over Server: Add the new note to the 'notes' array
+Server --> Browser: HTTP 302 /exampleapp/notes
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+Server --> Browser: HTTP 200 HTML code
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+Server --> Browser: HTTP 304
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+Server --> Browser: HTTP 304
+
+note over Browser: Execute main.js which will request the data.json file
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+Server --> Browser: HTTP 200 JSON data
+
+note over Browser: The event handler in main.js renders the notes in data.json
