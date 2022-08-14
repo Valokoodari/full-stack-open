@@ -1,0 +1,13 @@
+title Creating a new note on the SPA version
+
+note over Browser: Execute the event handler in spa.js: \n
+ - Read the note from the form and create a JSON object \n
+ - Add the JSON object to the local notes array \n
+ - Clear the form \n
+ - Rerender the notes with the new note added
+
+Browser -> Server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over Server: Add the new note to the 'notes' array
+Server --> Browser: HTTP 201
+
+note over Browser: Log the server response text to the console.
