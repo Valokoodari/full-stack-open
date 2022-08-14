@@ -1,0 +1,17 @@
+title Loading the SPA version
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+Server --> Browser: HTTP 200 HTML code
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+Server --> Browser: HTTP 200 main.css
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+Server -> Browser: HTTP 200 spa.js
+
+note over Browser: Execute spa.js which will request the data.json file
+
+Browser -> Server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+Server --> Browser: HTTP 200 JSON data
+
+note over Browser: spa.js renders the notes in data.json
