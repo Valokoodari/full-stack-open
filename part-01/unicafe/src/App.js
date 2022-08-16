@@ -8,8 +8,17 @@ const Statistic = ({text, value}) =>
 
 const Statistics = ({good, neutral, bad}) => {
   const all = good + neutral + bad
-  const positive = all ? good / all * 100 : "-"
-  const average = all ? (good - bad) / (good + bad + neutral) : "-"
+  const positive = good / all * 100
+  const average = (good - bad) / (good + bad + neutral)
+
+  if (all === 0) {
+    return (
+      <div>
+        <h2>Statistics</h2>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
 
   return (
     <div>
