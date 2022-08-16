@@ -12,6 +12,10 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const all = good + neutral + bad
+  const positive = all ? good / all * 100 : "-"
+  const average = all ? (good - bad) / (good + bad + neutral) : "-"
+
   return (
     <div>
       <h1>Give feedback</h1>
@@ -25,6 +29,9 @@ const App = () => {
       <Statistic text="good" value={good} />
       <Statistic text="neutral" value={neutral} />
       <Statistic text="bad" value={bad} />
+      <Statistic text="all" value={good+neutral+bad} />
+      <Statistic text="average" value={average} />
+      <Statistic text="positive" value={positive + " %"} />
     </div>
   )
 }
