@@ -33,7 +33,10 @@ const App = () => {
       return
     }
 
-    setContacts(contacts.concat(contactObject))
+    axios
+      .post('http://localhost:3001/contacts', contactObject)
+      .then(response => setContacts(contacts.concat(response.data)))
+
     setNewNumber('')
     setNewName('')
   }
