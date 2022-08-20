@@ -1,5 +1,12 @@
 import { useState } from 'react'
 
+const Anecdote = ({ anecdote }) => (
+  <div>
+    <i>{anecdote.text}</i><br />
+    has {anecdote.votes} votes
+  </div>
+)
+
 const App = () => {
   const anecdoteTexts = [
     'If it hurts, do it more often.',
@@ -29,11 +36,16 @@ const App = () => {
 
   return (
     <div>
-      <p>{anecdotes[selected].text}</p>
-      <p>has {anecdotes[selected].votes} votes</p>
+      <h1>Anecdote of the Day</h1>
+
+      <Anecdote anecdote={anecdotes[selected]} />
 
       <button onClick={voteAnecdote}>vote</button>
       <button onClick={nextAnecdote}>next anecdote</button>
+
+      <h2>Anecdote with the most votes</h2>
+
+      <Anecdote anecdote={anecdotes.reduce((a, b) => a.votes > b.votes ? a : b)} />
     </div>
   )
 }
