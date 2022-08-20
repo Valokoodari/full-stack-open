@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import Contacts from './components/Contacts'
 import ContactForm from './components/ContactForm'
+import contactService from './services/contacts'
 
 const App = () => {
   const [contacts, setContacts] = useState([])
@@ -11,9 +11,9 @@ const App = () => {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/contacts')
-      .then(response => setContacts(response.data))
+    contactService.getAll().then(initialContacts =>
+      setContacts(initialContacts)
+    )
   }, [])
 
   const handleNameChange = (event) =>
@@ -33,12 +33,11 @@ const App = () => {
       return
     }
 
-    axios
-      .post('http://localhost:3001/contacts', contactObject)
-      .then(response => setContacts(contacts.concat(response.data)))
-
-    setNewNumber('')
-    setNewName('')
+    contactService.create(contactObject).then(returnedContact => {
+      setContacts(contacts.concat(returnedContact))
+      setNewNumber('')
+      setNewName('')
+    })
   }
 
   const contactsToShow = contacts.filter(contact =>
