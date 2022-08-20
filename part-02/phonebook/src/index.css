@@ -1,7 +1,15 @@
 #notification-box {
-    border: 3px solid green;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 20px;
     background: lightgray;
 }
+
+#notification-box.success {
+    border: 3px solid green;
+}
+
+#notification-box.error {
+    border: 3px solid red;
+}
+

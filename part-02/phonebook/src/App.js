@@ -25,6 +25,11 @@ const App = () => {
   const handleFilterChange = (event) =>
     setFilter(event.target.value)
 
+  const createNotification = notification => {
+    setNotification(notification)
+    setTimeout(() => setNotification(null), 5000)
+  }
+
   const addContact = (event) => {
     event.preventDefault()
 
@@ -38,10 +43,15 @@ const App = () => {
         contactService.update(id, contactObject).then(returnedContact => {
           setContacts(contacts.map(contact =>
             contact.id === id ? returnedContact : contact))
-          setNotification(
-            { message: `The number of ${newName} has been updated.` }
-          )
-          setTimeout(() => setNotification(null), 5000)
+          createNotification({
+            message: `The number of ${newName} has been updated.`,
+            type: 'success'
+          })
+        }).catch(_ => {
+          createNotification({
+            message: `Could not update the number of ${newName}!`,
+            type: 'error'
+          })
         })
       }
       return
@@ -52,10 +62,15 @@ const App = () => {
       setNewNumber('')
       setNewName('')
 
-      setNotification({
+      createNotification({
         message: `${newName} has been added to the phonebook.`,
+        type: 'success'
       })
-      setTimeout(() => setNotification(null), 5000)
+    }).catch(_ => {
+      createNotification({
+        message: `Could not add ${newName} to the phonebook!`,
+        type: 'error'
+      })
     })
   }
 
@@ -65,12 +80,17 @@ const App = () => {
     if (window.confirm(`Delete ${name}?`)) {
       contactService.remove(id).then(_ => {
         setContacts(contacts.filter(contact => contact.id !== id))
-      })
 
-      setNotification({
-        message: `${name} has been deleted from the phonebook.`,
+        createNotification({
+          message: `${name} has been deleted from the phonebook.`,
+          type: 'success'
+        })
+      }).catch(_ => {
+        createNotification({
+          message: `Could not delete ${name} from the phonebook!`,
+          type: 'error'
+        })
       })
-      setTimeout(() => setNotification(null), 5000)
     }
   }
 
