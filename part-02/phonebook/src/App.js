@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import Contacts from './components/Contacts'
 import ContactForm from './components/ContactForm'
+import Notification from './components/Notification'
 import contactService from './services/contacts'
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     contactService.getAll().then(initialContacts =>
@@ -36,6 +38,10 @@ const App = () => {
         contactService.update(id, contactObject).then(returnedContact => {
           setContacts(contacts.map(contact =>
             contact.id === id ? returnedContact : contact))
+          setNotification(
+            { message: `The number of ${newName} has been updated.` }
+          )
+          setTimeout(() => setNotification(null), 5000)
         })
       }
       return
@@ -45,6 +51,11 @@ const App = () => {
       setContacts(contacts.concat(returnedContact))
       setNewNumber('')
       setNewName('')
+
+      setNotification({
+        message: `${newName} has been added to the phonebook.`,
+      })
+      setTimeout(() => setNotification(null), 5000)
     })
   }
 
@@ -55,6 +66,11 @@ const App = () => {
       contactService.remove(id).then(_ => {
         setContacts(contacts.filter(contact => contact.id !== id))
       })
+
+      setNotification({
+        message: `${name} has been deleted from the phonebook.`,
+      })
+      setTimeout(() => setNotification(null), 5000)
     }
   }
 
@@ -65,6 +81,8 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+
+      <Notification notification={notification} />
 
       <Filter value={filter} onChange={handleFilterChange} />
 
