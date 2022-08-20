@@ -29,7 +29,15 @@ const App = () => {
     const contactObject = { name: newName, number: newNumber }
 
     if (contacts.some(contact => contact.name === newName)) {
-      alert(`${newName} is already in the phonebook.`)
+      if (window.confirm(`${newName} is already added to phonebook, replace `
+        + 'the old number with a new one?')) {
+        const id = contacts.find(contact => contact.name === newName).id
+
+        contactService.update(id, contactObject).then(returnedContact => {
+          setContacts(contacts.map(contact =>
+            contact.id === id ? returnedContact : contact))
+        })
+      }
       return
     }
 
