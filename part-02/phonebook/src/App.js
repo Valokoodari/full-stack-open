@@ -40,6 +40,16 @@ const App = () => {
     })
   }
 
+  const deleteContact = (id) => {
+    const name = contacts.find(contact => contact.id === id).name
+
+    if (window.confirm(`Delete ${name}?`)) {
+      contactService.remove(id).then(_ => {
+        setContacts(contacts.filter(contact => contact.id !== id))
+      })
+    }
+  }
+
   const contactsToShow = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   )
@@ -60,7 +70,7 @@ const App = () => {
       />
 
       <h2>Contacts</h2>
-      <Contacts contacts={contactsToShow} />
+      <Contacts contacts={contactsToShow} onDelete={deleteContact} />
     </div>
   )
 }

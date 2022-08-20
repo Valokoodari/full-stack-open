@@ -1,4 +1,4 @@
-const Contact = ({ name, number }) =>
-  <div>{name} {number}</div>
+const Contact = ({ name, number, onClick }) =>
+  <div><button onClick={onClick}>x</button> {name} {number}</div>
 
 export default Contact

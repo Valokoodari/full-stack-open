@@ -1,9 +1,14 @@
 import Contact from './Contact'
 
-const Contacts = ({ contacts }) =>
+const Contacts = ({ contacts, onDelete }) =>
   <div>
-    {contacts.map(({name, number}) =>
-      <Contact key={name} name={name} number={number} />
+    {contacts.map(({ id, name, number }) =>
+      <Contact
+        key={id}
+        name={name}
+        number={number}
+        onClick={() => onDelete(id)}
+      />
     )}
   </div>
 
