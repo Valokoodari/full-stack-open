@@ -18,9 +18,15 @@ const App = () => {
 
   const handleFilterChange = (event) => setFilter(event.target.value)
 
-  const countriesToShow = countries.filter(country =>
-    country.name.common.toLowerCase().includes(filter.toLowerCase())
+  const countryNames = countries.map(country =>
+    country.name.common.toLowerCase()
   )
+
+  const countriesToShow = countryNames.includes(filter.toLowerCase())
+    ? countries.filter(country =>
+      country.name.common.toLowerCase() === filter.toLowerCase())
+    : countries.filter(country =>
+      country.name.common.toLowerCase().includes(filter.toLowerCase()))
 
   return (
     <div>
