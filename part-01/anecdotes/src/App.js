@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const App = () => {
-  const anecdotes = [
+  const anecdoteTexts = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
     'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
@@ -11,17 +11,28 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
   ]
 
+  const [anecdotes, setAnecdotes] =
+    useState(anecdoteTexts.map(text => ({ text, votes: 0 })))
+
   const randInt = (n) => Math.floor(Math.random() * n)
 
   const nextAnecdote = () =>
     setSelected(randInt(anecdotes.length))
+
+  const voteAnecdote = () => {
+    const newAnecdotes = [...anecdotes]
+    newAnecdotes[selected].votes += 1
+    setAnecdotes(newAnecdotes)
+  }
    
   const [selected, setSelected] = useState(randInt(anecdotes.length))
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
+      <p>{anecdotes[selected].text}</p>
+      <p>has {anecdotes[selected].votes} votes</p>
 
+      <button onClick={voteAnecdote}>vote</button>
       <button onClick={nextAnecdote}>next anecdote</button>
     </div>
   )
