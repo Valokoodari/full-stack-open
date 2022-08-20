@@ -1,3 +1,5 @@
+import Weather from './Weather'
+
 const Country = ({country}) =>
   <div>
     <h2>{country.name.common}</h2>
@@ -10,6 +12,8 @@ const Country = ({country}) =>
     </ul>
 
     <img src={country.flags.png} alt={`The flag of ${country.name.common}`} />
+
+    <Weather country={country} />
   </div>
 
 export default Country
