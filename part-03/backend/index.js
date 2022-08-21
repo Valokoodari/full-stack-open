@@ -87,6 +87,10 @@ const errorHandler = (err, _, res, next) => {
     return res.status(400).json({
       error: err.message
     })
+  } else if (err.name === 'MongoServerError' && err.code === 11000) {
+    return res.status(400).send({
+      error: 'A contact with the given name already exists.'
+    })
   }
 
   next(err)
