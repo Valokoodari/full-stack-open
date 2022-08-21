@@ -15,23 +15,23 @@ app.use(express.static('build'))
 app.use(morgan(':method :url :status :res[content-length] - '
   + ':response-time ms :post-data'))
 
-app.get('/info', (_, res) => {
+app.get('/info', (_, res, next) => {
   const date = new Date()
   Contact.find({}).then(contacts => {
     res.send(`
       <p>Phonebook has info for ${contacts.length} people</p>
       <p>${date}</p>
     `)
-  })
+  }).catch(error => next(error))
 })
 
-app.get('/api/persons/', (_, res) => {
+app.get('/api/persons/', (_, res, next) => {
   Contact.find({}).then(contacts => {
     res.json(contacts)
-  })
+  }).catch(error => next(error))
 })
 
-app.post('/api/persons/', (req, res) => {
+app.post('/api/persons/', (req, res, next) => {
   const contact = req.body
 
   if (!contact.name) {
@@ -51,20 +51,38 @@ app.post('/api/persons/', (req, res) => {
 
   newContact.save().then(savedContact => {
     res.json(savedContact)
-  })
+  }).catch(error => next(error))
 })
 
-app.get('/api/persons/:id', (req, res) => {
+app.get('/api/persons/:id', (req, res, next) => {
   Contact.findById(req.params.id).then(contact => {
-    res.json(contact)
-  })
+    if (contact) {
+      res.json(contact)
+    } else {
+      res.status(404).end()
+    }
+  }).catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
   Contact.findByIdAndRemove(req.params.id).then(() => {
     res.status(204).end()
-  })
+  }).catch(error => next(error))
 })
+
+const errorHandler = (err, _, res, next) => {
+  console.log(err.message)
+
+  if (err.name === 'CastError') {
+    return res.status(400).send({
+      error: 'malformatted id'
+    })
+  }
+
+  next(err)
+}
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
