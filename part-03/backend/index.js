@@ -64,6 +64,20 @@ app.get('/api/persons/:id', (req, res, next) => {
   }).catch(error => next(error))
 })
 
+app.put('/api/persons/:id', (req, res, next) => {
+  const contact = req.body
+
+  const updatedContact = {
+    name: contact.name,
+    number: contact.number
+  }
+
+  Contact.findByIdAndUpdate(req.params.id, updatedContact, { new: true })
+    .then(updated => {
+      res.json(updated)
+    }).catch(error => next(error))
+})
+
 app.delete('/api/persons/:id', (req, res, next) => {
   Contact.findByIdAndRemove(req.params.id).then(() => {
     res.status(204).end()
