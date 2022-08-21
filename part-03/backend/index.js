@@ -5,7 +5,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
 
-morgan.token('post-data', (req, _) => {
+morgan.token('post-data', (req) => {
   return req.method === 'POST' ? JSON.stringify(req.body) : ' '
 })
 
@@ -62,8 +62,8 @@ app.put('/api/persons/:id', (req, res, next) => {
     { name, number },
     { new: true, runValidators: true, context: 'query' }
   ).then(updated => {
-      res.json(updated)
-    }).catch(error => next(error))
+    res.json(updated)
+  }).catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
