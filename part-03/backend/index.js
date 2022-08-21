@@ -60,9 +60,13 @@ app.put('/api/persons/:id', (req, res, next) => {
   Contact.findByIdAndUpdate(
     req.params.id,
     { name, number },
-    { new: true, runValidators: true, context: 'query' }
+    { new: false, runValidators: true, context: 'query' }
   ).then(updated => {
-    res.json(updated)
+    if (updated) {
+      res.json(updated)
+    } else {
+      res.status(404).send({ error: 'contact not found' })
+    }
   }).catch(error => next(error))
 })
 
