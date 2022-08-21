@@ -15,35 +15,14 @@ app.use(express.static('build'))
 app.use(morgan(':method :url :status :res[content-length] - '
   + ':response-time ms :post-data'))
 
-let contacts = [
-  {
-    "id": 1,
-    "name": "Arto Hellas",
-    "number": "040-123456"
-  },
-  {
-    "id": 2,
-    "name": "Ada Lovelace",
-    "number": "39-44-5323523"
-  },
-  {
-    "id": 3,
-    "name": "Dan Abramov",
-    "number": "12-43-234345"
-  },
-  {
-    "id": 4,
-    "name": "Mary Poppendieck",
-    "number": "39-23-6423122"
-  }
-]
-
 app.get('/info', (_, res) => {
   const date = new Date()
-  res.send(`
-    <p>Phonebook has info for ${contacts.length} people </p>
-    <p>${date}</p>
-  `)
+  Contact.find({}).then(contacts => {
+    res.send(`
+      <p>Phonebook has info for ${contacts.length} people</p>
+      <p>${date}</p>
+    `)
+  })
 })
 
 app.get('/api/persons/', (_, res) => {
@@ -63,16 +42,16 @@ app.post('/api/persons/', (req, res) => {
     return res.status(400).json({
       error: 'number missing'
     })
-  } else if (contacts.find(c => c.name === contact.name)) {
-    return res.status(400).json({
-      error: 'name must be unique'
-    })
   }
 
-  contact.id = Math.floor(Math.random() * 2000000000)
-  contacts = contacts.concat(contact)
+  const newContact = new Contact({
+    name: contact.name,
+    number: contact.number
+  })
 
-  res.json(contact)
+  newContact.save().then(savedContact => {
+    res.json(savedContact)
+  })
 })
 
 app.get('/api/persons/:id', (req, res) => {
@@ -82,10 +61,9 @@ app.get('/api/persons/:id', (req, res) => {
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
-  contacts = contacts.filter(contact => contact.id !== id)
-
-  res.status(204).end()
+  Contact.findByIdAndRemove(req.params.id).then(() => {
+    res.status(204).end()
+  })
 })
 
 const PORT = process.env.PORT
