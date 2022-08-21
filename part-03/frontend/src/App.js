@@ -49,9 +49,9 @@ const App = () => {
             message: `The number of ${newName} has been updated.`,
             type: 'success'
           })
-        }).catch(_ => {
+        }).catch(error => {
           createNotification({
-            message: `Could not update the number of ${newName}!`,
+            message: error.response.data.error,
             type: 'error'
           })
         })
@@ -68,9 +68,9 @@ const App = () => {
         message: `${newName} has been added to the phonebook.`,
         type: 'success'
       })
-    }).catch(_ => {
+    }).catch(error => {
       createNotification({
-        message: `Could not add ${newName} to the phonebook!`,
+        message: error.response.data.error,
         type: 'error'
       })
     })
