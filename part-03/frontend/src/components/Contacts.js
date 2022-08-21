@@ -1,5 +1,7 @@
 import Contact from './Contact'
+import React from 'react'
 
+/* eslint-disable react/prop-types */
 const Contacts = ({ contacts, onDelete }) =>
   <div>
     {contacts.map(({ id, name, number }) =>

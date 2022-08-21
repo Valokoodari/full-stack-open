@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import Contacts from './components/Contacts'
 import ContactForm from './components/ContactForm'
@@ -80,14 +80,14 @@ const App = () => {
     const name = contacts.find(contact => contact.id === id).name
 
     if (window.confirm(`Delete ${name}?`)) {
-      contactService.remove(id).then(_ => {
+      contactService.remove(id).then(() => {
         setContacts(contacts.filter(contact => contact.id !== id))
 
         createNotification({
           message: `${name} has been deleted from the phonebook.`,
           type: 'success'
         })
-      }).catch(_ => {
+      }).catch(() => {
         createNotification({
           message: `Could not delete ${name} from the phonebook!`,
           type: 'error'
