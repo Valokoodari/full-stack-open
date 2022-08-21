@@ -42,6 +42,20 @@ app.post('/api/persons/', (req, res) => {
   const contact = req.body
   contact.id = Math.floor(Math.random() * 2000000000)
 
+  if (!contact.name) {
+    return res.status(400).json({
+      error: 'name missing'
+    })
+  } else if (!contact.number) {
+    return res.status(400).json({
+      error: 'number missing'
+    })
+  } else if (contacts.find(c => c.name === contact.name)) {
+    return res.status(400).json({
+      error: 'name must be unique'
+    })
+  }
+
   contacts = contacts.concat(contact)
 
   console.log(contact)
