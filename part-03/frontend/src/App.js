@@ -43,6 +43,8 @@ const App = () => {
         contactService.update(id, contactObject).then(returnedContact => {
           setContacts(contacts.map(contact =>
             contact.id === id ? returnedContact : contact))
+          setNewNumber('')
+          setNewName('')
           createNotification({
             message: `The number of ${newName} has been updated.`,
             type: 'success'
