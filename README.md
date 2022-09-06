@@ -9,4 +9,4 @@ as some parts are only available in English.
 
 ## Deployed apps
 
-- [Phonebook](https://valo-phonebook.herokuapp.com/)   
+- [Phonebook](https://phonebook.valokoodari.eu/)  
