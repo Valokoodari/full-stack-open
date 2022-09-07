@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Valon blogi",
+    "author": "Valokoodari",
+    "url": "https://valokoodari.eu",
+    "likes": 2
+}
