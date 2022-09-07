@@ -61,3 +61,26 @@ describe("favorite blog", () => {
     expect(result).toEqual(strip(data.blogs[2]))
   })
 })
+
+describe("most blogs", () => {
+  test("of an empty list is null", () => {
+    const blogs = []
+
+    const result = listHelper.mostBlogs(blogs)
+    expect(result).toBe(null)
+  })
+
+  test("of a list with a single blog is the author of that blog", () => {
+    const blogs = [data.blog]
+
+    const result = listHelper.mostBlogs(blogs)
+    expect(result).toEqual({ author: "Olaf", blogs: 1 })
+  })
+
+  test("of a larger list is the author with the most blogs", () => {
+    const blogs = data.blogs
+
+    const result = listHelper.mostBlogs(blogs)
+    expect(result).toEqual({ author: "Robert C. Martin", blogs: 3 })
+  })
+})
