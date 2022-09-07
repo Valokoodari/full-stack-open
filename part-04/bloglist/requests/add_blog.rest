@@ -7,3 +7,15 @@ content-type: application/json
     "url": "https://valokoodari.eu",
     "likes": 2
 }
+
+###
+
+POST http://localhost:3000/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "I Love Summer",
+    "author": "Olaf",
+    "url": "https://frozen.com/olaf",
+    "likes": 5
+}
