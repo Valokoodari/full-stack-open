@@ -1,3 +1,10 @@
+const blog = {
+  title: "I Love Summer",
+  author: "Olaf",
+  url: "https://frozen.com/olaf",
+  likes: 23
+}
+
 const blogs = [
   {
     _id: "5a422a851b54a676234d17f7",
@@ -49,4 +56,7 @@ const blogs = [
   }  
 ]
 
-module.exports = blogs
+module.exports = {
+  blog,
+  blogs
+}
