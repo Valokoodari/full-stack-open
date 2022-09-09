@@ -26,6 +26,12 @@ describe("the api returns", () => {
   })
 })
 
+test("blogs have an id property", async () => {
+  const response = await api.get("/api/blogs")
+
+  expect(response.body[0].id).toBeDefined()
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
