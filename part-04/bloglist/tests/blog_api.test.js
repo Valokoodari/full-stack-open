@@ -78,6 +78,13 @@ describe("a blog added to the database", () => {
   })
 })
 
+test("the api returns 400 if title and url are missing", async () => {
+  await api
+    .post("/api/blogs")
+    .send(data.blogNoTitleOrUrl)
+    .expect(400)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

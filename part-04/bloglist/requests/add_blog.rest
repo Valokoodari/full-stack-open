@@ -19,3 +19,24 @@ content-type: application/json
     "url": "https://frozen.com/olaf",
     "likes": 5
 }
+
+###
+
+POST http://localhost:3000/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "I Love Winter",
+    "author": "Olaf",
+    "url": "https://frozen.com/olaf"
+}
+
+###
+
+POST http://localhost:3000/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "author": "Olaf",
+    "likes": 23
+}

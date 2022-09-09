@@ -11,6 +11,11 @@ const blogNoLikes = {
   url: "https://frozen.com/olaf"
 }
 
+const blogNoTitleOrUrl = {
+  author: "Olaf",
+  likes: 23
+}
+
 const blogs = [
   {
     _id: "5a422a851b54a676234d17f7",
@@ -65,5 +70,6 @@ const blogs = [
 module.exports = {
   blog,
   blogs,
-  blogNoLikes
+  blogNoLikes,
+  blogNoTitleOrUrl
 }
