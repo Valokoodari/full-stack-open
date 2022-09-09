@@ -44,26 +44,38 @@ test("the api can add a blog to the database", async () => {
   expect(response.body).toHaveLength(data.blogs.length + 1)
 })
 
-test("a blog added to the database has the correct data", async () => {
-  const postResponse = await api
-    .post("/api/blogs")
-    .send(data.blog)
-    .expect(201)
-    .expect("Content-Type", /application\/json/)
+describe("a blog added to the database", () => {
+  test("has the correct data", async () => {
+    const postResponse = await api
+      .post("/api/blogs")
+      .send(data.blog)
+      .expect(201)
+      .expect("Content-Type", /application\/json/)
+  
+    const id = postResponse.body.id
+  
+    const response = await api.get("/api/blogs")
+  
+    expect(response.body).toContainEqual(
+      expect.objectContaining({
+        title: data.blog.title,
+        author: data.blog.author,
+        url: data.blog.url,
+        likes: data.blog.likes,
+        id
+      })
+    )
+  })
+  
+  test("has 0 likes if no likes are specified", async () => {
+    const postResponse = await api
+      .post("/api/blogs")
+      .send(data.blogNoLikes)
+      .expect(201)
+      .expect("Content-Type", /application\/json/)
 
-  const id = postResponse.body.id
-
-  const response = await api.get("/api/blogs")
-
-  expect(response.body).toContainEqual(
-    expect.objectContaining({
-      title: data.blog.title,
-      author: data.blog.author,
-      url: data.blog.url,
-      likes: data.blog.likes,
-      id
-    })
-  )
+    expect(postResponse.body.likes).toBe(0)
+  })
 })
 
 afterAll(() => {

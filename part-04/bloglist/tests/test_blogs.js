@@ -5,6 +5,12 @@ const blog = {
   likes: 23
 }
 
+const blogNoLikes = {
+  title: "I Love Summer",
+  author: "Olaf",
+  url: "https://frozen.com/olaf"
+}
+
 const blogs = [
   {
     _id: "5a422a851b54a676234d17f7",
@@ -58,5 +64,6 @@ const blogs = [
 
 module.exports = {
   blog,
-  blogs
+  blogs,
+  blogNoLikes
 }
