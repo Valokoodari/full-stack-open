@@ -85,6 +85,40 @@ test("the api returns 400 if title and url are missing", async () => {
     .expect(400)
 })
 
+describe("when a blog is deleted", () => {
+  test("the number of blogs goes down by one", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+  
+    await api
+      .delete(`/api/blogs/${id}`)
+      .expect(204)
+  
+    const response = await api.get("/api/blogs")
+  
+    expect(response.body).toHaveLength(data.blogs.length - 1)
+  })
+
+  test("a blog with the deleted id doesn't exist anymore", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+  
+    await api
+      .delete(`/api/blogs/${id}`)
+      .expect(204)
+  
+    const response = await api.get("/api/blogs")
+  
+    expect(response.body).not.toContainEqual(
+      expect.objectContaining({
+        title: data.blogs[0].title,
+        author: data.blogs[0].author,
+        url: data.blogs[0].url,
+        likes: data.blogs[0].likes,
+        id
+      })
+    )
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
