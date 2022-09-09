@@ -30,6 +30,13 @@ describe("the api returns", () => {
   
     expect(response.body[0].id).toBeDefined()
   })
+
+  test("error 400 if title and url are missing from a new blog", async () => {
+    await api
+      .post("/api/blogs")
+      .send(data.blogNoTitleOrUrl)
+      .expect(400)
+  })
 })
 
 test("the api can add a blog to the database", async () => {
@@ -78,13 +85,6 @@ describe("a blog added to the database", () => {
   })
 })
 
-test("the api returns 400 if title and url are missing", async () => {
-  await api
-    .post("/api/blogs")
-    .send(data.blogNoTitleOrUrl)
-    .expect(400)
-})
-
 describe("when a blog is deleted", () => {
   test("the number of blogs goes down by one", async () => {
     const id = (await api.get("/api/blogs")).body[0].id
@@ -113,6 +113,55 @@ describe("when a blog is deleted", () => {
         author: data.blogs[0].author,
         url: data.blogs[0].url,
         likes: data.blogs[0].likes,
+        id
+      })
+    )
+  })
+})
+
+describe("when a blog is updated", () => {
+  test("the number of blogs stays the same", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+
+    await api
+      .put(`/api/blogs/${id}`)
+      .send(data.blog)
+      .expect(200)
+
+    const response = await api.get("/api/blogs")
+
+    expect(response.body).toHaveLength(data.blogs.length)
+  })
+
+  test("the number of likes can be updated", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+
+    await api
+      .put(`/api/blogs/${id}`)
+      .send({ likes: 100 })
+      .expect(200)
+
+    const response = await api.get("/api/blogs")
+
+    expect(response.body[0].likes).toBe(100)
+  })
+
+  test("the whole blog can be updated", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+
+    await api
+      .put(`/api/blogs/${id}`)
+      .send(data.blog)
+      .expect(200)
+
+    const response = await api.get("/api/blogs")
+
+    expect(response.body).toContainEqual(
+      expect.objectContaining({
+        title: data.blog.title,
+        author: data.blog.author,
+        url: data.blog.url,
+        likes: data.blog.likes,
         id
       })
     )
