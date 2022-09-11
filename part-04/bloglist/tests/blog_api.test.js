@@ -8,19 +8,37 @@ const validUser = require("./test_users").initialUsers[0]
 
 const api = supertest(app)
 
-beforeEach(async () => {
-  await blog.deleteMany({})
+var user = null
+var token = null
+
+const getToken = async () => {
+  const response = await api
+    .post("/api/login")
+    .send({ username: validUser.username, password: "sekret" })
+    .expect(200)
+    .expect("Content-Type", /application\/json/)
+
+  return response.body.token
+}
+
+beforeAll(async () => {
   await User.deleteMany({})
 
-  const savedUser = await new User(validUser).save()
+  user = await new User(validUser).save()
+  token = await getToken()
+})
+
+beforeEach(async () => {
+  await blog.deleteMany({})
 
   const initialBlogs = data.blogs.map(b => {
-    b.user = savedUser.id
+    b.user = user.id
     return b
   })
 
   await blog.insertMany(initialBlogs)
 })
+
 
 describe("the blog api returns", () => {
   test("the data in json format", async () => {
@@ -45,19 +63,17 @@ describe("the blog api returns", () => {
   test("error 400 if title and url are missing from a new blog", async () => {
     await api
       .post("/api/blogs")
+      .set("Authorization", `Bearer ${token}`)
       .send(data.blogNoTitleOrUrl)
       .expect(400)
   })
 })
 
 test("the api can add a blog to the database", async () => {
-  const newBlog = data.blog
-  const user = await User.findOne({})
-  newBlog.user = user.id
-
   await api
     .post("/api/blogs")
-    .send(newBlog)
+    .set("Authorization", `Bearer ${token}`)
+    .send(data.blog)
     .expect(201)
     .expect("Content-Type", /application\/json/)
 
@@ -69,11 +85,11 @@ test("the api can add a blog to the database", async () => {
 describe("a blog added to the database", () => {
   test("has the correct data", async () => {
     const newBlog = data.blog
-    const user = await User.findOne({})
     newBlog.user = user.id
 
     const postResponse = await api
       .post("/api/blogs")
+      .set("Authorization", `Bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/)
@@ -98,11 +114,11 @@ describe("a blog added to the database", () => {
 
   test("has 0 likes if no likes are specified", async () => {
     const newBlog = data.blogNoLikes
-    const user = await User.findOne({})
     newBlog.user = user.id
 
     const postResponse = await api
       .post("/api/blogs")
+      .set("Authorization", `Bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/)

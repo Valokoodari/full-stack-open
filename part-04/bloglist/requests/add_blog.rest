@@ -1,5 +1,6 @@
 POST http://localhost:3000/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyODk2NDE2fQ.ccawi45uC7ZAc7CrbDB0Y7eZ64iXYV0RrK6BRxwfa0o
 
 {
     "title": "Valon blogi",
@@ -13,6 +14,7 @@ content-type: application/json
 
 POST http://localhost:3000/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyODk2NDE2fQ.ccawi45uC7ZAc7CrbDB0Y7eZ64iXYV0RrK6BRxwfa0o
 
 {
     "title": "I Love Summer",
@@ -26,6 +28,7 @@ content-type: application/json
 
 POST http://localhost:3000/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyODk2NDE2fQ.ccawi45uC7ZAc7CrbDB0Y7eZ64iXYV0RrK6BRxwfa0o
 
 {
     "title": "I Love Winter",
@@ -38,6 +41,7 @@ content-type: application/json
 
 POST http://localhost:3000/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyODk2NDE2fQ.ccawi45uC7ZAc7CrbDB0Y7eZ64iXYV0RrK6BRxwfa0o
 
 {
     "author": "Olaf",
@@ -49,6 +53,7 @@ content-type: application/json
 
 POST http://localhost:3000/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyODk2NDE2fQ.ccawi45uC7ZAc7CrbDB0Y7eZ64iXYV0RrK6BRxwfa0o
 
 {
     "title": "I don't even know a Samantha",
@@ -62,6 +67,7 @@ content-type: application/json
 
 POST http://localhost:3000/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyODk2NDE2fQ.ccawi45uC7ZAc7CrbDB0Y7eZ64iXYV0RrK6BRxwfa0o
 
 {
     "title": "Anna? Elsa? Sven?",
