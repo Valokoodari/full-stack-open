@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
 import BlogForm from "./components/BlogForm"
 import loginService from "./services/login"
@@ -7,6 +8,7 @@ import Blog from "./components/Blog"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [notification, setNotification] = useState(null)
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -39,6 +41,8 @@ const App = () => {
         username, password,
       })
 
+      createNotification("success", `Logged in as ${user.name}`)
+
       window.localStorage.setItem(
         "currentBloglistUser", JSON.stringify(user)
       )
@@ -47,7 +51,7 @@ const App = () => {
       setUsername("")
       setPassword("")
     } catch (exception) {
-      console.log("wrong credentials")
+      createNotification("error", "Incorrect username or password!")
     }
   }
 
@@ -55,6 +59,7 @@ const App = () => {
     window.localStorage.removeItem("currentBloglistUser")
     blogService.setToken(null)
     setUser(null)
+    createNotification("success", "Logged out successfully!")
   }
 
   const handleCreateBlog = async (event) => {
@@ -64,26 +69,42 @@ const App = () => {
       title, author, url
     }
 
-    const returnedBlog = await blogService.create(blogObject)
-    setBlogs(blogs.concat(returnedBlog))
-    setTitle("")
-    setAuthor("")
-    setUrl("")
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      setTitle("")
+      setAuthor("")
+      setUrl("")
+      createNotification("success", `A new blog ${returnedBlog.title} by ${returnedBlog.author} added.`)
+    } catch (exception) {
+      createNotification("error", `Could not create blog: ${exception.response.data.error}`)
+    }
+  }
+
+  const createNotification = (type, message) => {
+    setNotification({ message, type })
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
   }
 
   if (!user) {
     return (
-      <LoginForm
-        username={username} password={password}
-        setUsername={setUsername} setPassword={setPassword}
-        handleLogin={handleLogin}
-      />
+      <div>
+        <Notification notification={notification} />
+        <LoginForm
+          username={username} password={password}
+          setUsername={setUsername} setPassword={setPassword}
+          handleLogin={handleLogin}
+        />
+      </div>
     )
   }
 
   return (
     <div>
       <h1>Bloglist</h1>
+      <Notification notification={notification} />
       <div>
         Logged in as {user.name}{" "}
         <button onClick={handleLogout}>logout</button>
