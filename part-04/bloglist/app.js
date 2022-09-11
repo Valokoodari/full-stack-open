@@ -1,6 +1,7 @@
 const errorHandler = require("./utils/error_handler")
 const blogsRouter = require("./controllers/blogs")
 const usersRouter = require("./controllers/users")
+const loginRouter = require("./controllers/login")
 const config = require("./utils/config")
 const mongoose = require("mongoose")
 const express = require("express")
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV !== "test") {
 
 app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)
+app.use("/api/login", loginRouter)
 
 // Unknown endpoint
 app.use((_, res) => {
