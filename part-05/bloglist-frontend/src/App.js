@@ -14,6 +14,7 @@ const App = () => {
   const [password, setPassword] = useState("")
   const [user, setUser] = useState(null)
 
+  const [showBlogForm, setShowBlogForm] = useState(false)
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
@@ -72,6 +73,7 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
+      setShowBlogForm(false)
       setTitle("")
       setAuthor("")
       setUrl("")
@@ -110,6 +112,7 @@ const App = () => {
         <button onClick={handleLogout}>logout</button>
       </div>
       <BlogForm
+        showBlogForm={showBlogForm} setShowBlogForm={setShowBlogForm}
         title={title} setTitle={setTitle}
         author={author} setAuthor={setAuthor}
         url={url} setUrl={setUrl}
