@@ -1,3 +1,4 @@
+const tokenExtractor = require("./utils/token_extractor")
 const errorHandler = require("./utils/error_handler")
 const blogsRouter = require("./controllers/blogs")
 const usersRouter = require("./controllers/users")
@@ -18,6 +19,8 @@ app.use(express.json())
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("tiny"))
 }
+
+app.use(tokenExtractor)
 
 app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)
