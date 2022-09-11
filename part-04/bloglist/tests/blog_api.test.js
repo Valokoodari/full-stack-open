@@ -3,12 +3,23 @@ const supertest = require("supertest")
 const data = require("./test_blogs")
 const app = require("../app")
 const blog = require("../models/blog")
+const User = require("../models/user")
+const validUser = require("./test_users").initialUsers[0]
 
 const api = supertest(app)
 
 beforeEach(async () => {
   await blog.deleteMany({})
-  await blog.insertMany(data.blogs)
+  await User.deleteMany({})
+
+  const savedUser = await new User(validUser).save()
+
+  const initialBlogs = data.blogs.map(b => {
+    b.user = savedUser.id
+    return b
+  })
+
+  await blog.insertMany(initialBlogs)
 })
 
 describe("the blog api returns", () => {
@@ -27,7 +38,7 @@ describe("the blog api returns", () => {
 
   test("blogs that have id instead of _id", async () => {
     const response = await api.get("/api/blogs")
-  
+
     expect(response.body[0].id).toBeDefined()
   })
 
@@ -40,9 +51,13 @@ describe("the blog api returns", () => {
 })
 
 test("the api can add a blog to the database", async () => {
+  const newBlog = data.blog
+  const user = await User.findOne({})
+  newBlog.user = user.id
+
   await api
     .post("/api/blogs")
-    .send(data.blog)
+    .send(newBlog)
     .expect(201)
     .expect("Content-Type", /application\/json/)
 
@@ -53,29 +68,42 @@ test("the api can add a blog to the database", async () => {
 
 describe("a blog added to the database", () => {
   test("has the correct data", async () => {
+    const newBlog = data.blog
+    const user = await User.findOne({})
+    newBlog.user = user.id
+
     const postResponse = await api
       .post("/api/blogs")
-      .send(data.blog)
+      .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/)
-  
+
     const id = postResponse.body.id
-  
+
     const response = await api.get("/api/blogs")
-  
+
     expect(response.body).toContainEqual({
         title: data.blog.title,
         author: data.blog.author,
         url: data.blog.url,
         likes: data.blog.likes,
+        user: {
+          username: user.username,
+          name: user.name,
+          id: user.id
+        },
         id
     })
   })
-  
+
   test("has 0 likes if no likes are specified", async () => {
+    const newBlog = data.blogNoLikes
+    const user = await User.findOne({})
+    newBlog.user = user.id
+
     const postResponse = await api
       .post("/api/blogs")
-      .send(data.blogNoLikes)
+      .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/)
 
@@ -86,25 +114,25 @@ describe("a blog added to the database", () => {
 describe("when a blog is deleted", () => {
   test("the number of blogs goes down by one", async () => {
     const id = (await api.get("/api/blogs")).body[0].id
-  
+
     await api
       .delete(`/api/blogs/${id}`)
       .expect(204)
-  
+
     const response = await api.get("/api/blogs")
-  
+
     expect(response.body).toHaveLength(data.blogs.length - 1)
   })
 
   test("a blog with the deleted id doesn't exist anymore", async () => {
     const id = (await api.get("/api/blogs")).body[0].id
-  
+
     await api
       .delete(`/api/blogs/${id}`)
       .expect(204)
-  
+
     const response = await api.get("/api/blogs")
-  
+
     expect(response.body).not.toContainEqual(
       expect.objectContaining({
         title: data.blogs[0].title,

@@ -41,3 +41,7 @@ content-type: application/json
   "url": "https://frozen.com/olaf",
   "likes": 43
 }
+
+###
+
+DELETE http://localhost:3000/api/blogs/6231b1f078d58f7fc58b5e891 HTTP/1.1

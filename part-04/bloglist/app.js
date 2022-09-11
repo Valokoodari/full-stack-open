@@ -4,6 +4,7 @@ const usersRouter = require("./controllers/users")
 const config = require("./utils/config")
 const mongoose = require("mongoose")
 const express = require("express")
+const morgan = require("morgan")
 const cors = require("cors")
 
 const app = express()
@@ -12,6 +13,10 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(cors())
 app.use(express.json())
+
+if (process.env.NODE_ENV !== "test") {
+  app.use(morgan("tiny"))
+}
 
 app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)

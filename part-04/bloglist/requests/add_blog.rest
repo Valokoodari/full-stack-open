@@ -5,7 +5,8 @@ content-type: application/json
     "title": "Valon blogi",
     "author": "Valokoodari",
     "url": "https://valokoodari.eu",
-    "likes": 2
+    "likes": 2,
+    "user": "631ccd3c1fd6c6d24c8c0a1d"
 }
 
 ###
@@ -17,7 +18,8 @@ content-type: application/json
     "title": "I Love Summer",
     "author": "Olaf",
     "url": "https://frozen.com/olaf",
-    "likes": 5
+    "likes": 5,
+    "user": "631ccd3c1fd6c6d24c8c0a1d"
 }
 
 ###
@@ -28,7 +30,8 @@ content-type: application/json
 {
     "title": "I Love Winter",
     "author": "Olaf",
-    "url": "https://frozen.com/olaf"
+    "url": "https://frozen.com/olaf",
+    "user": "631ccd3c1fd6c6d24c8c0a1d"
 }
 
 ###
@@ -38,5 +41,32 @@ content-type: application/json
 
 {
     "author": "Olaf",
-    "likes": 23
+    "likes": 23,
+    "user": "631ccd3c1fd6c6d24c8c0a1d"
 }
+
+###
+
+POST http://localhost:3000/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "I don't even know a Samantha",
+    "author": "Olaf",
+    "url": "https://frozen.com/olaf",
+    "likes": 5,
+    "user": "631ccd3c1fd6c6d24c8c0a3d"
+}
+
+###
+
+POST http://localhost:3000/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Anna? Elsa? Sven?",
+    "author": "Olaf",
+    "url": "https://frozen.com/olaf",
+    "likes": 5
+}
+

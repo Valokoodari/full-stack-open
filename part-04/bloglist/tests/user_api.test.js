@@ -64,6 +64,7 @@ describe("a user added to the database", () => {
     expect(response.body).toContainEqual({
       username: data.validUser.username,
       name: data.validUser.name,
+      blogs: [],
       id
     })
   })

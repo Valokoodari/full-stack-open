@@ -15,6 +15,10 @@ const errorHandler = (error, _, res, next) => {
     }
   }
 
+  if (error.name === "CastError") {
+    return res.status(400).json({ error: "malformatted id" })
+  }
+
   next(error)
 }
 
