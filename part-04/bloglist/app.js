@@ -1,4 +1,3 @@
-const userExtractor = require("./utils/user_extractor")
 const errorHandler = require("./utils/error_handler")
 const blogsRouter = require("./controllers/blogs")
 const usersRouter = require("./controllers/users")
@@ -20,7 +19,7 @@ if (process.env.NODE_ENV !== "test") {
   app.use(morgan("tiny"))
 }
 
-app.use("/api/blogs", userExtractor, blogsRouter)
+app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)
 app.use("/api/login", loginRouter)
 

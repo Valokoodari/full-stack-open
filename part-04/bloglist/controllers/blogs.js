@@ -1,7 +1,6 @@
-const jwt = require("jsonwebtoken")
+const userExtractor = require("../utils/user_extractor")
 const blogsRouter = require("express").Router()
 const Blog = require("../models/blog")
-const User = require("../models/user")
 
 blogsRouter.get("/", async (_, res) => {
   const blogs = await Blog.find({}).populate("user", { username: 1, name: 1 })
@@ -9,7 +8,7 @@ blogsRouter.get("/", async (_, res) => {
   res.json(blogs)
 })
 
-blogsRouter.post("/", async (req, res, next) => {
+blogsRouter.post("/", userExtractor, async (req, res, next) => {
   try {
     const body = new Blog(req.body)
 
@@ -47,7 +46,7 @@ blogsRouter.put("/:id", async (req, res) => {
   }
 })
 
-blogsRouter.delete("/:id", async (req, res, next) => {
+blogsRouter.delete("/:id", userExtractor, async (req, res, next) => {
   try {
     const blog = await Blog.findById(req.params.id)
     if (blog.user.toString() === req.user.id) {

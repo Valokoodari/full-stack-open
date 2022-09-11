@@ -10,6 +10,7 @@ const api = supertest(app)
 
 var user = null
 var token = null
+const INVALID_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlciIsImlkIjoiNjMxY2NkM2MxZmQ2YzZkMjRjOGMwYTFkIiwiaWF0IjoxNjYyOTAzNTY3fQ.9aeIYthsYKPwCZgxDsOafgWNvS96T2TXd3Bp8uqmo84"
 
 const getToken = async () => {
   const response = await api
@@ -209,6 +210,61 @@ describe("when a blog is updated", () => {
         id
       })
     )
+  })
+})
+
+describe("when authorization token is not provided", () => {
+  test("adding a blog returns 401", async () => {
+    await api
+      .post("/api/blogs")
+      .send(data.blog)
+      .expect(401)
+  })
+
+  test("deleting a blog returns 401", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+
+    await api
+      .delete(`/api/blogs/${id}`)
+      .expect(401)
+  })
+})
+
+describe("when authorization token is invalid", () => {
+  test("adding a blog returns 401", async () => {
+    await api
+      .post("/api/blogs")
+      .set("Authorization", `Bearer ${INVALID_TOKEN}`)
+      .send(data.blog)
+      .expect(401)
+  })
+
+  test("deleting a blog returns 401", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+
+    await api
+      .delete(`/api/blogs/${id}`)
+      .set("Authorization", `Bearer ${INVALID_TOKEN}`)
+      .expect(401)
+  })
+})
+
+describe("when authorization token is malformed", () => {
+  test("adding a blog returns 401", async () => {
+    await api
+      .post("/api/blogs")
+      .set("Authorization", "Bearer Malformed")
+      .send(data.blog)
+      .expect(401)
+  })
+
+  test("deleting a blog returns 401", async () => {
+    const id = (await api.get("/api/blogs")).body[0].id
+
+    await api
+      .delete(`/api/blogs/${id}`)
+      .set("Authorization", "Bearer Malformed")
+      .expect(401)
   })
 })
 
