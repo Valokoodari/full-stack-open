@@ -133,6 +133,7 @@ describe("when a blog is deleted", () => {
 
     await api
       .delete(`/api/blogs/${id}`)
+      .set("Authorization", `Bearer ${token}`)
       .expect(204)
 
     const response = await api.get("/api/blogs")
@@ -145,6 +146,7 @@ describe("when a blog is deleted", () => {
 
     await api
       .delete(`/api/blogs/${id}`)
+      .set("Authorization", `Bearer ${token}`)
       .expect(204)
 
     const response = await api.get("/api/blogs")
