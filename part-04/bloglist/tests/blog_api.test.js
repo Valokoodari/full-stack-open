@@ -11,7 +11,7 @@ beforeEach(async () => {
   await blog.insertMany(data.blogs)
 })
 
-describe("the api returns", () => {
+describe("the blog api returns", () => {
   test("the data in json format", async () => {
     await api
       .get("/api/blogs")
@@ -63,15 +63,13 @@ describe("a blog added to the database", () => {
   
     const response = await api.get("/api/blogs")
   
-    expect(response.body).toContainEqual(
-      expect.objectContaining({
+    expect(response.body).toContainEqual({
         title: data.blog.title,
         author: data.blog.author,
         url: data.blog.url,
         likes: data.blog.likes,
         id
-      })
-    )
+    })
   })
   
   test("has 0 likes if no likes are specified", async () => {
