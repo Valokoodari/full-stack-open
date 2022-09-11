@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Notification from "./components/Notification"
+import Togglable from "./components/Togglable"
 import LoginForm from "./components/LoginForm"
 import BlogForm from "./components/BlogForm"
 import loginService from "./services/login"
@@ -13,11 +14,6 @@ const App = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [user, setUser] = useState(null)
-
-  const [showBlogForm, setShowBlogForm] = useState(false)
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -63,26 +59,6 @@ const App = () => {
     createNotification("success", "Logged out successfully!")
   }
 
-  const handleCreateBlog = async (event) => {
-    event.preventDefault()
-
-    const blogObject = {
-      title, author, url
-    }
-
-    try {
-      const returnedBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(returnedBlog))
-      setShowBlogForm(false)
-      setTitle("")
-      setAuthor("")
-      setUrl("")
-      createNotification("success", `A new blog ${returnedBlog.title} by ${returnedBlog.author} added.`)
-    } catch (exception) {
-      createNotification("error", `Could not create blog: ${exception.response.data.error}`)
-    }
-  }
-
   const createNotification = (type, message) => {
     setNotification({ message, type })
     setTimeout(() => {
@@ -90,38 +66,46 @@ const App = () => {
     }, 5000)
   }
 
-  if (!user) {
-    return (
-      <div>
-        <Notification notification={notification} />
-        <LoginForm
-          username={username} password={password}
-          setUsername={setUsername} setPassword={setPassword}
-          handleLogin={handleLogin}
-        />
-      </div>
-    )
+  const createBlog = async (blogObject) => {
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      blogFormRef.current.toggleVisibility()
+      createNotification("success", `A new blog ${returnedBlog.title} by ${returnedBlog.author} added.`)
+    } catch (exception) {
+      createNotification("error", `Could not create blog: ${exception.response.data.error}`)
+    }
   }
+
+  const blogFormRef = useRef()
 
   return (
     <div>
       <h1>Bloglist</h1>
-      <Notification notification={notification} />
-      <div>
-        Logged in as {user.name}{" "}
-        <button onClick={handleLogout}>logout</button>
-      </div>
-      <BlogForm
-        showBlogForm={showBlogForm} setShowBlogForm={setShowBlogForm}
-        title={title} setTitle={setTitle}
-        author={author} setAuthor={setAuthor}
-        url={url} setUrl={setUrl}
-        createBlog={handleCreateBlog}
-      />
-      <h2>blogs</h2>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      { user === null ?
+        <div>
+          <Notification notification={notification} />
+          <LoginForm
+            username={username} password={password}
+            setUsername={setUsername} setPassword={setPassword}
+            handleLogin={handleLogin}
+          />
+        </div> :
+        <div>
+          <Notification notification={notification} />
+          <div>
+            Logged in as {user.name}{" "}
+            <button onClick={handleLogout}>logout</button>
+          </div>
+          <Togglable buttonLabel="new blog" ref={blogFormRef} >
+            <BlogForm createBlog={createBlog} />
+          </Togglable>
+          <h2>blogs</h2>
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
+      }
     </div>
   )
 }

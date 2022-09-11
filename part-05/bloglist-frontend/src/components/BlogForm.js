@@ -1,26 +1,26 @@
-const BlogForm = ({
-  showBlogForm, setShowBlogForm,
-  title, setTitle,
-  author, setAuthor,
-  url, setUrl,
-  createBlog
-}) => {
-  const showButtonStyle = {
-    marginTop: "1.2em"
-  }
+import { useState } from "react"
 
-  if (!showBlogForm) {
-    return (
-      <button style={showButtonStyle} onClick={() => setShowBlogForm(true)}>
-        new blog
-      </button>
-    )
+const BlogForm = ({ createBlog }) => {
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [url, setUrl] = useState("")
+
+  const addBlog = async (event) => {
+    event.preventDefault()
+
+    createBlog({
+      title, author, url
+    })
+
+    setTitle("")
+    setAuthor("")
+    setUrl("")
   }
 
   return (
     <div>
       <h2>create new</h2>
-      <form onSubmit={createBlog}>
+      <form onSubmit={addBlog}>
         <div>
           title{" "}
           <input
@@ -49,9 +49,6 @@ const BlogForm = ({
           />
         </div>
         <button type="submit">create</button>{" "}
-        <button onClick={(event) => {
-          event.preventDefault(); setShowBlogForm(false)
-        }}>cancel</button>
       </form>
     </div>
   )
