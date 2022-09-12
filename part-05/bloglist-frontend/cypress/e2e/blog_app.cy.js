@@ -37,4 +37,20 @@ describe("Blog app", () => {
         .should("have.css", "color", "rgb(255, 0, 0)")
     })
   })
+
+  describe("When logged in", () => {
+    beforeEach(() => {
+      cy.login({ username: "tester", password: "P4ssw0rd" })
+    })
+
+    it("A blog can be created", () => {
+      cy.contains("new blog").click()
+      cy.get("#title-input").type("A blog created by cypress")
+      cy.get("#author-input").type("Cypress")
+      cy.get("#url-input").type("http://localhost:3000")
+      cy.get("#submit-button").click()
+
+      cy.contains("A blog created by cypress by Cypress")
+    })
+  })
 })

@@ -54,6 +54,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
             type="text"
             value={title}
             name="Title"
+            id="title-input"
             onChange={({ target }) => setTitle(target.value)}
           />
         </div>
@@ -63,6 +64,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
             type="text"
             value={author}
             name="Author"
+            id="author-input"
             onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
@@ -72,10 +74,11 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
             type="text"
             value={url}
             name="Url"
+            id="url-input"
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button type="submit">create</button>{" "}
+        <button type="submit" id="submit-button">create</button>{" "}
         <button onClick={(event) => handleToggleVisibility(event)}>cancel</button>
       </form>
     </div>
