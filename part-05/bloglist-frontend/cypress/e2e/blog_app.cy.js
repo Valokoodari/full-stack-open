@@ -86,5 +86,43 @@ describe("Blog app", () => {
         cy.get("#blog-list").should("not.contain", "remove")
       })
     })
+
+    describe("and multiple blogs exist", () => {
+      beforeEach(() => {
+        cy.createBlog({
+          title: "Another blog created by cypress",
+          author: "Cypress",
+          url: "http://localhost:3000",
+        })
+        cy.createBlog({
+          title: "Yet another blog created by cypress",
+          author: "Cypress",
+          url: "http://localhost:3000",
+        })
+        cy.createBlog({
+          title: "The last blog created by cypress",
+          author: "Cypress",
+          url: "http://localhost:3000",
+        })
+
+        cy.get(".blog").eq(0).contains("view").click()
+        cy.get(".blog").eq(1).contains("view").click()
+        cy.get(".blog").eq(2).contains("view").click()
+        
+        cy.get(".blog").eq(0).contains("like").click()
+        cy.get(".blog").eq(0).contains("like").click()
+        cy.get(".blog").eq(0).contains("like").click()
+        cy.get(".blog").eq(2).contains("like").click()
+      })
+    
+      it("the blogs are ordered by likes", () => {
+        cy.get(".blog").eq(0).should("contain", "likes 3")
+          .should("contain", "Another blog created by cypress")
+        cy.get(".blog").eq(1).should("contain", "likes 1")
+          .should("contain", "The last blog created by cypress")
+        cy.get(".blog").eq(2).should("contain", "likes 0")
+          .should("contain", "Yet another blog created by cypress")
+      })
+    })
   })
 })
