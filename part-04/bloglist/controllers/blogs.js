@@ -53,9 +53,9 @@ blogsRouter.delete("/:id", userExtractor, async (req, res, next) => {
       await Blog.findByIdAndRemove(req.params.id)
 
       res.status(204).end()
+    } else {
+      res.status(401).json({ error: "unauthorized" })
     }
-
-    res.status(401).json({ error: "unauthorized" })
   } catch (error) {
     next(error)
   }
