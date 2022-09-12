@@ -33,11 +33,21 @@ blogsRouter.post("/", userExtractor, async (req, res, next) => {
 })
 
 blogsRouter.put("/:id", async (req, res) => {
-  const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+  const body = req.body
+
+  const blog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes,
+    user: body.user
+  }
+
+  const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blog, {
     new: true,
     runValidators: true,
     context: "query"
-  })
+  }).populate("user", { username: 1, name: 1 })
 
   if (updatedBlog) {
     res.json(updatedBlog)
