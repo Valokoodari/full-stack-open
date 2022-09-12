@@ -108,13 +108,13 @@ describe("Blog app", () => {
         cy.get(".blog").eq(0).contains("view").click()
         cy.get(".blog").eq(1).contains("view").click()
         cy.get(".blog").eq(2).contains("view").click()
-        
+
         cy.get(".blog").eq(0).contains("like").click()
         cy.get(".blog").eq(0).contains("like").click()
         cy.get(".blog").eq(0).contains("like").click()
         cy.get(".blog").eq(2).contains("like").click()
       })
-    
+
       it("the blogs are ordered by likes", () => {
         cy.get(".blog").eq(0).should("contain", "likes 3")
           .should("contain", "Another blog created by cypress")
