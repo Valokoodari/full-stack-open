@@ -47,9 +47,9 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
   return (
     <div>
       <h2>create new</h2>
-      <form onSubmit={addBlog}>
+      <form onSubmit={addBlog} data-testid="blog-form">
         <div>
-          title{" "}
+          <label htmlFor="Title">title{" "}</label>
           <input
             type="text"
             value={title}
@@ -58,7 +58,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
           />
         </div>
         <div>
-          author{" "}
+          <label htmlFor="Author">author{" "}</label>
           <input
             type="text"
             value={author}
@@ -67,7 +67,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
           />
         </div>
         <div>
-          url{" "}
+          <label htmlFor="Url">url{" "}</label>
           <input
             type="text"
             value={url}
