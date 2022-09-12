@@ -65,7 +65,7 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
-      blogFormRef.current.toggleVisibility()
+      blogFormToggleRef.current.toggleVisibility()
       createNotification("success", `A new blog ${returnedBlog.title} by ${returnedBlog.author} added.`)
     } catch (exception) {
       createNotification("error", `Could not create blog: ${exception.response.data.error}`)
@@ -94,7 +94,7 @@ const App = () => {
     }
   }
 
-  const blogFormRef = useRef()
+  const blogFormToggleRef = useRef()
 
   return (
     <div>
@@ -109,7 +109,7 @@ const App = () => {
             Logged in as {user.name}{" "}
             <button onClick={handleLogout}>logout</button>
           </div>
-          <Togglable buttonLabel="new blog" ref={blogFormRef} >
+          <Togglable buttonLabel="new blog" ref={blogFormToggleRef} >
             <BlogForm createBlog={createBlog} />
           </Togglable>
           <h2>blogs</h2>
