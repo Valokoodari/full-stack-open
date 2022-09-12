@@ -52,5 +52,21 @@ describe("Blog app", () => {
 
       cy.contains("A blog created by cypress by Cypress")
     })
+
+    describe("and a blog exists", () => {
+      beforeEach(() => {
+        cy.createBlog({
+          title: "Another blog created by cypress",
+          author: "Cypress",
+          url: "http://localhost:3000",
+        })
+      })
+
+      it("it can be liked", () => {
+        cy.contains("view").click()
+        cy.contains("like").click()
+        cy.contains("likes 1")
+      })
+    })
   })
 })
