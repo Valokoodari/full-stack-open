@@ -1,8 +1,7 @@
 import React from "react"
 import "@testing-library/jest-dom/extend-expect"
-import { render, screen } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 import Blog from "./Blog"
-import { act } from "react-dom/test-utils"
 
 const test_user = {
   username: "snowman",
@@ -33,9 +32,7 @@ test("Blog component displays all information after the view button is clicked",
   expect(element).toBeDefined()
 
   const button = screen.getByText("view")
-  act(() => {
-    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-  })
+  fireEvent.click(button)
 
   expect(screen.getByText("I Love Summer")).toBeDefined()
   expect(screen.getByText("by Olaf")).toBeInTheDocument()
@@ -50,15 +47,11 @@ test("Blog component calls the updateBlog function twice when the like button is
   expect(element).toBeDefined()
 
   const button = screen.getByText("view")
-  act(() => {
-    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-  })
+  fireEvent.click(button)
 
   const likeButton = screen.getByText("like")
-  act(() => {
-    likeButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-    likeButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-  })
+  fireEvent.click(likeButton)
+  fireEvent.click(likeButton)
 
   expect(updateBlog).toHaveBeenCalledTimes(2)
 })
