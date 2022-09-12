@@ -8,12 +8,9 @@ import blogService from "./services/blogs"
 import Blog from "./components/Blog"
 
 const App = () => {
+  const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
   const [notification, setNotification] = useState(null)
-
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [user, setUser] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -30,13 +27,9 @@ const App = () => {
     }
   }, [])
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
-
+  const handleLogin = async (credentials) => {
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login(credentials)
 
       createNotification("success", `Logged in as ${user.name}`)
 
@@ -45,8 +38,6 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
-      setUsername("")
-      setPassword("")
     } catch (exception) {
       createNotification("error", "Incorrect username or password!")
     }
@@ -82,17 +73,12 @@ const App = () => {
   return (
     <div>
       <h1>Bloglist</h1>
+      <Notification notification={notification} />
       { user === null ?
         <div>
-          <Notification notification={notification} />
-          <LoginForm
-            username={username} password={password}
-            setUsername={setUsername} setPassword={setPassword}
-            handleLogin={handleLogin}
-          />
+          <LoginForm handleLogin={handleLogin} />
         </div> :
         <div>
-          <Notification notification={notification} />
           <div>
             Logged in as {user.name}{" "}
             <button onClick={handleLogout}>logout</button>

@@ -20,3 +20,10 @@
     color: green;
     border-color: green;
 }
+
+.blog {
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 1em;
+    margin-bottom: 0.5em;
+}
