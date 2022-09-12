@@ -43,3 +43,22 @@ test("Blog component displays all information after the view button is clicked",
   expect(screen.getByText("likes 242")).toBeInTheDocument()
   expect(screen.getByText("The Snowman")).toBeInTheDocument()
 })
+
+test("Blog component calls the updateBlog function twice when the like button is clicked twice", () => {
+  const updateBlog = jest.fn()
+  const element = render(<Blog blog={test_blog} user={test_user} createBlog={()=> {}} updateBlog={updateBlog} removeBlog={() => {}} />)
+  expect(element).toBeDefined()
+
+  const button = screen.getByText("view")
+  act(() => {
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+  })
+
+  const likeButton = screen.getByText("like")
+  act(() => {
+    likeButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    likeButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+  })
+
+  expect(updateBlog).toHaveBeenCalledTimes(2)
+})
