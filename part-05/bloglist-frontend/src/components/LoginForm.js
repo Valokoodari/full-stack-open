@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useState, useImperativeHandle, forwardRef } from "react"
 
-const LoginForm = ({
+const LoginForm = forwardRef(({
   handleLogin
-}) => {
+}, ref) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -13,10 +13,18 @@ const LoginForm = ({
       username,
       password
     })
+  }
 
+  const clearForm = () => {
     setUsername("")
     setPassword("")
   }
+
+  useImperativeHandle(ref, () => {
+    return {
+      clearForm
+    }
+  })
 
   return (
     <div>
@@ -44,6 +52,8 @@ const LoginForm = ({
       </form>
     </div>
   )
-}
+})
+
+LoginForm.displayName = "LoginForm"
 
 export default LoginForm

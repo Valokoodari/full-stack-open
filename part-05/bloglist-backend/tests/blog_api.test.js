@@ -100,16 +100,16 @@ describe("a blog added to the database", () => {
     const response = await api.get("/api/blogs")
 
     expect(response.body).toContainEqual({
-        title: data.blog.title,
-        author: data.blog.author,
-        url: data.blog.url,
-        likes: data.blog.likes,
-        user: {
-          username: user.username,
-          name: user.name,
-          id: user.id
-        },
-        id
+      title: data.blog.title,
+      author: data.blog.author,
+      url: data.blog.url,
+      likes: data.blog.likes,
+      user: {
+        username: user.username,
+        name: user.name,
+        id: user.id
+      },
+      id
     })
   })
 

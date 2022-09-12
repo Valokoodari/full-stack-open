@@ -26,7 +26,10 @@ blogsRouter.post("/", userExtractor, async (req, res, next) => {
     user.blogs = user.blogs.concat(savedBlog._id)
     await user.save()
 
-    res.status(201).json(savedBlog)
+    const populatedBlog = await Blog.findById(savedBlog._id)
+      .populate("user", { username: 1, name: 1 })
+
+    res.status(201).json(populatedBlog)
   } catch (error) {
     next(error)
   }
@@ -63,9 +66,9 @@ blogsRouter.delete("/:id", userExtractor, async (req, res, next) => {
       await Blog.findByIdAndRemove(req.params.id)
 
       res.status(204).end()
+    } else {
+      res.status(401).json({ error: "unauthorized" })
     }
-
-    res.status(401).json({ error: "unauthorized" })
   } catch (error) {
     next(error)
   }

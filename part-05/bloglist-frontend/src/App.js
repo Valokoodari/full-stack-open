@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react"
 import Notification from "./components/Notification"
-import Togglable from "./components/Togglable"
 import LoginForm from "./components/LoginForm"
 import BlogForm from "./components/BlogForm"
 import loginService from "./services/login"
@@ -38,6 +37,7 @@ const App = () => {
         "currentBloglistUser", JSON.stringify(user)
       )
       blogService.setToken(user.token)
+      loginFormRef.current.clearForm()
       setUser(user)
     } catch (exception) {
       createNotification("error", "Incorrect username or password!")
@@ -65,7 +65,8 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
-      blogFormToggleRef.current.toggleVisibility()
+      blogFormRef.current.toggleVisibility()
+      blogFormRef.current.clearForm()
       createNotification("success", `A new blog ${returnedBlog.title} by ${returnedBlog.author} added.`)
     } catch (exception) {
       createNotification("error", `Could not create blog: ${exception.response.data.error}`)
@@ -94,7 +95,8 @@ const App = () => {
     }
   }
 
-  const blogFormToggleRef = useRef()
+  const blogFormRef = useRef()
+  const loginFormRef = useRef()
 
   return (
     <div>
@@ -102,16 +104,14 @@ const App = () => {
       <Notification notification={notification} />
       { user === null ?
         <div>
-          <LoginForm handleLogin={handleLogin} />
+          <LoginForm handleLogin={handleLogin} ref={loginFormRef} />
         </div> :
         <div>
           <div>
             Logged in as {user.name}{" "}
             <button onClick={handleLogout}>logout</button>
           </div>
-          <Togglable buttonLabel="new blog" ref={blogFormToggleRef} >
-            <BlogForm createBlog={createBlog} />
-          </Togglable>
+          <BlogForm createBlog={createBlog} ref={blogFormRef} />
           <h2>blogs</h2>
           {blogs
             .sort((a, b) => b.likes - a.likes)
