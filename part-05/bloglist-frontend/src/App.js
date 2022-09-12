@@ -82,6 +82,18 @@ const App = () => {
     }
   }
 
+  const removeBlog = async (blogObject) => {
+    if (window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}?`)) {
+      try {
+        await blogService.remove(blogObject.id)
+        setBlogs(blogs.filter(blog => blog.id !== blogObject.id))
+        createNotification("success", `Blog ${blogObject.title} by ${blogObject.author} removed.`)
+      } catch (exception) {
+        createNotification("error", `Could not remove blog: ${exception.response.data.error}`)
+      }
+    }
+  }
+
   const blogFormRef = useRef()
 
   return (
@@ -104,7 +116,10 @@ const App = () => {
           {blogs
             .sort((a, b) => b.likes - a.likes)
             .map(blog =>
-              <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
+              <Blog key={blog.id} user={user} blog={blog}
+                updateBlog={updateBlog}
+                removeBlog={removeBlog}
+              />
             )
           }
         </div>
