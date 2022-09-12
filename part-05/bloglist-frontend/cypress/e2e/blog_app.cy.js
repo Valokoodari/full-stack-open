@@ -67,6 +67,24 @@ describe("Blog app", () => {
         cy.contains("like").click()
         cy.contains("likes 1")
       })
+
+      it("it can be deleted by the user who created it", () => {
+        cy.contains("view").click()
+        cy.contains("remove").click()
+        cy.get("#blog-list").should("not.contain", "Another blog created by cypress")
+      })
+
+      it("it cannot be deleted by another user", () => {
+        const user = {
+          name: "Another User",
+          username: "another",
+          password: "S3cr3t",
+        }
+        cy.request("POST", "http://localhost:3003/api/users/", user)
+        cy.login({ username: "another", password: "S3cr3t" })
+        cy.contains("view").click()
+        cy.get("#blog-list").should("not.contain", "remove")
+      })
     })
   })
 })

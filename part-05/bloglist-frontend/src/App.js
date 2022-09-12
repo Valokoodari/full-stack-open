@@ -113,15 +113,17 @@ const App = () => {
           </div>
           <BlogForm createBlog={createBlog} ref={blogFormRef} />
           <h2>blogs</h2>
-          {blogs
-            .sort((a, b) => b.likes - a.likes)
-            .map(blog =>
-              <Blog key={blog.id} user={user} blog={blog}
-                updateBlog={updateBlog}
-                removeBlog={removeBlog}
-              />
-            )
-          }
+          <div id="blog-list">
+            {blogs
+              .sort((a, b) => b.likes - a.likes)
+              .map(blog =>
+                <Blog key={blog.id} user={user} blog={blog}
+                  updateBlog={updateBlog}
+                  removeBlog={removeBlog}
+                />
+              )
+            }
+          </div>
         </div>
       }
     </div>
