@@ -23,6 +23,11 @@ app.use("/api/blogs", blogsRouter)
 app.use("/api/users", usersRouter)
 app.use("/api/login", loginRouter)
 
+if (config.NODE_ENV === "test") {
+  const testingRouter = require("./controllers/testing")
+  app.use("/api/testing", testingRouter)
+}
+
 // Unknown endpoint
 app.use((_, res) => {
   res.status(404).send({ error: "unknown endpoint" })

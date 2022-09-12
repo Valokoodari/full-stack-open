@@ -17,7 +17,7 @@ const test_blog = {
 }
 
 test("Blog component displays only the title and author by default", () => {
-  const element = render(<Blog blog={test_blog} user={test_user} createBlog={()=> {}} updateBlog={() => {}} removeBlog={() => {}} />)
+  const element = render(<Blog blog={test_blog} user={test_user} createBlog={() => {}} updateBlog={() => {}} removeBlog={() => {}} />)
   expect(element).toBeDefined()
 
   expect(screen.getByText("I Love Summer")).toBeDefined()
@@ -28,7 +28,7 @@ test("Blog component displays only the title and author by default", () => {
 })
 
 test("Blog component displays all information after the view button is clicked", () => {
-  const element = render(<Blog blog={test_blog} user={test_user} createBlog={()=> {}} updateBlog={() => {}} removeBlog={() => {}} />)
+  const element = render(<Blog blog={test_blog} user={test_user} createBlog={() => {}} updateBlog={() => {}} removeBlog={() => {}} />)
   expect(element).toBeDefined()
 
   const button = screen.getByText("view")
@@ -43,7 +43,7 @@ test("Blog component displays all information after the view button is clicked",
 
 test("Blog component calls the updateBlog function twice when the like button is clicked twice", () => {
   const updateBlog = jest.fn()
-  const element = render(<Blog blog={test_blog} user={test_user} createBlog={()=> {}} updateBlog={updateBlog} removeBlog={() => {}} />)
+  const element = render(<Blog blog={test_blog} user={test_user} createBlog={() => {}} updateBlog={updateBlog} removeBlog={() => {}} />)
   expect(element).toBeDefined()
 
   const button = screen.getByText("view")
