@@ -1,6 +1,7 @@
 const _ = require("lodash")
 
 const dummy = (blogs) => {
+  blogs
   return 1
 }
 
@@ -13,7 +14,7 @@ const favoriteBlog = (blogs) => {
 
   const favorite = blogs.reduce((favorite, blog) =>
     blog.likes > favorite.likes ? blog : favorite,
-    { likes: 0 }
+  { likes: 0 }
   )
 
   return _.pick(favorite, ["title", "author", "likes"])

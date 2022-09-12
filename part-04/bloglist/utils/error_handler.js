@@ -1,4 +1,4 @@
-const logger = require('./logger')
+const logger = require("./logger")
 
 const errorHandler = (error, _, res, next) => {
   logger.error(error.message)
