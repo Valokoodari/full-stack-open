@@ -47,50 +47,6 @@ const App = () => {
     dispatch(setNotification("Logged out successfully!"));
   };
 
-  const updateBlog = async (blogObject) => {
-    try {
-      const returnedBlog = await blogService.update(blogObject.id, blogObject);
-      // setBlogs(
-      //   blogs.map((blog) => (blog.id === returnedBlog.id ? returnedBlog : blog))
-      // );
-      dispatch(
-        setNotification(
-          `Blog ${returnedBlog.title} by ${returnedBlog.author} updated.`
-        )
-      );
-    } catch (exception) {
-      dispatch(
-        setNotification(
-          `Could not update blog: ${exception.response.data.error}`,
-          "error"
-        )
-      );
-    }
-  };
-
-  const removeBlog = async (blogObject) => {
-    if (
-      window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}?`)
-    ) {
-      try {
-        await blogService.remove(blogObject.id);
-        // setBlogs(blogs.filter((blog) => blog.id !== blogObject.id));
-        dispatch(
-          setNotification(
-            `Blog ${blogObject.title} by ${blogObject.author} removed.`
-          )
-        );
-      } catch (exception) {
-        dispatch(
-          setNotification(
-            `Could not remove blog: ${exception.response.data.error}`,
-            "error"
-          )
-        );
-      }
-    }
-  };
-
   const loginFormRef = useRef();
 
   return (
@@ -108,11 +64,7 @@ const App = () => {
             <button onClick={handleLogout}>logout</button>
           </div>
           <BlogForm />
-          <BlogList
-            updateBlog={updateBlog}
-            removeBlog={removeBlog}
-            user={user}
-          />
+          <BlogList user={user} />
         </div>
       )}
     </div>

@@ -1,15 +1,26 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { updateBlog, removeBlog } from "../reducers/blogReducer";
 
-const Blog = ({ user, blog, updateBlog, removeBlog }) => {
+const Blog = ({ user, blog }) => {
+  const dispatch = useDispatch();
+
   const [visible, setVisible] = useState(false);
 
   const handleLike = () => {
-    updateBlog({
-      ...blog,
-      likes: blog.likes + 1,
-      user: blog.user.id,
-    });
+    dispatch(
+      updateBlog({
+        ...blog,
+        likes: blog.likes + 1,
+        user: blog.user.id,
+      })
+    );
+  };
+
+  const handleRemove = () => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      dispatch(removeBlog(blog));
+    }
   };
 
   return (
@@ -33,7 +44,7 @@ const Blog = ({ user, blog, updateBlog, removeBlog }) => {
           {user.username === blog.user.username ? (
             <button
               onClick={() => {
-                removeBlog(blog);
+                handleRemove();
               }}
             >
               remove
@@ -43,13 +54,6 @@ const Blog = ({ user, blog, updateBlog, removeBlog }) => {
       ) : null}
     </div>
   );
-};
-
-Blog.propTypes = {
-  user: PropTypes.object.isRequired,
-  blog: PropTypes.object.isRequired,
-  updateBlog: PropTypes.func.isRequired,
-  removeBlog: PropTypes.func.isRequired,
 };
 
 export default Blog;

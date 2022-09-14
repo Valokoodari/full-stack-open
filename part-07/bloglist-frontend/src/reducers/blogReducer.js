@@ -12,6 +12,14 @@ const blogReducer = createSlice({
     appendBlog(state, action) {
       return state.concat(action.payload);
     },
+    updateBlog(state, action) {
+      return state.map((blog) =>
+        blog.id === action.payload.id ? action.payload : blog
+      );
+    },
+    removeBlog(state, action) {
+      return state.filter((blog) => blog.id !== action.payload.id);
+    },
   },
 });
 
@@ -38,6 +46,48 @@ export const createBlog = (blogObject) => {
       dispatch(
         setNotification(
           `Could not create blog: ${exception.response.data.error}`,
+          "error"
+        )
+      );
+    }
+  };
+};
+
+export const updateBlog = (blogObject) => {
+  return async (dispatch) => {
+    try {
+      const returnedBlog = await blogService.update(blogObject.id, blogObject);
+      dispatch(blogReducer.actions.updateBlog(returnedBlog));
+      dispatch(
+        setNotification(
+          `Blog ${returnedBlog.title} by ${returnedBlog.author} updated.`
+        )
+      );
+    } catch (exception) {
+      dispatch(
+        setNotification(
+          `Could not update blog: ${exception.response.data.error}`,
+          "error"
+        )
+      );
+    }
+  };
+};
+
+export const removeBlog = (blogObject) => {
+  return async (dispatch) => {
+    try {
+      await blogService.remove(blogObject.id);
+      dispatch(blogReducer.actions.removeBlog(blogObject));
+      dispatch(
+        setNotification(
+          `Blog ${blogObject.title} by ${blogObject.author} removed.`
+        )
+      );
+    } catch (exception) {
+      dispatch(
+        setNotification(
+          `Could not remove blog: ${exception.response.data.error}`,
           "error"
         )
       );

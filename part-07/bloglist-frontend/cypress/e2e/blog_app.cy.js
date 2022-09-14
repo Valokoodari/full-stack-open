@@ -33,7 +33,7 @@ describe("Blog app", () => {
       cy.get("#login-button").click();
 
       cy.get(".error")
-        .contains("Incorrect username or password")
+        .contains("Wrong username or password")
         .should("have.css", "color", "rgb(255, 0, 0)");
     });
   });
