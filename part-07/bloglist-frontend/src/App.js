@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { setNotification } from "./reducers/notificationReducer";
+import { initializeBlogs } from "./reducers/blogReducer";
 import Notification from "./components/Notification";
 import LoginForm from "./components/LoginForm";
 import BlogForm from "./components/BlogForm";
@@ -11,12 +12,11 @@ import blogService from "./services/blogs";
 const App = () => {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState(null);
-  const [blogs, setBlogs] = useState([]);
-
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
-  }, []);
+    dispatch(initializeBlogs());
+  }, [dispatch]);
+
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const currentUserJSON = window.localStorage.getItem("currentBloglistUser");
@@ -47,33 +47,12 @@ const App = () => {
     dispatch(setNotification("Logged out successfully!"));
   };
 
-  const createBlog = async (blogObject) => {
-    try {
-      const returnedBlog = await blogService.create(blogObject);
-      setBlogs(blogs.concat(returnedBlog));
-      blogFormRef.current.toggleVisibility();
-      blogFormRef.current.clearForm();
-      dispatch(
-        setNotification(
-          `A new blog ${returnedBlog.title} by ${returnedBlog.author} added`
-        )
-      );
-    } catch (exception) {
-      dispatch(
-        setNotification(
-          `Could not create blog: ${exception.response.data.error}`,
-          "error"
-        )
-      );
-    }
-  };
-
   const updateBlog = async (blogObject) => {
     try {
       const returnedBlog = await blogService.update(blogObject.id, blogObject);
-      setBlogs(
-        blogs.map((blog) => (blog.id === returnedBlog.id ? returnedBlog : blog))
-      );
+      // setBlogs(
+      //   blogs.map((blog) => (blog.id === returnedBlog.id ? returnedBlog : blog))
+      // );
       dispatch(
         setNotification(
           `Blog ${returnedBlog.title} by ${returnedBlog.author} updated.`
@@ -95,7 +74,7 @@ const App = () => {
     ) {
       try {
         await blogService.remove(blogObject.id);
-        setBlogs(blogs.filter((blog) => blog.id !== blogObject.id));
+        // setBlogs(blogs.filter((blog) => blog.id !== blogObject.id));
         dispatch(
           setNotification(
             `Blog ${blogObject.title} by ${blogObject.author} removed.`
@@ -112,7 +91,6 @@ const App = () => {
     }
   };
 
-  const blogFormRef = useRef();
   const loginFormRef = useRef();
 
   return (
@@ -129,9 +107,8 @@ const App = () => {
             Logged in as {user.name}{" "}
             <button onClick={handleLogout}>logout</button>
           </div>
-          <BlogForm createBlog={createBlog} ref={blogFormRef} />
+          <BlogForm />
           <BlogList
-            blogs={blogs}
             updateBlog={updateBlog}
             removeBlog={removeBlog}
             user={user}

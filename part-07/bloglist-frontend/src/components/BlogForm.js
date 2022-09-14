@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
 import { useState, useImperativeHandle, forwardRef } from "react";
+import { createBlog } from "../reducers/blogReducer";
 
-const BlogForm = forwardRef(({ createBlog }, ref) => {
+const BlogForm = forwardRef(({}, ref) => {
+  const dispatch = useDispatch();
+
   const [visibility, setVisibility] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -9,11 +13,13 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
   const addBlog = async (event) => {
     event.preventDefault();
 
-    createBlog({
-      title,
-      author,
-      url,
-    });
+    dispatch(
+      createBlog({
+        title,
+        author,
+        url,
+      })
+    );
   };
 
   const clearForm = () => {
