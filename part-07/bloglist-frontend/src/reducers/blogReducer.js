@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import blogService from "../services/blogs";
 import { setNotification } from "./notificationReducer";
+import blogService from "../services/blogs";
 
 const blogReducer = createSlice({
   name: "blogs",

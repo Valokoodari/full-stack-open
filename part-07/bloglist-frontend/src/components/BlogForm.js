@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useState, useImperativeHandle, forwardRef } from "react";
 import { createBlog } from "../reducers/blogReducer";
 
-const BlogForm = forwardRef(({}, ref) => {
+const BlogForm = () => {
   const dispatch = useDispatch();
 
   const [visibility, setVisibility] = useState(false);
@@ -20,9 +20,7 @@ const BlogForm = forwardRef(({}, ref) => {
         url,
       })
     );
-  };
 
-  const clearForm = () => {
     setTitle("");
     setAuthor("");
     setUrl("");
@@ -36,13 +34,6 @@ const BlogForm = forwardRef(({}, ref) => {
     event.preventDefault();
     toggleVisibility();
   };
-
-  useImperativeHandle(ref, () => {
-    return {
-      clearForm,
-      toggleVisibility,
-    };
-  });
 
   if (!visibility) {
     return (
@@ -95,8 +86,6 @@ const BlogForm = forwardRef(({}, ref) => {
       </form>
     </div>
   );
-});
-
-BlogForm.displayName = "BlogForm";
+};
 
 export default BlogForm;

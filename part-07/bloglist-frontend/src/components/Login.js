@@ -1,33 +1,37 @@
-import { useState, useImperativeHandle, forwardRef } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../reducers/userReducer";
 
-const LoginForm = forwardRef(({ handleLogin }, ref) => {
+const Login = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const onLogin = (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
-
-    handleLogin({
-      username,
-      password,
-    });
-  };
-
-  const clearForm = () => {
+    dispatch(login({ username, password }));
     setUsername("");
     setPassword("");
   };
 
-  useImperativeHandle(ref, () => {
-    return {
-      clearForm,
-    };
-  });
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  if (user) {
+    return (
+      <div>
+        Logged in as {user.name} <button onClick={handleLogout}>logout</button>
+      </div>
+    );
+  }
 
   return (
     <div>
       <h2>Log in to application</h2>
-      <form onSubmit={onLogin}>
+      <form onSubmit={handleLogin}>
         <div>
           username{" "}
           <input
@@ -54,8 +58,6 @@ const LoginForm = forwardRef(({ handleLogin }, ref) => {
       </form>
     </div>
   );
-});
+};
 
-LoginForm.displayName = "LoginForm";
-
-export default LoginForm;
+export default Login;
