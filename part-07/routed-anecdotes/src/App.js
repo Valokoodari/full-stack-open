@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState } from "react"
 import {
-  BrowserRouter as Router, Routes, Route, Link, useParams
-} from 'react-router-dom'
+  BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate, Navigate
+} from "react-router-dom"
 
 const Menu = () => {
   const padding = {
@@ -13,6 +13,18 @@ const Menu = () => {
       <Link to="/create" style={padding}>create new</Link>
       <Link to="/about" style={padding}>about</Link>
     </div>
+  )
+}
+
+const Notification = ({ notification }) => {
+  console.log(notification)
+  const style = {
+    border: 'solid',
+    padding: 10,
+    borderWidth: 1
+  }
+  return (
+    notification ? <div style={style}>{notification}</div> : null
   )
 }
 
@@ -58,26 +70,29 @@ const About = () => (
 
 const Footer = () => (
   <div>
-    Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
+    Anecdote app for <a href="https://fullstackopen.com/">Full Stack Open</a>.
 
-    See <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js</a> for the source code.
+    See <a href="https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js">https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js</a> for the source code.
   </div>
 )
 
-const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+const CreateNew = ({ addNew, createNotification }) => {
+  const [content, setContent] = useState("")
+  const [author, setAuthor] = useState("")
+  const [info, setInfo] = useState("")
 
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.addNew({
+    addNew({
       content,
       author,
       info,
       votes: 0
     })
+    navigate("/")
+    createNotification(`a new anecdote ${content} created!`)
   }
 
   return (
@@ -86,15 +101,15 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input name="content" value={content} onChange={(e) => setContent(e.target.value)} />
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input name="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input name="info" value={info} onChange={(e)=> setInfo(e.target.value)} />
         </div>
         <button>create</button>
       </form>
@@ -106,22 +121,33 @@ const CreateNew = (props) => {
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
-      content: 'If it hurts, do it more often',
-      author: 'Jez Humble',
-      info: 'https://martinfowler.com/bliki/FrequencyReducesDifficulty.html',
+      content: "If it hurts, do it more often",
+      author: "Jez Humble",
+      info: "https://martinfowler.com/bliki/FrequencyReducesDifficulty.html",
       votes: 0,
       id: 1
     },
     {
-      content: 'Premature optimization is the root of all evil',
-      author: 'Donald Knuth',
-      info: 'http://wiki.c2.com/?PrematureOptimization',
+      content: "Premature optimization is the root of all evil",
+      author: "Donald Knuth",
+      info: "http://wiki.c2.com/?PrematureOptimization",
       votes: 0,
       id: 2
     }
   ])
 
-  const [notification, setNotification] = useState('')
+  const [notification, setNotification] = useState(null)
+  const [notificationTimeout, setNotificationTimeout] = useState(null)
+
+  const createNotification = (message) => {
+    if (notificationTimeout) {
+      clearTimeout(notificationTimeout)
+    }
+    setNotification(message)
+    setNotificationTimeout(setTimeout(() => {
+      setNotification(null)
+    }, 5000))
+  }
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
@@ -147,10 +173,12 @@ const App = () => {
       <Router>
         <h1>Software anecdotes</h1>
         <Menu />
+        <Notification notification={notification} />
         <Routes>
+          <Route path="/create" element={<CreateNew addNew={addNew} createNotification={createNotification} />} />
           <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} />
           <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
-          <Route path="/create" element={<CreateNew addNew={addNew} />} />
+          <Route path="/anecdotes" element={ <Navigate to="/" /> } />
           <Route path="/about" element={<About />}/>
         </Routes>
         <Footer />
