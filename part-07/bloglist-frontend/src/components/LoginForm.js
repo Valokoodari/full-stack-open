@@ -1,30 +1,28 @@
-import { useState, useImperativeHandle, forwardRef } from "react"
+import { useState, useImperativeHandle, forwardRef } from "react";
 
-const LoginForm = forwardRef(({
-  handleLogin
-}, ref) => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+const LoginForm = forwardRef(({ handleLogin }, ref) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const onLogin = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     handleLogin({
       username,
-      password
-    })
-  }
+      password,
+    });
+  };
 
   const clearForm = () => {
-    setUsername("")
-    setPassword("")
-  }
+    setUsername("");
+    setPassword("");
+  };
 
   useImperativeHandle(ref, () => {
     return {
-      clearForm
-    }
-  })
+      clearForm,
+    };
+  });
 
   return (
     <div>
@@ -50,12 +48,14 @@ const LoginForm = forwardRef(({
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit" id="login-button">login</button>
+        <button type="submit" id="login-button">
+          login
+        </button>
       </form>
     </div>
-  )
-})
+  );
+});
 
-LoginForm.displayName = "LoginForm"
+LoginForm.displayName = "LoginForm";
 
-export default LoginForm
+export default LoginForm;

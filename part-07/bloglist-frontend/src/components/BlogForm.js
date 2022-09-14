@@ -1,47 +1,49 @@
-import { useState, useImperativeHandle, forwardRef } from "react"
+import { useState, useImperativeHandle, forwardRef } from "react";
 
 const BlogForm = forwardRef(({ createBlog }, ref) => {
-  const [visibility, setVisibility] = useState(false)
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
+  const [visibility, setVisibility] = useState(false);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [url, setUrl] = useState("");
 
   const addBlog = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     createBlog({
-      title, author, url
-    })
-  }
+      title,
+      author,
+      url,
+    });
+  };
 
   const clearForm = () => {
-    setTitle("")
-    setAuthor("")
-    setUrl("")
-  }
+    setTitle("");
+    setAuthor("");
+    setUrl("");
+  };
 
   const toggleVisibility = () => {
-    setVisibility(!visibility)
-  }
+    setVisibility(!visibility);
+  };
 
   const handleToggleVisibility = (event) => {
-    event.preventDefault()
-    toggleVisibility()
-  }
+    event.preventDefault();
+    toggleVisibility();
+  };
 
   useImperativeHandle(ref, () => {
     return {
       clearForm,
-      toggleVisibility
-    }
-  })
+      toggleVisibility,
+    };
+  });
 
   if (!visibility) {
     return (
       <div style={{ marginTop: "1.2em" }}>
         <button onClick={toggleVisibility}>new blog</button>
       </div>
-    )
+    );
   }
 
   return (
@@ -49,7 +51,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
       <h2>create new</h2>
       <form onSubmit={addBlog} data-testid="blog-form">
         <div>
-          <label htmlFor="Title">title{" "}</label>
+          <label htmlFor="Title">title </label>
           <input
             type="text"
             value={title}
@@ -59,7 +61,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
           />
         </div>
         <div>
-          <label htmlFor="Author">author{" "}</label>
+          <label htmlFor="Author">author </label>
           <input
             type="text"
             value={author}
@@ -69,7 +71,7 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
           />
         </div>
         <div>
-          <label htmlFor="Url">url{" "}</label>
+          <label htmlFor="Url">url </label>
           <input
             type="text"
             value={url}
@@ -78,13 +80,17 @@ const BlogForm = forwardRef(({ createBlog }, ref) => {
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button type="submit" id="submit-button">create</button>{" "}
-        <button onClick={(event) => handleToggleVisibility(event)}>cancel</button>
+        <button type="submit" id="submit-button">
+          create
+        </button>{" "}
+        <button onClick={(event) => handleToggleVisibility(event)}>
+          cancel
+        </button>
       </form>
     </div>
-  )
-})
+  );
+});
 
-BlogForm.displayName = "BlogForm"
+BlogForm.displayName = "BlogForm";
 
-export default BlogForm
+export default BlogForm;
