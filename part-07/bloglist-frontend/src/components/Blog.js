@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBlog, removeBlog } from "../reducers/blogReducer";
 
-const Blog = ({ blog }) => {
+const Blog = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
-  const [visible, setVisible] = useState(false);
+  const id = useParams().id;
+  const user = useSelector((state) => state.user);
+  const blog = useSelector((state) => state.blogs.find((b) => b.id === id));
 
   const handleLike = () => {
     dispatch(
@@ -21,37 +23,28 @@ const Blog = ({ blog }) => {
   const handleRemove = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
       dispatch(removeBlog(blog));
+      navigate("/");
     }
   };
 
+  if (!blog) {
+    return null;
+  }
+
   return (
-    <div className="blog">
-      <b>{blog.title}</b> {blog.author ? ` by ${blog.author}` : null}{" "}
-      <button
-        onClick={() => {
-          setVisible(!visible);
-        }}
-      >
-        {visible ? "hide" : "view"}
-      </button>
-      {visible ? (
-        <div>
-          <a href={blog.url}>{blog.url}</a>
-          <div>
-            {" "}
-            likes {blog.likes} <button onClick={handleLike}>like</button>
-          </div>
-          <div>{blog.user.name}</div>
-          {user.username === blog.user.username ? (
-            <button
-              onClick={() => {
-                handleRemove();
-              }}
-            >
-              remove
-            </button>
-          ) : null}
-        </div>
+    <div>
+      <h2>
+        {blog.title} <i>by {blog.author}</i>
+      </h2>
+      <a href={blog.url}>{blog.url}</a>
+      <br />
+      {blog.likes} likes
+      <button onClick={handleLike}>like</button>
+      <br />
+      added by {blog.user.name}
+      <br />
+      {user.username === blog.user.username ? (
+        <button onClick={handleRemove}>remove</button>
       ) : null}
     </div>
   );
