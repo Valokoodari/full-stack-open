@@ -76,4 +76,19 @@ blogsRouter.delete("/:id", userExtractor, async (req, res, next) => {
   }
 });
 
+blogsRouter.post("/:id/comments", async (req, res, next) => {
+  try {
+    const blog = await Blog.findById(req.params.id).populate("user", {
+      username: 1,
+      name: 1,
+    });
+    blog.comments = blog.comments.concat(req.body.content);
+    await blog.save();
+
+    res.status(201).json(blog);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = blogsRouter;
