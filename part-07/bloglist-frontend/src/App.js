@@ -9,6 +9,7 @@ import BlogForm from "./components/BlogForm";
 import BlogList from "./components/BlogList";
 import UserList from "./components/UserList";
 import Login from "./components/Login";
+import User from "./components/User";
 
 const Home = (user) => (
   <div>
@@ -39,6 +40,7 @@ const App = () => {
         <Login />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
+          <Route path="/users/:id" element={<User />} />
           <Route path="/users" element={<UserList />} />
         </Routes>
       </div>
