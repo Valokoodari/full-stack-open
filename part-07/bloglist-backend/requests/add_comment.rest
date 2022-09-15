@@ -2,7 +2,7 @@ POST http://localhost:3003/api/blogs/631db588cf20605945871db3/comments
 Content-Type: application/json
 
 {
-  "content": "This is a comment"
+  "comment": "This is a comment"
 }
 
 ###
@@ -11,5 +11,5 @@ POST http://localhost:3003/api/blogs/631db588cf20605945871db3/comments
 Content-Type: application/json
 
 {
-  "content": "<script>alert('This is a comment')</script>"
+  "comment": "<script>alert('This is a comment')</script>"
 }

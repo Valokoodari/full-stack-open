@@ -20,15 +20,17 @@ const blogReducer = createSlice({
     removeBlog(state, action) {
       return state.filter((blog) => blog.id !== action.payload.id);
     },
+    addComment(state, action) {
+      const blog = state.find((blog) => blog.id === action.payload.id);
+      blog.comments = blog.comments.concat(action.payload.comment);
+    },
   },
 });
-
-export const { setBlogs, appendBlog } = blogReducer.actions;
 
 export const initializeBlogs = () => {
   return async (dispatch) => {
     const blogs = await blogService.getAll();
-    dispatch(setBlogs(blogs));
+    dispatch(blogReducer.actions.setBlogs(blogs));
   };
 };
 
@@ -36,7 +38,7 @@ export const createBlog = (blogObject) => {
   return async (dispatch) => {
     try {
       const returnedBlog = await blogService.create(blogObject);
-      dispatch(appendBlog(returnedBlog));
+      dispatch(blogReducer.actions.appendBlog(returnedBlog));
       dispatch(
         setNotification(
           `A new blog ${returnedBlog.title} by ${returnedBlog.author} added`
@@ -67,6 +69,23 @@ export const updateBlog = (blogObject) => {
       dispatch(
         setNotification(
           `Could not update blog: ${exception.response.data.error}`,
+          "error"
+        )
+      );
+    }
+  };
+};
+
+export const addComment = (id, comment) => {
+  return async (dispatch) => {
+    try {
+      const returnedBlog = await blogService.addComment(id, comment);
+      dispatch(blogReducer.actions.updateBlog(returnedBlog));
+      dispatch(setNotification(`Comment added to blog ${returnedBlog.title}`));
+    } catch (exception) {
+      dispatch(
+        setNotification(
+          `Could not add comment: ${exception.response.data.error}`,
           "error"
         )
       );

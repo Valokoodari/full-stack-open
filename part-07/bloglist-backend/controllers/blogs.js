@@ -82,7 +82,7 @@ blogsRouter.post("/:id/comments", async (req, res, next) => {
       username: 1,
       name: 1,
     });
-    blog.comments = blog.comments.concat(req.body.content);
+    blog.comments = blog.comments.concat(req.body.comment);
     await blog.save();
 
     res.status(201).json(blog);
