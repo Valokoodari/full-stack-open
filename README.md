@@ -10,3 +10,8 @@ as some parts are only available in English.
 ## Deployed apps
 
 - [Phonebook](https://phonebook.valokoodari.eu/)  
+- [Bloglist](https://bloglist.valokoodari.eu/)  
+
+### Test credentials
+> username: tester  
+> password: P4ssw0rd

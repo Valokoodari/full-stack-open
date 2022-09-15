@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Form, Button } from "react-bootstrap";
 import { login } from "../reducers/loginReducer";
+import Notification from "./Notification";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -16,33 +18,37 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Log in to application</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          username{" "}
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            id="username-input"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password{" "}
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            id="password-input"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit" id="login-button">
-          login
-        </button>
-      </form>
+    <div className="container" id="login">
+      <div className="w-50 mx-auto p-5 border rounded shadow bg-light mt-5">
+        <h2 className="mb-3">Log in to Bloglist</h2>
+        <Notification />
+        <Form onSubmit={handleLogin}>
+          <Form.Group>
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+            <Form.Label className="mt-3">Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+            <Button
+              variant="primary"
+              type="submit"
+              className="w-100 mt-4"
+              style={{ fontSize: "1.2em" }}
+            >
+              login
+            </Button>
+          </Form.Group>
+        </Form>
+      </div>
     </div>
   );
 };
