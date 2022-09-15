@@ -7,6 +7,7 @@ import { initializeUsers } from "./reducers/userReducer";
 import Notification from "./components/Notification";
 import BlogList from "./components/BlogList";
 import UserList from "./components/UserList";
+import Header from "./components/Header";
 import Login from "./components/Login";
 import Blog from "./components/Blog";
 import User from "./components/User";
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
+        <Header />
         <h1>Bloglist</h1>
         <Notification />
         <Routes>

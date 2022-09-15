@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login, logout } from "../reducers/loginReducer";
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/loginReducer";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,18 +14,6 @@ const Login = () => {
     setUsername("");
     setPassword("");
   };
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
-  if (user) {
-    return (
-      <div>
-        Logged in as {user.name} <button onClick={handleLogout}>logout</button>
-      </div>
-    );
-  }
 
   return (
     <div>

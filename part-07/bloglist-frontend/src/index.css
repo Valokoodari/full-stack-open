@@ -21,6 +21,12 @@
   border-color: green;
 }
 
+#header {
+  background-color: lightgray;
+  padding: 1em;
+  margin-bottom: 0.5em;
+}
+
 .blog {
   border: 2px solid black;
   border-radius: 15px;
