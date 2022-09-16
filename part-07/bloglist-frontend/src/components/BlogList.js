@@ -15,7 +15,7 @@ const BlogList = () => {
           <tr>
             <th>Title</th>
             <th>Author</th>
-            <th>URL</th>
+            <th>Website</th>
             <th>Likes</th>
           </tr>
         </thead>
@@ -27,7 +27,7 @@ const BlogList = () => {
               </td>
               <td>{blog.author}</td>
               <td>
-                <a href={blog.url}>{blog.url}</a>
+                <a href={blog.url}>Visit</a>
               </td>
               <td>{blog.likes}</td>
             </tr>
