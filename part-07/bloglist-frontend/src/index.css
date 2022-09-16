@@ -1,37 +1,5 @@
-#notification-box {
-  background-color: lightgray;
-  border: 5px solid black;
-  border-radius: 15px;
-  font-size: 20px;
-  padding: 1em;
-  margin-bottom: 0.5em;
-}
-
-#notification-box.error {
-  color: red;
-  border-color: red;
-}
-
-#notification-box.success {
-  color: green;
-  border-color: green;
-}
-
-#header {
-  background-color: lightgray;
-  padding: 1em;
-  margin-bottom: 0.5em;
-}
-
-.blog {
-  border: 2px solid black;
-  border-radius: 15px;
-  padding: 1em;
-  margin-bottom: 0.5em;
-}
-
-body:has(#login) {
-  background: rgb(0,211,255);
+.login-background {
+  background-color: rgb(0,211,255);
   background: linear-gradient(135deg, rgba(0,211,255,1) 0%, rgba(66,135,255,1) 25%, rgba(184,0,255,1) 100%); 
   background-attachment: fixed;
 }

@@ -77,6 +77,12 @@ blogsRouter.delete("/:id", userExtractor, async (req, res, next) => {
 });
 
 blogsRouter.post("/:id/comments", async (req, res, next) => {
+  if (!req.body.comment) {
+    return res.status(400).json({ error: "comment missing" });
+  }
+  if (req.body.comment.length < 3) {
+    return res.status(400).json({ error: "comment too short" });
+  }
   try {
     const blog = await Blog.findById(req.params.id).populate("user", {
       username: 1,

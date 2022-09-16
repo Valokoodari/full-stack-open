@@ -31,7 +31,6 @@ const App = () => {
       <BrowserRouter>
         <div>
           <Header />
-          <h1>Bloglist</h1>
           <Notification />
           <Routes>
             <Route path="/" element={<BlogList />} />

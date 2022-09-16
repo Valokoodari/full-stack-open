@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import BlogForm from "./BlogForm";
 
@@ -9,17 +10,30 @@ const BlogList = () => {
     <div>
       <BlogForm />
       <h2>blogs</h2>
-      <div id="blog-list">
-        {[...blogs]
-          .sort((a, b) => b.likes - a.likes)
-          .map((blog) => (
-            <div key={blog.id} className="blog">
-              <Link to={`/blogs/${blog.id}`}>
-                <b>{blog.title}</b> by {blog.author}
-              </Link>
-            </div>
+      <Table striped>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>URL</th>
+            <th>Likes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {blogs.map((blog) => (
+            <tr key={blog.id}>
+              <td>
+                <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+              </td>
+              <td>{blog.author}</td>
+              <td>
+                <a href={blog.url}>{blog.url}</a>
+              </td>
+              <td>{blog.likes}</td>
+            </tr>
           ))}
-      </div>
+        </tbody>
+      </Table>
     </div>
   );
 };

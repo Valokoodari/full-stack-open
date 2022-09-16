@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Form, Button } from "react-bootstrap";
 import { createBlog } from "../reducers/blogReducer";
 
 const BlogForm = () => {
@@ -37,53 +38,60 @@ const BlogForm = () => {
 
   if (!visibility) {
     return (
-      <div style={{ marginTop: "1.2em" }}>
-        <button onClick={toggleVisibility}>new blog</button>
+      <div className="mt-3 mb-4">
+        <Button variant="primary" onClick={handleToggleVisibility}>
+          new blog
+        </Button>
       </div>
     );
   }
 
   return (
-    <div>
-      <h2>create new</h2>
-      <form onSubmit={addBlog} data-testid="blog-form">
-        <div>
-          <label htmlFor="Title">title </label>
-          <input
+    <div className="mt-3 mb-4 border border-dark rounded p-4">
+      <h2>Add a new blog</h2>
+      <Form onSubmit={addBlog}>
+        <Form.Group>
+          <Form.Label>Title</Form.Label>
+          <Form.Control
             type="text"
+            name="title"
             value={title}
-            name="Title"
-            id="title-input"
             onChange={({ target }) => setTitle(target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="Author">author </label>
-          <input
+          <Form.Label className="mt-3">Author</Form.Label>
+          <Form.Control
             type="text"
+            name="author"
             value={author}
-            name="Author"
-            id="author-input"
             onChange={({ target }) => setAuthor(target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="Url">url </label>
-          <input
+          <Form.Label className="mt-3">Url</Form.Label>
+          <Form.Control
             type="text"
+            name="url"
             value={url}
-            name="Url"
-            id="url-input"
+            placeholder="https://example.com"
             onChange={({ target }) => setUrl(target.value)}
           />
-        </div>
-        <button type="submit" id="submit-button">
-          create
-        </button>{" "}
-        <button onClick={(event) => handleToggleVisibility(event)}>
-          cancel
-        </button>
-      </form>
+          <Button
+            variant="primary"
+            type="submit"
+            className="my-auto mt-4 me-3"
+            style={{ fontSize: "1.2em" }}
+          >
+            create
+          </Button>
+          <Button
+            variant="secondary"
+            type="button"
+            className="mt-4"
+            style={{ fontSize: "1.2em" }}
+            onClick={handleToggleVisibility}
+          >
+            cancel
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   );
 };

@@ -1,5 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { Form, Button, ListGroup, InputGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { updateBlog, removeBlog, addComment } from "../reducers/blogReducer";
 
 const Blog = () => {
@@ -45,25 +46,31 @@ const Blog = () => {
       </h2>
       <a href={blog.url}>{blog.url}</a>
       <br />
-      {blog.likes} likes
-      <button onClick={handleLike}>like</button>
-      <br />
-      added by {blog.user.name}
-      <br />
+      added by <Link to={`/users/${blog.user.id}`}>{blog.user.name}</Link>
+      <InputGroup className="my-3">
+        <InputGroup.Text id="basic-addon1">{blog.likes} likes</InputGroup.Text>
+        <Button variant="primary" onClick={handleLike}>
+          like
+        </Button>
+      </InputGroup>
       {user.username === blog.user.username ? (
-        <button onClick={handleRemove}>remove</button>
+        <Button variant="danger" onClick={handleRemove}>
+          remove
+        </Button>
       ) : null}
-      <div className="comments">
-        <h3>comments</h3>
-        <form onSubmit={(event) => handleComment(event)}>
-          <input type="text" name="comment" />
-          <button type="submit">add comment</button>
-        </form>
-        <ul>
+      <div className="comments mt-3">
+        <h3>Comments ({blog.comments.length})</h3>
+        <Form className="my-3" onSubmit={handleComment}>
+          <InputGroup>
+            <Form.Control type="text" name="comment" />
+            <Button type="submit">add comment</Button>
+          </InputGroup>
+        </Form>
+        <ListGroup>
           {blog.comments.map((comment, index) => (
-            <li key={index}>{comment}</li>
+            <ListGroup.Item key={index}>{comment}</ListGroup.Item>
           ))}
-        </ul>
+        </ListGroup>
       </div>
     </div>
   );
