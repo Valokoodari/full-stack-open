@@ -30,8 +30,12 @@ if (config.NODE_ENV === "test") {
 }
 
 // Unknown endpoint
-app.use((_, res) => {
+app.use("/api/*", (_, res) => {
   res.status(404).send({ error: "unknown endpoint" });
+});
+
+app.use("*", (_, res) => {
+  res.sendFile("build/index.html", { root: __dirname });
 });
 
 app.use(errorHandler);

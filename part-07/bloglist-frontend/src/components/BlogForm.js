@@ -22,6 +22,8 @@ const BlogForm = () => {
       })
     );
 
+    toggleVisibility();
+
     setTitle("");
     setAuthor("");
     setUrl("");
