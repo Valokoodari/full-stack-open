@@ -4,9 +4,11 @@ query e8_1 {
 }
 
 query e8_2 {
-  allBooks { 
-    title 
-    author
+  allBooks {
+    title
+    author {
+      name
+    }
     published
     genres
   }
@@ -28,38 +30,46 @@ query e8_4 {
 query e8_5_0 {
   allBooks(genre: "refactoring") {
     title
-    author
+    author {
+      name
+    }
   }
 }
 
-query e8_5_1{
+query e8_5_1 {
   allBooks(author: "Robert Martin", genre: "refactoring") {
     title
-    author
+    author {
+      name
+    }
   }
 }
 
 mutation e8_6_0 {
   addBook(
-    title: "NoSQL Distilled",
-    author: "Martin Fowler",
-    published: 2012,
+    title: "NoSQL Distilled"
+    author: "Martin Fowler"
+    published: 2012
     genres: ["database", "nosql"]
   ) {
-    title,
-    author
+    title
+    author {
+      name
+    }
   }
 }
 
 mutation e8_6_1 {
   addBook(
-    title: "Pimeyden tango",
-    author: "Reijo Mäki",
-    published: 1997,
+    title: "Pimeyden tango"
+    author: "Reijo Mäki"
+    published: 1997
     genres: ["crime"]
   ) {
-    title,
-    author
+    title
+    author {
+      name
+    }
   }
 }
 

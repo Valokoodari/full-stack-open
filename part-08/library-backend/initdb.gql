@@ -1,0 +1,132 @@
+mutation addBook0 {
+  addBook(
+    title: "Clean Code"
+    published: 2008
+    author: "Robert Martin"
+    genres: ["refactoring"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation addBook1 {
+  addBook(
+    title: "Agile software development"
+    published: 2002
+    author: "Robert Martin"
+    genres: ["agile", "patterns", "design"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation addBook2 {
+  addBook(
+    title: "Refactoring, edition 2"
+    published: 2018
+    author: "Martin Fowler"
+    genres: ["refactoring"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation addBook3 {
+  addBook(
+    title: "Refactoring to patterns"
+    published: 2008
+    author: "Joshua Kerievsky"
+    genres: ["refactoring", "patterns"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation addBook4 {
+  addBook(
+    title: "Practical Object-Oriented Design, An Agile Primer Using Ruby"
+    published: 2012
+    author: "Sandi Metz"
+    genres: ["refactoring", "design"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation addBook5 {
+  addBook(
+    title: "Crime and punishment"
+    published: 1866
+    author: "Fyodor Dostoevsky"
+    genres: ["classic", "crime"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation addBook6 {
+  addBook(
+    title: "The Demon"
+    published: 1872
+    author: "Fyodor Dostoevsky"
+    genres: ["classic", "revolution"]
+  ) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation setBirthyear0 {
+  editAuthor(name: "Robert Martin", setBornTo: 1952) {
+    name
+    born
+  }
+}
+
+mutation setBirthyear1 {
+  editAuthor(name: "Martin Fowler", setBornTo: 1963) {
+    name
+    born
+  }
+}
+
+mutation setBirthyear2 {
+  editAuthor(name: "Fyodor Dostoevsky", setBornTo: 1821) {
+    name
+    born
+  }
+}
