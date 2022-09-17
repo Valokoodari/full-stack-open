@@ -103,6 +103,15 @@ const typeDefs = gql`
     allBooks(author: String, genre: String): [Book!]!
     allAuthors: [Author!]!
   }
+
+  type Mutation {
+    addBook(
+      title: String!
+      author: String!
+      published: Int!
+      genres: [String!]!
+    ): Book
+  }
 `;
 
 const resolvers = {
@@ -130,6 +139,17 @@ const resolvers = {
           bookCount: books.filter((book) => book.author === author.name).length,
         };
       });
+    },
+  },
+  Mutation: {
+    addBook: (_, { title, author, published, genres }) => {
+      const book = { title, author, published, genres };
+      books = books.concat(book);
+      if (!authors.find((a) => a.name === author)) {
+        const newAuthor = { name: author };
+        authors = authors.concat(newAuthor);
+      }
+      return book;
     },
   },
 };
