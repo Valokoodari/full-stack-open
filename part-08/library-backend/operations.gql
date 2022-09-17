@@ -94,3 +94,22 @@ mutation e8_7_1 {
     born
   }
 }
+
+mutation e8_16_0 {
+  login(username: "valokoodari", password: "secret") {
+    value
+  }
+}
+
+query e8_16_1 {
+  me {
+    username
+    favoriteGenre
+  }
+}
+
+mutation e8_16_2 {
+  login(username: "valokoodari", password: "wrong") {
+    value
+  }
+}

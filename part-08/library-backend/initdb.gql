@@ -130,3 +130,17 @@ mutation setBirthyear2 {
     born
   }
 }
+
+mutation addUser0 {
+  createUser(username: "valokoodari", favoriteGenre: "refactoring") {
+    username
+    favoriteGenre
+  }
+}
+
+mutation addUser1 {
+  createUser(username: "tester", favoriteGenre: "crime") {
+    username
+    favoriteGenre
+  }
+}

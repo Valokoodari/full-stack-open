@@ -19,3 +19,10 @@ mutation error1 {
     genres
   }
 }
+
+mutation error2 {
+  createUser(username: "A", favoriteGenre: "fake") {
+    username
+    favoriteGenre
+  }
+}
