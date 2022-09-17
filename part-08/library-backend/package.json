@@ -1,0 +1,16 @@
+{
+  "name": "library-backend",
+  "version": "0.0.1",
+  "description": "A library backend for Full Stack Open 2022 part 8 (GraphQL)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Valokoodari",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^3.10.2",
+    "nodemon": "^2.0.20"
+  }
+}
