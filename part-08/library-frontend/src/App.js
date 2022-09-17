@@ -19,11 +19,17 @@ const App = () => {
 
   const client = useApolloClient();
 
+  const login = (token) => {
+    setPage("authors");
+    setToken(token);
+    localStorage.setItem("library-user-token", token);
+  };
+
   const logout = () => {
+    setPage("authors");
     setToken(null);
     localStorage.clear();
     client.resetStore();
-    setPage("authors");
   };
 
   return (
@@ -41,11 +47,15 @@ const App = () => {
         {token ? <button onClick={() => logout()}>logout</button> : null}
       </div>
 
-      <Books show={page === "books"} />
-      <NewBook show={page === "add"} />
-      <Recommend show={page === "recommend"} />
-      <Authors show={page === "authors"} logged={!!token} />
-      <Login show={page === "login"} setToken={setToken} setPage={setPage} />
+      {
+        {
+          authors: <Authors logged={!!token} />,
+          books: <Books />,
+          add: <NewBook />,
+          recommend: <Recommend />,
+          login: <Login handleLogin={login} />,
+        }[page]
+      }
     </div>
   );
 };

@@ -2,12 +2,8 @@ import { useQuery } from "@apollo/client";
 import UpdateAuthor from "./UpdateAuthor";
 import { ALL_AUTHORS } from "../queries";
 
-const Authors = (props) => {
+const Authors = ({ logged }) => {
   const result = useQuery(ALL_AUTHORS);
-
-  if (!props.show) {
-    return null;
-  }
 
   if (result.loading) {
     return <div>loading...</div>;
@@ -34,7 +30,7 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
-      <UpdateAuthor authors={authors} show={props.logged} />
+      <UpdateAuthor authors={authors} show={logged} />
     </div>
   );
 };
