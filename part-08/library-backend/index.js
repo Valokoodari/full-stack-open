@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer, gql, UserInputError } = require("apollo-server");
 const Author = require("./models/author");
 const Book = require("./models/book");
 
@@ -72,24 +72,47 @@ const resolvers = {
     },
   },
   Mutation: {
-    addBook: async (_, { title, author, published, genres }) => {
-      const book = new Book({ title, published, genres });
-      const authorExists = await Author.findOne({ name: author });
+    addBook: async (_, args) => {
+      const book = new Book({ ...args });
+      const authorExists = await Author.findOne({ name: args.author });
       if (!authorExists) {
-        const newAuthor = new Author({ name: author });
-        book.author = (await newAuthor.save())._id;
+        const newAuthor = new Author({ name: args.author });
+        try {
+          await newAuthor.save();
+        } catch (error) {
+          throw new UserInputError(error.message, {
+            invalidArgs: args,
+          });
+        }
+        book.author = newAuthor._id;
       } else {
         book.author = authorExists._id;
       }
-      return (await book.save()).populate("author");
+
+      try {
+        await book.save();
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        });
+      }
+
+      return book.populate("author");
     },
-    editAuthor: async (_, { name, setBornTo }) => {
-      const author = await Author.findOne({ name });
+    editAuthor: async (_, args) => {
+      const author = await Author.findOne({ ...args });
       if (!author) {
         return null;
       }
-      author.born = setBornTo;
-      return author.save();
+      author.born = args.setBornTo;
+
+      try {
+        return author.save();
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        });
+      }
     },
   },
 };

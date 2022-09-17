@@ -1,0 +1,21 @@
+mutation error0 {
+  addBook(title: "A", author: "Valo", published: 2022, genres: ["fake"]) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
+
+mutation error1 {
+  addBook(title: "The Book", author: "A", published: 2022, genres: ["fake"]) {
+    title
+    author {
+      name
+    }
+    published
+    genres
+  }
+}
