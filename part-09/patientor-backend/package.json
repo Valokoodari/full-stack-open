@@ -1,0 +1,26 @@
+{
+  "name": "patientor-backend",
+  "version": "0.0.1",
+  "description": "Full Stack Open 2022 - Part 9 - Patientor backend (9.8 ->)",
+  "main": "index.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "eslint": "eslint .",
+    "dev": "ts-node-dev index.ts",
+    "start": "node build/index.js"
+  },
+  "author": "Valokoodari",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "eslint": "^8.23.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.3"
+  }
+}
