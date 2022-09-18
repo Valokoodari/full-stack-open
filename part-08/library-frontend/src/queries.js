@@ -92,3 +92,13 @@ export const BOOK_ADDED = gql`
   }
   ${BOOK_DETAILS}
 `;
+
+export const AUTHOR_ADDED = gql`
+  subscription {
+    authorAdded {
+      name
+      born
+      bookCount
+    }
+  }
+`;
