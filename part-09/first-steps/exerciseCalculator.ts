@@ -46,8 +46,8 @@ const calculateExercises = (
     rating === 3
       ? "good, keep it up!"
       : rating === 2
-      ? "not too bad but could be better"
-      : "you should really try harder";
+        ? "not too bad but could be better"
+        : "you should really try harder";
 
   return {
     periodLength: daily_exercises.length,
