@@ -6,8 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "lint": "eslint . --ext .ts",
-    "dev": "ts-node-dev index.ts",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "dev": "ts-node-dev src/index.ts"
   },
   "author": "Valokoodari",
   "license": "ISC",

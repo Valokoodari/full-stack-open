@@ -1,8 +1,8 @@
 import cors from "cors";
 import express from "express";
-import diagnosesRouter from "./src/routes/diagnoses";
-import patientRouter from "./src/routes/patients";
-import config from "./src/utils/config";
+import diagnosesRouter from "./routes/diagnoses";
+import patientRouter from "./routes/patients";
+import config from "./utils/config";
 
 const app = express();
 
