@@ -5,12 +5,7 @@ query e8_1 {
 
 query e8_2 {
   allBooks {
-    title
-    author {
-      name
-    }
-    published
-    genres
+    ...BookDetails
   }
 }
 
