@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useApolloClient } from "@apollo/client";
+import Notifications from "./components/Notifications";
 import Recommend from "./components/Recommend";
 import Authors from "./components/Authors";
 import NewBook from "./components/NewBook";
@@ -18,7 +19,6 @@ const App = () => {
   }, []);
 
   const client = useApolloClient();
-
   const login = (token) => {
     setPage("authors");
     setToken(token);
@@ -46,6 +46,8 @@ const App = () => {
         ) : null}
         {token ? <button onClick={() => logout()}>logout</button> : null}
       </div>
+
+      <Notifications />
 
       {
         {
