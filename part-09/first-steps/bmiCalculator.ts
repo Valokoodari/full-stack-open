@@ -38,4 +38,4 @@ try {
   console.log("Error, something bad happened, message:", e.message);
 }
 
-export {};
+export { calculateBmi };
