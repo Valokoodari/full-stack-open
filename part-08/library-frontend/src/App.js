@@ -19,6 +19,7 @@ const App = () => {
   }, []);
 
   const client = useApolloClient();
+
   const login = (token) => {
     setPage("authors");
     setToken(token);
@@ -47,7 +48,7 @@ const App = () => {
         {token ? <button onClick={() => logout()}>logout</button> : null}
       </div>
 
-      <Notifications />
+      <Notifications client={client} />
 
       {
         {

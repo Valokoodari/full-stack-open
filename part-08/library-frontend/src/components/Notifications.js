@@ -1,10 +1,20 @@
 import { useSubscription } from "@apollo/client";
-import { BOOK_ADDED } from "../queries";
+import { BOOK_ADDED, ALL_BOOKS } from "../queries";
 
-const Notifications = () => {
+const Notifications = ({ client }) => {
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
-      window.alert(`New book added: ${subscriptionData.data.bookAdded.title}`);
+      const addedBook = subscriptionData.data.bookAdded;
+      window.alert(`New book added: ${addedBook.title}`);
+
+      const dataInStore = client.readQuery({ query: ALL_BOOKS });
+      client.writeQuery({
+        query: ALL_BOOKS,
+        data: {
+          ...dataInStore,
+          allBooks: [...dataInStore.allBooks, addedBook],
+        },
+      });
     },
   });
 
