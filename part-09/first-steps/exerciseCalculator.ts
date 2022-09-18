@@ -1,3 +1,8 @@
+interface ExerciseValues {
+  daily_exercises: Array<number>;
+  target: number;
+}
+
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -7,6 +12,27 @@ interface Result {
   target: number;
   average: number;
 }
+
+const parseArguments = (args: Array<string>): ExerciseValues => {
+  if (args.length < 4) throw new Error("Not enough arguments");
+
+  const daily_exercises = [];
+  for (let i = 3; i < args.length; i++) {
+    if (isNaN(Number(args[i]))) {
+      throw new Error("At least one of the provided values was not a number!");
+    }
+    daily_exercises.push(Number(args[i]));
+  }
+
+  if (!isNaN(Number(args[2]))) {
+    return {
+      daily_exercises,
+      target: Number(args[2]),
+    };
+  } else {
+    throw new Error("At least one of the provided values was not a number!");
+  }
+};
 
 const calculateExercises = (
   daily_exercises: Array<number>,
@@ -34,6 +60,11 @@ const calculateExercises = (
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
-console.log(calculateExercises([3, 1, 2, 4.5, 0, 3, 1], 2));
-console.log(calculateExercises([2, 0, 2, 1.5, 0, 0, 1], 2));
+try {
+  const { daily_exercises, target } = parseArguments(process.argv);
+  console.log(calculateExercises(daily_exercises, target));
+} catch (e) {
+  console.log("Error, something bad happened, message:", e.message);
+}
+
+export {};
