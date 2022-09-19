@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 
+import EntryListing from "../components/EntryListing";
 import { addPatient, useStateValue } from "../state";
+import { Entry, Patient } from "../types";
 import { apiBaseUrl } from "../constants";
-import { Patient } from "../types";
 
 const PatientPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -49,6 +50,12 @@ const PatientPage = () => {
       </h2>
       ssn: {patient.ssn} <br />
       occupation: {patient.occupation}
+      <h3>entries</h3>
+      {patient.entries
+        ? Object.values(patient.entries).map((entry: Entry) => (
+            <EntryListing key={entry.id} entry={entry} />
+          ))
+        : null}
     </div>
   );
 };
