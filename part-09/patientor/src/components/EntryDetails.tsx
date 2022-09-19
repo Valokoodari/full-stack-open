@@ -72,7 +72,7 @@ const EntryDetails = ({ entry }: { entry: Entry }) => {
               color:
                 entry.healthCheckRating <= 0
                   ? "green"
-                  : entry.healthCheckRating <= 1
+                  : entry.healthCheckRating <= 2
                   ? "orange"
                   : "red",
             }}
