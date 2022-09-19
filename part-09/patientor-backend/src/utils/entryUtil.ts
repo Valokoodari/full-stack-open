@@ -1,5 +1,5 @@
 import { parseString, parseDate, parseStrings, parseNumber } from "./parseUtil";
-import { Discharge, Entry, SickLeave } from "../types";
+import { Discharge, Entry, HealthCheckRating, SickLeave } from "../types";
 
 const parseDischarge = (discharge: unknown): Discharge => {
   if (
@@ -35,6 +35,20 @@ const parseSickLeave = (sickLeave: unknown): SickLeave => {
     startDate: parseDate(sickLeaveObject.startDate),
     endDate: parseDate(sickLeaveObject.endDate),
   };
+};
+
+const parseHealthCheckRating = (
+  healthCheckRating: unknown
+): HealthCheckRating => {
+  const healthCheckRatingNumber = parseNumber(healthCheckRating);
+
+  if (healthCheckRatingNumber < 0 || healthCheckRatingNumber > 3) {
+    throw new Error(
+      "Incorrect or missing health check rating: " + healthCheckRating
+    );
+  }
+
+  return healthCheckRatingNumber;
 };
 
 const parseEntry = (object: {
@@ -78,7 +92,7 @@ const parseEntry = (object: {
       return {
         ...commonFields,
         type: "HealthCheck",
-        healthCheckRating: parseNumber(object.healthCheckRating),
+        healthCheckRating: parseHealthCheckRating(object.healthCheckRating),
       };
     default:
       throw new Error("Incorrect or missing type: " + object.type);

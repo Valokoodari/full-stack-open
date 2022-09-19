@@ -36,9 +36,16 @@ export interface OccupationalHealthcareEntry extends EntryBase {
   };
 }
 
+export enum HealthCheckRating {
+  "Healthy" = 0,
+  "LowRisk" = 1,
+  "HighRisk" = 2,
+  "CriticalRisk" = 3,
+}
+
 export interface HealthCheckEntry extends EntryBase {
   type: "HealthCheck";
-  healthCheckRating: number;
+  healthCheckRating: HealthCheckRating;
 }
 
 export type Entry =

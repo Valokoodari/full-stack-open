@@ -31,8 +31,6 @@ const PatientPage = () => {
     try {
       if (!id) return;
 
-      console.log(values);
-
       const { data: updatedPatient } = await axios.post<Patient>(
         `${apiBaseUrl}/patients/${id}/entries`,
         values

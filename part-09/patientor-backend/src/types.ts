@@ -58,8 +58,15 @@ export interface OccupationalHealthcareEntry extends EntryBase {
   employerName: string;
 }
 
+export enum HealthCheckRating {
+  "Healthy" = 0,
+  "LowRisk" = 1,
+  "HighRisk" = 2,
+  "CriticalRisk" = 3,
+}
+
 export interface HealthCheckEntry extends EntryBase {
-  healthCheckRating: number;
+  healthCheckRating: HealthCheckRating;
   type: "HealthCheck";
 }
 
