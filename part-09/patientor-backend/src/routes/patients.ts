@@ -5,7 +5,29 @@ import toNewPatient from "../utils/patientUtils";
 const patientRouter = express.Router();
 
 patientRouter.get("/", (_req, res) => {
-  res.send(patientService.getNonSensitivePatients());
+  res.send(patientService.getPublicPatients());
+});
+
+const parseId = (id: string): string => {
+  if (!id || !id.match(/^[0-9a-fA-F-]{36}$/)) {
+    throw new Error("invalid id");
+  }
+  return id;
+};
+
+patientRouter.get("/:id", (req: { params: { id: unknown } }, res) => {
+  try {
+    const id = parseId(req.params.id as string);
+    const patient = patientService.getPatient(id);
+
+    if (patient) {
+      res.send(patient);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (e) {
+    res.status(400).json({ error: (e as Error).message });
+  }
 });
 
 interface PatientReqBody extends Express.Request {
@@ -25,11 +47,7 @@ patientRouter.post("/", (req: PatientReqBody, res) => {
     const addedPatient = patientService.addPatient(newPatient);
     res.json(addedPatient);
   } catch (e: unknown) {
-    let errorMessage = "Something went wrong";
-    if (e instanceof Error) {
-      errorMessage += " Error: " + e.message;
-    }
-    res.status(400).send(errorMessage);
+    res.status(400).json({ error: (e as Error).message });
   }
 });
 
