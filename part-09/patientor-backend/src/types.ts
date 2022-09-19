@@ -4,10 +4,28 @@ export enum Gender {
   Other = "other",
 }
 
-export interface Diagnose {
+export interface Diagnosis {
   code: string;
   name: string;
   latin?: string;
+}
+
+export interface EntryReqBody extends Express.Request {
+  body: {
+    id: unknown;
+    date: unknown;
+    type: unknown;
+    specialist: unknown;
+    description: unknown;
+    diagnosisCodes: unknown;
+    healthCheckRating?: unknown;
+    employerName?: unknown;
+    discharge?: unknown;
+    sickLeave?: unknown;
+  };
+  params: {
+    id: unknown;
+  };
 }
 
 export interface EntryBase {
@@ -15,46 +33,60 @@ export interface EntryBase {
   date: string;
   type: string;
   specialist: string;
-  diagnosisCodes?: Array<Diagnose["code"]>;
   description: string;
+  diagnosisCodes?: Array<Diagnosis["code"]>;
+}
+
+export interface Discharge {
+  criteria: string;
+  date: string;
 }
 
 export interface HospitalEntry extends EntryBase {
+  discharge: Discharge;
   type: "Hospital";
-  discharge: {
-    date: string;
-    criteria: string;
-  };
+}
+
+export interface SickLeave {
+  startDate: string;
+  endDate: string;
 }
 
 export interface OccupationalHealthcareEntry extends EntryBase {
   type: "OccupationalHealthcare";
+  sickLeave?: SickLeave;
   employerName: string;
-  sickLeave?: {
-    startDate: string;
-    endDate: string;
-  };
 }
 
 export interface HealthCheckEntry extends EntryBase {
-  type: "HealthCheck";
   healthCheckRating: number;
+  type: "HealthCheck";
 }
 
 export type Entry =
   | HospitalEntry
-  | OccupationalHealthcareEntry
-  | HealthCheckEntry;
+  | HealthCheckEntry
+  | OccupationalHealthcareEntry;
+
+export interface PatientReqBody extends Express.Request {
+  body: {
+    id: unknown;
+    ssn: unknown;
+    name: unknown;
+    gender: unknown;
+    occupation: unknown;
+    dateOfBirth: unknown;
+  };
+}
 
 export interface Patient {
   id: string;
-  name: string;
-  dateOfBirth: string;
   ssn: string;
+  name: string;
   gender: Gender;
   occupation: string;
+  dateOfBirth: string;
   entries: Entry[];
 }
 
-export type NewPatient = Omit<Patient, "id">;
 export type PublicPatient = Omit<Patient, "ssn" | "entries">;

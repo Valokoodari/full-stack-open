@@ -1,6 +1,9 @@
 import express from "express";
+import { v4 as uuid } from "uuid";
+import { PatientReqBody, EntryReqBody } from "../types";
 import patientService from "../services/patientService";
-import toNewPatient from "../utils/patientUtils";
+import parsePatient from "../utils/patientUtils";
+import parseEntry from "../utils/entryUtil";
 
 const patientRouter = express.Router();
 
@@ -30,22 +33,30 @@ patientRouter.get("/:id", (req: { params: { id: unknown } }, res) => {
   }
 });
 
-interface PatientReqBody extends Express.Request {
-  body: {
-    name: unknown;
-    dateOfBirth: unknown;
-    ssn: unknown;
-    gender: unknown;
-    occupation: unknown;
-  };
-}
-
 patientRouter.post("/", (req: PatientReqBody, res) => {
   try {
-    const newPatient = toNewPatient(req.body);
+    const body = req.body;
+    body.id = uuid();
+
+    const newPatient = parsePatient(body);
 
     const addedPatient = patientService.addPatient(newPatient);
     res.json(addedPatient);
+  } catch (e: unknown) {
+    res.status(400).json({ error: (e as Error).message });
+  }
+});
+
+patientRouter.post("/:id/entries", (req: EntryReqBody, res) => {
+  try {
+    const body = req.body;
+    body.id = uuid();
+
+    const newEntry = parseEntry(body);
+    const id = parseId(req.params.id as string);
+
+    const updatedPatient = patientService.addEntry(id, newEntry);
+    res.json(updatedPatient);
   } catch (e: unknown) {
     res.status(400).json({ error: (e as Error).message });
   }
