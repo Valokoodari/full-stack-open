@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 
+import { addPatient, useStateValue } from "../state";
 import { apiBaseUrl } from "../constants";
-import { useStateValue } from "../state";
 import { Patient } from "../types";
 
 const PatientPage = () => {
@@ -23,7 +23,7 @@ const PatientPage = () => {
         const { data: patientFromApi } = await axios.get<Patient>(
           `${apiBaseUrl}/patients/${id as string}`
         );
-        dispatch({ type: "ADD_PATIENT", payload: patientFromApi });
+        dispatch(addPatient(patientFromApi));
       } catch (e) {
         console.error(e);
       }

@@ -8,9 +8,9 @@ import { Box, Table, Button, TableHead, Typography } from "@material-ui/core";
 
 import { PatientFormValues } from "../AddPatientModal/AddPatientForm";
 import HealthRatingBar from "../components/HealthRatingBar";
+import { addPatient, useStateValue } from "../state";
 import AddPatientModal from "../AddPatientModal";
 import { apiBaseUrl } from "../constants";
-import { useStateValue } from "../state";
 import { Patient } from "../types";
 
 const PatientListPage = () => {
@@ -32,7 +32,7 @@ const PatientListPage = () => {
         `${apiBaseUrl}/patients`,
         values
       );
-      dispatch({ type: "ADD_PATIENT", payload: newPatient });
+      dispatch(addPatient(newPatient));
       closeModal();
     } catch (e: unknown) {
       if (axios.isAxiosError(e)) {
