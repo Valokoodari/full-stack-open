@@ -33,7 +33,7 @@ export const parseDate = (arg: unknown): string => {
 };
 
 export const parseNumber = (arg: unknown): number => {
-  if (!arg || isNaN(Number(arg))) {
+  if (arg === null || isNaN(Number(arg))) {
     throw new Error("Incorrect or missing number: " + arg);
   }
   return Number(arg);

@@ -126,6 +126,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
         label="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        required={true}
       />
       <TextField
         fullWidth
@@ -133,7 +134,9 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
         style={fieldStyle}
         label="Date"
         value={date}
+        type="date"
         onChange={(e) => setDate(e.target.value)}
+        required={true}
       />
       <TextField
         fullWidth
@@ -142,6 +145,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
         label="Specialist"
         value={specialist}
         onChange={(e) => setSpecialist(e.target.value)}
+        required={true}
       />
       <TextField
         fullWidth
@@ -160,7 +164,9 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
             style={fieldStyle}
             label="Discharge date"
             value={dischargeDate}
+            type="date"
             onChange={(e) => setDischargeDate(e.target.value)}
+            required={true}
           />
           <TextField
             fullWidth
@@ -169,6 +175,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
             label="Discharge criteria"
             value={dischargeCriteria}
             onChange={(e) => setDischargeCriteria(e.target.value)}
+            required={true}
           />
         </>
       )}
@@ -181,6 +188,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
           value={healthCheckRating}
           style={fieldStyle}
           onChange={(e) => setHealthCheckRating(e.target.value as number)}
+          required={true}
         >
           {healthCheckRatingOptions.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -199,6 +207,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
             label="Employer name"
             value={employerName}
             onChange={(e) => setEmployerName(e.target.value)}
+            required={true}
           />
           <TextField
             fullWidth
@@ -206,6 +215,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
             style={fieldStyle}
             label="Sick leave start date"
             value={sickLeaveStartDate}
+            type="date"
             onChange={(e) => setSickLeaveStartDate(e.target.value)}
           />
           <TextField
@@ -214,6 +224,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
             style={fieldStyle}
             label="Sick leave end date"
             value={sickLeaveEndDate}
+            type="date"
             onChange={(e) => setSickLeaveEndDate(e.target.value)}
           />
         </>

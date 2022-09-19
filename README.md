@@ -30,4 +30,4 @@ as some parts are only available in English.
 | Part 6 | 8     |
 | Part 7 | 14    |
 | Part 8 | 11    |
-| Part 9 | 12    |
+| Part 9 | 13    |
