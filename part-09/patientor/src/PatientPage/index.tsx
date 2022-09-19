@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 
-import EntryListing from "../components/EntryListing";
+import EntryDetails from "../components/EntryDetails";
 import { addPatient, useStateValue } from "../state";
 import { Entry, Patient } from "../types";
 import { apiBaseUrl } from "../constants";
@@ -53,7 +53,7 @@ const PatientPage = () => {
       <h3>entries</h3>
       {patient.entries
         ? Object.values(patient.entries).map((entry: Entry) => (
-            <EntryListing key={entry.id} entry={entry} />
+            <EntryDetails key={entry.id} entry={entry} />
           ))
         : null}
     </div>
