@@ -3,6 +3,7 @@ const theme = {
     background: "#e1e4e8",
     primary: "#2d2d2d",
     accent: "#0366d6",
+    border: "#d3d3d3",
     card: "#ffffff",
   },
   fontSizes: {
