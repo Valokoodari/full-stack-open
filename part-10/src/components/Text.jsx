@@ -4,6 +4,7 @@ import theme from "../theme";
 const styles = StyleSheet.create({
   text: {
     marginBottom: 4,
+    fontFamily: theme.fonts.main,
   },
   heading: {
     fontSize: theme.fontSizes.heading,

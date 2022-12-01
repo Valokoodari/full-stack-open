@@ -15,6 +15,7 @@ const style = StyleSheet.create({
     paddingLeft: 16,
     marginBottom: 6,
     borderStyle: "solid",
+    fontFamily: theme.fonts.main,
     fontSize: theme.fontSizes.body,
     borderColor: theme.colors.border,
   },
