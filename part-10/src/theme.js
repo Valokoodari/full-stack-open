@@ -4,6 +4,7 @@ const theme = {
     primary: "#2d2d2d",
     accent: "#0366d6",
     border: "#d3d3d3",
+    error: "#d73a4a",
     card: "#ffffff",
   },
   fontSizes: {

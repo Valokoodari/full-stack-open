@@ -25,12 +25,16 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 3,
   },
+  error: {
+    color: theme.colors.error,
+  },
 });
 
-const Text = ({ isHeading, isSubheading, isTag, children }) => {
+const Text = ({ isHeading, isSubheading, isError, isTag, children }) => {
   const textStyles = [
     styles.text,
     isTag && styles.tag,
+    isError && styles.error,
     isHeading && styles.heading,
     isSubheading && styles.subheading,
   ];
