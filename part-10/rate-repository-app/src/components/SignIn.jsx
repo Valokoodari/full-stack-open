@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { Formik } from "formik";
+import { useNavigate } from "react-router-native";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import FormikTextInput from "./FormikTextInput";
 import useSignIn from "../hooks/useSignIn";
@@ -30,7 +31,11 @@ const initialValues = {
 
 const SignInForm = ({ onSubmit }) => (
   <View style={style.container}>
-    <FormikTextInput placeholder="Username" name="username" />
+    <FormikTextInput
+      autoCapitalize="none"
+      placeholder="Username"
+      name="username"
+    />
     <FormikTextInput placeholder="Password" name="password" secureTextEntry />
     <Pressable style={style.button} onPress={onSubmit}>
       <Text style={style.buttonText}>Sign in</Text>
@@ -45,15 +50,15 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
-
     try {
-      const { data } = await signIn({ username, password });
-      console.log("Success:", data);
+      await signIn({ username, password });
+      navigate("/");
     } catch (e) {
-      console.log("Error:", e);
+      console.log(e);
     }
   };
 
