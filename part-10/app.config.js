@@ -5,4 +5,4 @@ export default {
   extra: {
     apolloUri: process.env.APOLLO_URI,
   }
-}
+};

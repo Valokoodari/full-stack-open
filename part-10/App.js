@@ -8,14 +8,14 @@ const apolloClient = createApolloClient();
 
 const App = () => {
   return (
-  <>
-    <NativeRouter>
-      <ApolloProvider client={apolloClient}>
-        <Main />
-      </ApolloProvider>
-    </NativeRouter>
-    <StatusBar style="light" />
-  </>
+    <>
+      <NativeRouter>
+        <ApolloProvider client={apolloClient}>
+          <Main />
+        </ApolloProvider>
+      </NativeRouter>
+      <StatusBar style="light" />
+    </>
   );
 };
 

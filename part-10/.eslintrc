@@ -10,6 +10,7 @@
   "env": {
     "react-native/react-native": true
   },
+  "ignorePatterns": ["rate-repository-api/*"],
   "rules": {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",

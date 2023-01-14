@@ -15,6 +15,6 @@ const useRepositories = () => {
   }, [data]);
 
   return { repositories, loading, error };
-}
+};
 
 export default useRepositories;
