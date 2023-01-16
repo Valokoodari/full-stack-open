@@ -31,7 +31,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Text = ({ isHeading, isSubheading, isError, isTag, children }) => {
+const Text = ({
+  isHeading,
+  isSubheading,
+  isError,
+  isTag,
+  children,
+  ...props
+}) => {
   const textStyles = [
     styles.text,
     isTag && styles.tag,
@@ -40,7 +47,11 @@ const Text = ({ isHeading, isSubheading, isError, isTag, children }) => {
     isSubheading && styles.subheading,
   ];
 
-  return <RNText style={textStyles}>{children}</RNText>;
+  return (
+    <RNText style={textStyles} {...props}>
+      {children}
+    </RNText>
+  );
 };
 
 export default Text;

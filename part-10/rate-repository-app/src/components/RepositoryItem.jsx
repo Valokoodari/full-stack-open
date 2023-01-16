@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.card}>
+    <View testID="repositoryItem" style={styles.card}>
       <View style={{ flexDirection: "row" }}>
         <Image
           source={{
@@ -32,16 +32,34 @@ const RepositoryItem = ({ item }) => {
           style={styles.image}
         />
         <View>
-          <Text isHeading>{item.fullName}</Text>
-          <Text isSubheading>{item.description}</Text>
-          <Text isTag>{item.language}</Text>
+          <Text testID="repoFullName" isHeading>
+            {item.fullName}
+          </Text>
+          <Text testID="repoDescription" isSubheading>
+            {item.description}
+          </Text>
+          <Text testID="repoLanguage" isTag>
+            {item.language}
+          </Text>
         </View>
       </View>
       <View style={styles.stats}>
-        <StatItem name="Stars" value={item.stargazersCount} />
-        <StatItem name="Forks" value={item.forksCount} />
-        <StatItem name="Reviews" value={item.reviewCount} />
-        <StatItem name="Rating" value={item.ratingAverage} />
+        <StatItem
+          testID="repoStarCount"
+          name="Stars"
+          value={item.stargazersCount}
+        />
+        <StatItem testID="repoForkCount" name="Forks" value={item.forksCount} />
+        <StatItem
+          testID="repoReviewCount"
+          name="Reviews"
+          value={item.reviewCount}
+        />
+        <StatItem
+          testID="repoRating"
+          name="Rating"
+          value={item.ratingAverage}
+        />
       </View>
     </View>
   );

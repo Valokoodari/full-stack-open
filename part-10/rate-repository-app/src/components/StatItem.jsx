@@ -14,7 +14,9 @@ const StatItem = ({ value, name }) => {
 
   return (
     <View style={styles.container}>
-      <Text isHeading>{value}</Text>
+      <Text testID={"repoStat" + name} isHeading>
+        {value}
+      </Text>
       <Text isSubheading>{name}</Text>
     </View>
   );

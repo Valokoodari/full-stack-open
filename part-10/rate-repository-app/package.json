@@ -7,11 +7,25 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-router-native)"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   },
   "dependencies": {
     "@apollo/client": "^3.7.3",
     "@expo/metro-config": "^0.5.2",
+    "@react-native-async-storage/async-storage": "~1.17.3",
     "dotenv": "^16.0.3",
     "expo": "~46.0.13",
     "expo-status-bar": "~1.4.0",
@@ -20,15 +34,20 @@
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-router-native": "^6.4.2",
-    "yup": "^0.32.11",
-    "@react-native-async-storage/async-storage": "~1.17.3"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/eslint-parser": "^7.19.1",
+    "@testing-library/jest-native": "^5.4.1",
+    "@testing-library/react-native": "^11.5.0",
     "eslint": "^8.25.0",
+    "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-native": "^4.0.0"
+    "eslint-plugin-react-native": "^4.0.0",
+    "jest": "^27.5.1",
+    "jest-expo": "^47.0.1",
+    "react-test-renderer": "^18.2.0"
   },
   "private": true
 }
