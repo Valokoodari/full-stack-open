@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
   error: {
     color: theme.colors.error,
   },
+  rating: {
+    color: theme.colors.accent,
+    fontSize: theme.fontSizes.rating,
+    fontWeight: "bold",
+    marginBottom: 0,
+  },
 });
 
 const Text = ({
@@ -36,6 +42,7 @@ const Text = ({
   isSubheading,
   isError,
   isTag,
+  isRating,
   children,
   ...props
 }) => {
@@ -43,6 +50,7 @@ const Text = ({
     styles.text,
     isTag && styles.tag,
     isError && styles.error,
+    isRating && styles.rating,
     isHeading && styles.heading,
     isSubheading && styles.subheading,
   ];

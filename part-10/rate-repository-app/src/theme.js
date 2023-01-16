@@ -12,10 +12,12 @@ const theme = {
   fontSizes: {
     heading: 18,
     subheading: 16,
+    rating: 16,
     body: 14,
   },
   imageSizes: {
     author: 45,
+    rating: 45,
   },
   fonts: {
     main: Platform.select({
@@ -23,7 +25,7 @@ const theme = {
       android: "Roboto",
       default: "System",
     }),
-  }
+  },
 };
 
 export default theme;

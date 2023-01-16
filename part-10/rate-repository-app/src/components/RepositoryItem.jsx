@@ -1,6 +1,4 @@
-import { useParams } from "react-router-native";
 import { View, StyleSheet, Image, Linking } from "react-native";
-import useRepository from "../hooks/useRepository";
 import StatItem from "./StatItem";
 import Button from "./Button";
 import theme from "../theme";
@@ -10,6 +8,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.card,
     padding: 15,
+    marginBottom: 10,
   },
   image: {
     width: theme.imageSizes.author,
@@ -24,54 +23,42 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ item }) => {
-  if (!item) {
-    const { id } = useParams();
-    const { repository } = useRepository(id);
-    item = repository;
-  }
-
-  if (!item) {
-    return null;
-  }
-
-  return (
-    <View testID="repositoryItem" style={styles.card}>
-      <View style={{ flexDirection: "row" }}>
-        <Image
-          source={{
-            uri: item.ownerAvatarUrl,
-          }}
-          style={styles.image}
-        />
-        <View>
-          <Text testID="repoFullName" isHeading>
-            {item.fullName}
-          </Text>
-          <Text testID="repoDescription" isSubheading>
-            {item.description}
-          </Text>
-          <Text testID="repoLanguage" isTag>
-            {item.language}
-          </Text>
-        </View>
+const RepositoryItem = ({ item }) => (
+  <View testID="repositoryItem" style={styles.card}>
+    <View style={{ flexDirection: "row" }}>
+      <Image
+        source={{
+          uri: item.ownerAvatarUrl,
+        }}
+        style={styles.image}
+      />
+      <View style={{ flexShrink: 1 }}>
+        <Text testID="repoFullName" isHeading>
+          {item.fullName}
+        </Text>
+        <Text testID="repoDescription" isSubheading>
+          {item.description}
+        </Text>
+        <Text testID="repoLanguage" isTag>
+          {item.language}
+        </Text>
       </View>
-      <View style={styles.stats}>
-        <StatItem name="Stars" value={item.stargazersCount} />
-        <StatItem name="Forks" value={item.forksCount} />
-        <StatItem name="Reviews" value={item.reviewCount} />
-        <StatItem name="Rating" value={item.ratingAverage} />
-      </View>
-      {item.url && (
-        <Button
-          onPress={() => {
-            Linking.openURL(item.url);
-          }}
-          text="Open in GitHub"
-        />
-      )}
     </View>
-  );
-};
+    <View style={styles.stats}>
+      <StatItem name="Stars" value={item.stargazersCount} />
+      <StatItem name="Forks" value={item.forksCount} />
+      <StatItem name="Reviews" value={item.reviewCount} />
+      <StatItem name="Rating" value={item.ratingAverage} />
+    </View>
+    {item.url && (
+      <Button
+        onPress={() => {
+          Linking.openURL(item.url);
+        }}
+        text="Open in GitHub"
+      />
+    )}
+  </View>
+);
 
 export default RepositoryItem;
