@@ -1,26 +1,15 @@
 import * as yup from "yup";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-native";
-import { Pressable, Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import FormikTextInput from "./FormikTextInput";
 import useSignIn from "../hooks/useSignIn";
+import Button from "./Button";
 import theme from "../theme";
 
 const style = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.card,
-  },
-  button: {
-    height: 48,
-    margin: 12,
-    borderRadius: 4,
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: theme.fontSizes.body,
-    backgroundColor: theme.colors.accent,
-  },
-  buttonText: {
-    color: "white",
   },
 });
 
@@ -37,9 +26,7 @@ const SignInForm = ({ onSubmit }) => (
       name="username"
     />
     <FormikTextInput placeholder="Password" name="password" secureTextEntry />
-    <Pressable style={style.button} onPress={onSubmit}>
-      <Text style={style.buttonText}>Sign in</Text>
-    </Pressable>
+    <Button onPress={onSubmit} text="Sign in" />
   </View>
 );
 

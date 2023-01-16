@@ -1,3 +1,4 @@
+import { NativeRouter } from "react-router-native";
 import { render } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../../components/RepositoryList";
 
@@ -48,7 +49,9 @@ describe("RepositoryList", () => {
   describe("RepositoryListContainer", () => {
     it("renders the correct amount of repository items", () => {
       const { getAllByTestId } = render(
-        <RepositoryListContainer repositories={repositories} />
+        <NativeRouter>
+          <RepositoryListContainer repositories={repositories} />
+        </NativeRouter>
       );
 
       const repositoryItems = getAllByTestId("repositoryItem");
@@ -57,7 +60,9 @@ describe("RepositoryList", () => {
 
     it("renders repository information correctly", () => {
       const { getAllByTestId } = render(
-        <RepositoryListContainer repositories={repositories} />
+        <NativeRouter>
+          <RepositoryListContainer repositories={repositories} />
+        </NativeRouter>
       );
 
       const fullNames = getAllByTestId("repoFullName");

@@ -1,5 +1,8 @@
-import { View, StyleSheet, Image } from "react-native";
+import { useParams } from "react-router-native";
+import { View, StyleSheet, Image, Linking } from "react-native";
+import useRepository from "../hooks/useRepository";
 import StatItem from "./StatItem";
+import Button from "./Button";
 import theme from "../theme";
 import Text from "./Text";
 
@@ -22,6 +25,16 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryItem = ({ item }) => {
+  if (!item) {
+    const { id } = useParams();
+    const { repository } = useRepository(id);
+    item = repository;
+  }
+
+  if (!item) {
+    return null;
+  }
+
   return (
     <View testID="repositoryItem" style={styles.card}>
       <View style={{ flexDirection: "row" }}>
@@ -44,23 +57,19 @@ const RepositoryItem = ({ item }) => {
         </View>
       </View>
       <View style={styles.stats}>
-        <StatItem
-          testID="repoStarCount"
-          name="Stars"
-          value={item.stargazersCount}
-        />
-        <StatItem testID="repoForkCount" name="Forks" value={item.forksCount} />
-        <StatItem
-          testID="repoReviewCount"
-          name="Reviews"
-          value={item.reviewCount}
-        />
-        <StatItem
-          testID="repoRating"
-          name="Rating"
-          value={item.ratingAverage}
-        />
+        <StatItem name="Stars" value={item.stargazersCount} />
+        <StatItem name="Forks" value={item.forksCount} />
+        <StatItem name="Reviews" value={item.reviewCount} />
+        <StatItem name="Rating" value={item.ratingAverage} />
       </View>
+      {item.url && (
+        <Button
+          onPress={() => {
+            Linking.openURL(item.url);
+          }}
+          text="Open in GitHub"
+        />
+      )}
     </View>
   );
 };
