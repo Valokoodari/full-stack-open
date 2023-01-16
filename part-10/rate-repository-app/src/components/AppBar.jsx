@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.primary,
     flexDirection: "row",
-    padding: 15,
   },
 });
 
@@ -21,6 +20,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab path="/" text="Repositories" />
+        {data?.me && <AppBarTab path="/create" text="Create a review" />}
         {data?.me ? (
           <AppBarTab logout text="Sign out" />
         ) : (

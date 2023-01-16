@@ -2,16 +2,14 @@ import { Link } from "react-router-native";
 import { useApolloClient } from "@apollo/client";
 import { Text, Pressable, StyleSheet } from "react-native";
 import useAuthStorage from "../hooks/useAuthStorage";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
-  container: {
-    paddingLeft: 3,
-    paddingRight: 17,
-  },
   tabText: {
-    fontSize: 24,
+    fontSize: theme.fontSizes.appbar,
     color: "white",
     fontWeight: "bold",
+    padding: 14,
   },
 });
 

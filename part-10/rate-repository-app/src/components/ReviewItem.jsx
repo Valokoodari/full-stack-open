@@ -31,7 +31,7 @@ const ReviewItem = ({ item }) => {
       <View style={{ flexShrink: 1 }}>
         <Text isHeading>{item.user.username}</Text>
         <Text>{format(new Date(item.createdAt), "dd.MM.yyyy")}</Text>
-        <Text>{item.text}</Text>
+        {item.text && item.text != "" && <Text>{item.text}</Text>}
       </View>
     </View>
   );
