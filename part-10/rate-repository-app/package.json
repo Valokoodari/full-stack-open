@@ -37,6 +37,7 @@
     "react-native": "0.69.6",
     "react-native-dropdown-picker": "^5.4.4",
     "react-router-native": "^6.4.2",
+    "use-debounce": "^9.0.3",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -8,10 +8,10 @@ const orders = {
   lowest: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
 };
 
-const useRepositories = (order) => {
+const useRepositories = ({ sort, searchKeyword }) => {
   const [repositories, setRepositories] = useState();
   const { data, loading, error } = useQuery(GET_REPOSITORIES, {
-    variables: { ...orders[order] },
+    variables: { ...orders[sort], searchKeyword },
     fetchPolicy: "cache-and-network",
   });
 
