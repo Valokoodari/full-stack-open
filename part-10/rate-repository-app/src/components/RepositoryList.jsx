@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useNavigate } from "react-router-native";
-import {
-  FlatList,
-  View,
-  Pressable,
-  TextInput,
-  StyleSheet,
-  TouchableHighlightComponent,
-} from "react-native";
+import { FlatList, View, Pressable, TextInput, StyleSheet } from "react-native";
 import useRepositories from "../hooks/useRepositories";
 import DropdownSelect from "./DropdownSelect";
 import RepositoryItem from "./RepositoryItem";
@@ -33,7 +26,7 @@ const sortOptions = [
   { label: "Lowest rated repositories", value: "lowest" },
 ];
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, onEndReach }) => {
   const navigate = useNavigate();
 
   const repositoryNodes = repositories
@@ -44,6 +37,8 @@ export const RepositoryListContainer = ({ repositories }) => {
     <FlatList
       style={{ marginBottom: 200 }}
       data={repositoryNodes}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
       renderItem={({ item }) => (
         <Pressable
           onPress={() => {
@@ -62,7 +57,15 @@ const RepositoryList = () => {
   const [sort, setSort] = useState("latest");
 
   const [searchKeyword] = useDebounce(search, 500);
-  const { repositories } = useRepositories({ sort, searchKeyword });
+  const { repositories, fetchMore } = useRepositories({
+    sort,
+    searchKeyword,
+    first: 8,
+  });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <View>
@@ -78,7 +81,10 @@ const RepositoryList = () => {
         selectedValue={sort}
         onValueChange={(value) => setSort(value)}
       />
-      <RepositoryListContainer repositories={repositories} />
+      <RepositoryListContainer
+        repositories={repositories}
+        onEndReach={onEndReach}
+      />
     </View>
   );
 };
