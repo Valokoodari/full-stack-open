@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useNavigate } from "react-router-native";
-import { FlatList, View, Pressable, TextInput, StyleSheet } from "react-native";
+import {
+  FlatList,
+  View,
+  Pressable,
+  TextInput,
+  StyleSheet,
+  TouchableHighlightComponent,
+} from "react-native";
 import useRepositories from "../hooks/useRepositories";
 import DropdownSelect from "./DropdownSelect";
 import RepositoryItem from "./RepositoryItem";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   searchField: {
@@ -34,6 +42,7 @@ export const RepositoryListContainer = ({ repositories }) => {
 
   return (
     <FlatList
+      style={{ marginBottom: 200 }}
       data={repositoryNodes}
       renderItem={({ item }) => (
         <Pressable
@@ -61,6 +70,7 @@ const RepositoryList = () => {
         placeholder="Search"
         autoCapitalize="none"
         style={styles.searchField}
+        placeholderTextColor={theme.colors.textPlaceholder}
         onChangeText={(searchKeyword) => setSearch(searchKeyword)}
       />
       <DropdownSelect

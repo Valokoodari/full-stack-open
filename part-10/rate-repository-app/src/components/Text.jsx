@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   subheading: {
     fontSize: theme.fontSizes.subheading,
     marginBottom: 4,
-    color: "#777777",
+    color: theme.colors.textSecondary,
   },
   tag: {
     backgroundColor: theme.colors.accent,

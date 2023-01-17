@@ -31,6 +31,7 @@ const FormikTextInput = ({ name, ...props }) => {
   return (
     <View style={style.container}>
       <TextInput
+        placeholderTextColor={theme.colors.textPlaceholder}
         onChangeText={(text) => helpers.setValue(text)}
         onBlur={() => helpers.setTouched(true)}
         style={[style.inputField, showError && style.invalidInput]}

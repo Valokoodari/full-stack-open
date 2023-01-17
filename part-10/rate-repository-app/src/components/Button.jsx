@@ -1,7 +1,7 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 import theme from "../theme";
 
-const style = StyleSheet.create({
+let style = StyleSheet.create({
   button: {
     height: 48,
     margin: 12,
@@ -16,12 +16,10 @@ const style = StyleSheet.create({
   },
 });
 
-const Button = ({ onPress, text }) => {
-  return (
-    <Pressable style={style.button} onPress={onPress}>
-      <Text style={style.buttonText}>{text}</Text>
-    </Pressable>
-  );
-};
+const Button = ({ onPress, text, ...props }) => (
+  <Pressable style={{ ...style.button, ...props.style }} onPress={onPress}>
+    <Text style={style.buttonText}>{text}</Text>
+  </Pressable>
+);
 
 export default Button;

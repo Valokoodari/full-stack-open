@@ -52,6 +52,7 @@ const RepositoryItem = ({ item }) => (
     </View>
     {item.url && (
       <Button
+        style={{ margin: 0, marginTop: 10 }}
         onPress={() => {
           Linking.openURL(item.url);
         }}
