@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-native";
 import { FlatList, View, Pressable } from "react-native";
 import useRepositories from "../hooks/useRepositories";
+import DropdownSelect from "./DropdownSelect";
 import RepositoryItem from "./RepositoryItem";
 
 export const RepositoryListContainer = ({ repositories }) => {
@@ -26,10 +28,26 @@ export const RepositoryListContainer = ({ repositories }) => {
   );
 };
 
-const RepositoryList = () => {
-  const { repositories } = useRepositories();
+const sortOptions = [
+  { label: "Latest repositories", value: "latest" },
+  { label: "Highest rated repositories", value: "highest" },
+  { label: "Lowest rated repositories", value: "lowest" },
+];
 
-  return <RepositoryListContainer repositories={repositories} />;
+const RepositoryList = () => {
+  const [sort, setSort] = useState("latest");
+  const { repositories } = useRepositories(sort);
+
+  return (
+    <View>
+      <DropdownSelect
+        options={sortOptions}
+        selectedValue={sort}
+        onValueChange={(value) => setSort(value)}
+      />
+      <RepositoryListContainer repositories={repositories} />
+    </View>
+  );
 };
 
 export default RepositoryList;
