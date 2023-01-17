@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ME } from "../graphql/queries";
 
 const useMe = (variables) => {
-  const { data, loading, fetchMore, ...result } = useQuery(GET_ME, {
+  const { data, loading, fetchMore, refetch, ...result } = useQuery(GET_ME, {
     variables,
     fetchPolicy: "cache-and-network",
   });
@@ -26,6 +26,7 @@ const useMe = (variables) => {
     me: data?.me,
     fetchMore: handleFetchMore,
     loading,
+    refetch,
     ...result,
   };
 };

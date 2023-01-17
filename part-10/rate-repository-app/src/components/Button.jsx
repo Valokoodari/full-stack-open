@@ -16,10 +16,18 @@ let style = StyleSheet.create({
   },
 });
 
-const Button = ({ onPress, text, ...props }) => (
-  <Pressable style={{ ...style.button, ...props.style }} onPress={onPress}>
-    <Text style={style.buttonText}>{text}</Text>
-  </Pressable>
-);
+const Button = ({ onPress, text, danger, ...props }) => {
+  const buttonStyle = [
+    style.button,
+    props.style,
+    danger && { backgroundColor: theme.colors.error },
+  ];
+
+  return (
+    <Pressable style={buttonStyle} onPress={onPress}>
+      <Text style={style.buttonText}>{text}</Text>
+    </Pressable>
+  );
+};
 
 export default Button;

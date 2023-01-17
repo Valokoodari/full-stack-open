@@ -1,9 +1,9 @@
 import { FlatList } from "react-native";
-import useMe from "../hooks/useMe";
 import ReviewItem from "./ReviewItem";
+import useMe from "../hooks/useMe";
 
 const MyReviews = () => {
-  const { me, fetchMore } = useMe({ includeReviews: true, first: 8 });
+  const { me, fetchMore, refetch } = useMe({ includeReviews: true, first: 8 });
 
   const reviews = me?.reviews.edges.map((edge) => edge.node);
 
@@ -16,7 +16,9 @@ const MyReviews = () => {
       data={reviews}
       onEndReached={onEndReach}
       onEndReachedThreshold={0.5}
-      renderItem={({ item }) => <ReviewItem item={item} />}
+      renderItem={({ item }) => (
+        <ReviewItem item={item} refetch={refetch} owner />
+      )}
     />
   );
 };
