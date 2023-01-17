@@ -39,9 +39,21 @@ const RepositoryItem = ({ item }) => (
         <Text testID="repoDescription" isSubheading>
           {item.description}
         </Text>
-        <Text testID="repoLanguage" isTag>
-          {item.language}
-        </Text>
+        <View
+          style={{
+            backgroundColor: theme.colors.accent,
+            alignSelf: "baseline",
+            paddingHorizontal: 6,
+            borderRadius: 3,
+            paddingTop: 4,
+            paddingBottom: 2,
+            marginTop: 4,
+          }}
+        >
+          <Text testID="repoLanguage" isTag>
+            {item.language}
+          </Text>
+        </View>
       </View>
     </View>
     <View style={styles.stats}>

@@ -17,14 +17,8 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
   },
   tag: {
-    backgroundColor: theme.colors.accent,
     fontSize: theme.fontSizes.body,
-    alignSelf: "baseline",
-    paddingHorizontal: 6,
-    marginVertical: 4,
-    borderRadius: 3,
     color: "white",
-    padding: 3,
   },
   error: {
     color: theme.colors.error,
