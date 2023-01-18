@@ -1,0 +1,23 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: part-11
+
+jobs:
+  simple-deployment-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "19"
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
