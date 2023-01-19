@@ -39,3 +39,5 @@ jobs:
           heroku_app_name: valo-pokedex
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: part-11
+          healthcheck: https://valo-pokedex.herokuapp.com/health
+          checkstring: ok
