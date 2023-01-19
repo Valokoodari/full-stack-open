@@ -41,3 +41,4 @@ jobs:
           appdir: part-11
           healthcheck: https://valo-pokedex.herokuapp.com/health
           checkstring: ok
+          rollbackonhealthcheckfailed: true
