@@ -11,7 +11,8 @@ as some parts are only available in English.
 
 - [Phonebook](https://phonebook.valokoodari.eu/)  
 - [Bloglist](https://bloglist.valokoodari.eu/)  
-- [rate-repository-app](https://github.com/valolipasto/FullStackOpen/releases/tag/e10.27) (Android app)  
+- [rate-repository-app](https://github.com/valolipasto/FullStackOpen/releases/tag/e10.27) (Part 10, Android app)  
+- [Pokédex](https://pokedex.valokoodari.eu) (Part 11)  
 
 ### Test credentials
 > username: tester  
