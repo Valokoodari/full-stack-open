@@ -35,17 +35,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy to heroku
+      - name: deploy to dokku
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
-        uses: akhileshns/heroku-deploy@v3.12.12
+        uses: dokku/github-action@v1.4.0
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: valo-pokedex
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          appdir: part-11
-          healthcheck: https://valo-pokedex.herokuapp.com/health
-          checkstring: ok
-          rollbackonhealthcheckfailed: true
+          git_remote_url: ${{ secrets.DOKKU_REMOTE_URL }}
+          ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
+
   tag-release:
     if: ${{ github.event_name == 'push' }}
     needs: [simple-deployment-pipeline]
