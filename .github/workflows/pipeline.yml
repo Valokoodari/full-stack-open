@@ -41,6 +41,7 @@ jobs:
         with:
           git_remote_url: ${{ secrets.DOKKU_REMOTE_URL }}
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
+          git_push_flags: --force
 
   tag-release:
     if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
