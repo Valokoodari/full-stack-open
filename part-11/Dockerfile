@@ -2,7 +2,7 @@ FROM node:16
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY part-11 .
 
 RUN npm install
 RUN npm run build
