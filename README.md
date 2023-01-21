@@ -33,4 +33,4 @@ as some parts are only available in English.
 | Part  8 | 11    |
 | Part  9 | 13    |
 | Part 10 | 16    |
-| Part 11 | 1     |
+| Part 11 | 7     |
