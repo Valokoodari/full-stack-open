@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 16
       - name: npm install
-        run: npm instal
+        run: npn install
       - name: lint
         run: npm run eslint
       - name: build
@@ -67,6 +67,13 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           username: FullStackOpen - Pokédex
           title: Build failed
+      - name: discord cancellation notification
+        if: cancelled()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Pokédex
+          title: Build cancelled
 
   tag-release:
     if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
