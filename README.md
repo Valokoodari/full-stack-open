@@ -21,17 +21,17 @@ as some parts are only available in English.
 
 ## Time usage (estimated)  
 
-|         | Hours |
-|   ---   |  ---  |
-| Part  0 | 1     |
-| Part  1 | 2     |
-| Part  2 | 7     |
-| Part  3 | 7     |
-| Part  4 | 10    |
-| Part  5 | 10    |
-| Part  6 | 8     |
-| Part  7 | 14    |
-| Part  8 | 11    |
-| Part  9 | 13    |
-| Part 10 | 16    |
-| Part 11 | 7     |
+|                     | Hours |
+| ---                 |  ---  |
+| Part  0             | 1     |
+| Part  1             | 2     |
+| Part  2             | 7     |
+| Part  3             | 7     |
+| Part  4             | 10    |
+| Part  5             | 10    |
+| Part  6             | 8     |
+| Part  7             | 14    |
+| Part  8             | 11    |
+| Part  9             | 13    |
+| Part 10             | 16    |
+| [Part 11](/part-11) | 7     |
