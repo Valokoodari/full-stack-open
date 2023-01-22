@@ -31,6 +31,13 @@ jobs:
         run: npm ci
       - name: run tests
         run: npm test
+      - name: discord test failure
+        if: failure()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Bloglist
+          title: tests failed
 
   deployment:
     needs: [test-backend]
