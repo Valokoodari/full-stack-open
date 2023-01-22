@@ -104,7 +104,7 @@ describe("a blog added to the database", () => {
       author: data.blog.author,
       url: data.blog.url,
       likes: data.blog.likes,
-      // comments: [],
+      comments: [],
       user: {
         username: user.username,
         name: user.name,

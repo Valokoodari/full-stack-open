@@ -1,6 +1,7 @@
 # Part 11
 
 [![Pokédex CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml)
+[![Bloglist CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/bloglist-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/bloglist-pipeline.yml)
 
 ## Exercises
 
@@ -23,5 +24,5 @@
 - [x] 11.17 Adding protection to your main branch  
 - [x] 11.18 [Build success/failure notification action](exercise18.png)  
 - [x] 11.19 [Periodic health check](/.github/workflows/pokedex-health.yml)  
-- [ ] 11.20 Your own pipeline  
+- [x] 11.20 [Your own pipeline](/.github/workflows/bloglist-pipeline.yml)  
 - [ ] 11.21 Protect your main branch and ask for pull request  
