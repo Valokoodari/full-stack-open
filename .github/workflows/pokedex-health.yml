@@ -18,4 +18,5 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           username: FullStackOpen - Pokédex
+          nodetail: true
           title: The periodic health check failed
