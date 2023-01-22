@@ -1,0 +1,21 @@
+name: Pokédex periodic health check
+
+on:
+  schedule:
+    - cron: '0,20,40 * * * *'
+
+jobs:
+  periodic-health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: URL Health Check
+        uses: Jtalk/url-health-check-action@v3
+        with:
+          url: https://pokedex.valokoodari.eu/health
+      - name: discord failure notification
+        if: failure()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Pokédex
+          title: The periodic health check failed
