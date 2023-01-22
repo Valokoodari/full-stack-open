@@ -1,0 +1,44 @@
+name: Bloglist CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+default:
+  run:
+    working-directory: part-07/bloglist
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: deploy to dokku
+        if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#blog') }}
+        uses: dokku/github-action@v1.4.0
+        with:
+          git_remote_url: ${{ secrets.DOKKU_BLOGLIST_URL }}
+          ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
+      - name: discord failure notification
+        if: failure()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Bloglist
+          title: deployment failed
+      - name: discord success notification
+        if: success() && contains(github.event.head_commit.message, '#blog')
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Bloglist
+          nodetail: true
+          title: A new version of Bloglist was deployed
+          description: View the app at https://bloglist.valokoodari.eu
