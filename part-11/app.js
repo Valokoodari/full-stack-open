@@ -9,12 +9,12 @@ app.get('/health', (_, res) => {
 })
 
 app.get('/version', (_, res) => {
-  res.send('7')
+  res.send('8')
 })
 
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('server started on port 5000')
+  console.log('server started on port', PORT)
 })

@@ -34,7 +34,7 @@ Start by running `npm install` inside the project folder
 - [x] 11.15 Adding versioning  
 - [x] 11.16 Skipping a commit for tagging and deployment  
 - [x] 11.17 Adding protection to your main branch  
-- [ ] 11.18 Build success/failure notification action  
+- [x] 11.18 Build success/failure notification action  
 - [ ] 11.19 Periodic health check  
 - [ ] 11.20 Your own pipeline  
 - [ ] 11.21 Protect your main branch and ask for pull request  
