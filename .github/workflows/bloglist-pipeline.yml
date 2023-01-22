@@ -8,19 +8,39 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+env:
+  SECRET: SuperS3cr3tK3y
+
 defaults:
   run:
     working-directory: part-07/bloglist
 
 jobs:
+  test-backend:
+    if: contains(github.event.head_commit.message, '#blog')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: 4.4
+      - name: npm ci
+        run: npm ci
+      - name: run tests
+        run: npm test
+
   deployment:
+    needs: [test-backend]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: deploy to dokku
-        if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#blog') }}
+        if: github.event_name == 'push'
         uses: dokku/github-action@v1.4.0
         with:
           git_remote_url: ${{ secrets.DOKKU_BLOGLIST_URL }}
@@ -34,7 +54,7 @@ jobs:
           username: FullStackOpen - Bloglist
           title: deployment failed
       - name: discord success notification
-        if: success() && contains(github.event.head_commit.message, '#blog')
+        if: success()
         uses: sarisia/actions-status-discord@v1.11.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
