@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Pokédex CI/CD
 
 on:
   push:

@@ -1,5 +1,7 @@
 # Part 11
 
+[![Pokédex CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml)
+
 ## Exercises
 
 - [ ] 11.1 [Warming up](exercise1.md)  
