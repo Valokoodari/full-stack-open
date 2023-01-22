@@ -2,7 +2,7 @@ name: Pokédex periodic health check
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '20 4 20 4 *'
 
 jobs:
   periodic-health-check:
