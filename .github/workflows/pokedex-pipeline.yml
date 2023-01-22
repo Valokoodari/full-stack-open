@@ -44,7 +44,7 @@ jobs:
           git_remote_url: ${{ secrets.DOKKU_REMOTE_URL }}
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
       - name: discord deploy success notification
-        if: ${{ success() && !contains(github.event.head_commit.message, '#skip') }}
+        if: ${{ success() && !contains(github.event.head_commit.message, '#skip') && github.event_name == 'push' }}
         uses: sarisia/actions-status-discord@v1.11.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -53,7 +53,7 @@ jobs:
           title: A new version of Pokédex was deployed
           description: View the app at https://pokedex.valokoodari.eu
       - name: discord success notification
-        if: ${{ success() && !(!contains(github.event.head_commit.message, '#skip') && github.event_name != 'push') }}
+        if: ${{ success() && !(!contains(github.event.head_commit.message, '#skip') && github.event_name == 'push') }}
         uses: sarisia/actions-status-discord@v1.11.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -88,4 +88,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          INITIAL_VERSION: 0.11.14
