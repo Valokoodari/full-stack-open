@@ -53,7 +53,7 @@ jobs:
           title: A new version of Pokédex was deployed
           description: View the app at https://pokedex.valokoodari.eu
       - name: discord success notification
-        if: ${{ success() && contains(github.event.head_commit.message, '#skip') && github.event_name != 'push' }}
+        if: ${{ success() && !(!contains(github.event.head_commit.message, '#skip') && github.event_name != 'push') }}
         uses: sarisia/actions-status-discord@v1.11.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
