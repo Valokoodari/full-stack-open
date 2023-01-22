@@ -17,9 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          fetch-depth: 0
       - name: deploy to dokku
         if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#blog') }}
         uses: dokku/github-action@v1.4.0
