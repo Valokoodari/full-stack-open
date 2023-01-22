@@ -21,9 +21,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: 16
       - name: npm install
-        run: npm install
+        run: npm instal
       - name: lint
         run: npm run eslint
       - name: build
@@ -38,17 +38,35 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy to dokku
-        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && github.event_name == 'push' }}
         uses: dokku/github-action@v1.4.0
         with:
           git_remote_url: ${{ secrets.DOKKU_REMOTE_URL }}
           ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
-      - name: discord notification
-        if: always()
+      - name: discord deploy success notification
+        if: ${{ success() && !contains(github.event.head_commit.message, '#skip') }}
         uses: sarisia/actions-status-discord@v1.11.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          title: "Pokédex pipeline"
+          username: FullStackOpen - Pokédex
+          nodetail: true
+          title: A new version of Pokédex was deployed
+          description: View the app at https://pokedex.valokoodari.eu
+      - name: discord success notification
+        if: ${{ success() && contains(github.event.head_commit.message, '#skip') && github.event_name != 'push' }}
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Pokédex
+          nodetail: true
+          title: All checks were completed successfully
+      - name: discord failure notification
+        if: failure()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Pokédex
+          title: Build failed
 
   tag-release:
     if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
