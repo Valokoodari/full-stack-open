@@ -1,4 +1,4 @@
-# Part 11
+# Part 11 - CI/CD
 
 [![Pokédex CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml)
 [![Bloglist CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/bloglist-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/bloglist-pipeline.yml)
