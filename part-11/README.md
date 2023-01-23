@@ -5,7 +5,7 @@
 
 ## Exercises
 
-- [ ] 11.1 [Warming up](exercise1.md)  
+- [x] 11.1 [Warming up](exercise1.md)  
 - [x] 11.2 The example project  
 - [x] 11.3 [Hello world!](/.github/workflows/hello.yml)  
 - [x] 11.4 Date and directory contents  
@@ -25,4 +25,4 @@
 - [x] 11.18 [Build success/failure notification action](exercise18.png)  
 - [x] 11.19 [Periodic health check](/.github/workflows/pokedex-health.yml)  
 - [x] 11.20 [Your own pipeline](/.github/workflows/bloglist-pipeline.yml)  
-- [ ] 11.21 Protect your main branch and ask for pull request  
+- [x] 11.21 Protect your main branch and ask for [pull request](#3)  
