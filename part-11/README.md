@@ -3,6 +3,9 @@
 [![Pokédex CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/pokedex-pipeline.yml)
 [![Bloglist CI/CD](https://github.com/valolipasto/FullStackOpen/actions/workflows/bloglist-pipeline.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/bloglist-pipeline.yml)
 
+- [Pokédex](https://pokedex.valokoodari.eu)  
+- [Bloglist](https://bloglist.valokoodari.eu/)  
+
 ## Exercises
 
 - [x] 11.1 [Warming up](exercise1.md)  
@@ -25,4 +28,4 @@
 - [x] 11.18 [Build success/failure notification action](exercise18.png)  
 - [x] 11.19 [Periodic health check](/.github/workflows/pokedex-health.yml)  
 - [x] 11.20 [Your own pipeline](/.github/workflows/bloglist-pipeline.yml)  
-- [x] 11.21 Protect your main branch and ask for [pull request](#3)  
+- [x] 11.21 Protect your main branch and ask for pull request (#3)  
