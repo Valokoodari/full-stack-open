@@ -9,7 +9,7 @@
 - [x] 12.5 Containerizing a Node application
 - [x] 12.6 Docker compose
 - [x] 12.7 Little bit of MongoDB coding
-- [ ] 12.8 Mongo command-line interface
+- [x] 12.8 Mongo command-line interface
 - [ ] 12.9 Set up Redis for the project
 - [ ] 12.10 ...
 - [ ] 12.11 ...
