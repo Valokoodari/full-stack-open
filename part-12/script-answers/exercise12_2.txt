@@ -1,0 +1,17 @@
+Script started on 2023-01-24 11:59:49+02:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+[?2004h> docker run -it ubuntu bash
+[?2004lUnable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+
+[1A[2K6e3729cf69e0: Pulling fs layer [1B[1A[2K6e3729cf69e0: Downloading  311.3kB/30.43MB[1B[1A[2K6e3729cf69e0: Downloading   10.6MB/30.43MB[1B[1A[2K6e3729cf69e0: Downloading  14.66MB/30.43MB[1B[1A[2K6e3729cf69e0: Downloading  23.71MB/30.43MB[1B[1A[2K6e3729cf69e0: Download complete [1B[1A[2K6e3729cf69e0: Extracting  327.7kB/30.43MB[1B[1A[2K6e3729cf69e0: Extracting  8.192MB/30.43MB[1B[1A[2K6e3729cf69e0: Extracting  16.38MB/30.43MB[1B[1A[2K6e3729cf69e0: Extracting  26.21MB/30.43MB[1B[1A[2K6e3729cf69e0: Extracting  30.15MB/30.43MB[1B[1A[2K6e3729cf69e0: Extracting  30.43MB/30.43MB[1B[1A[2K6e3729cf69e0: Pull complete [1BDigest: sha256:27cb6e6ccef575a4698b66f5de06c7ecd61589132d5a91d098f7f3f9285415a9
+Status: Downloaded newer image for ubuntu:latest
+[?2004h]0;root@47c3b98b77e4: /root@47c3b98b77e4:/# [K]0;root@47c3b98b77e4: /root@47c3b98b77e4:/# mkdir /usr/src/app
+[?2004l[?2004h]0;root@47c3b98b77e4: /root@47c3b98b77e4:/# touch /usr/src/app/index.js
+[?2004l[?2004h]0;root@47c3b98b77e4: /root@47c3b98b77e4:/# [Kls /usr/src/app
+[?2004lindex.js
+[?2004h]0;root@47c3b98b77e4: /root@47c3b98b77e4:/# exit
+[?2004lexit
+e[?2004h> exit
+[?2004lexit
+
+Script done on 2023-01-24 12:00:32+02:00 [COMMAND_EXIT_CODE="0"]
