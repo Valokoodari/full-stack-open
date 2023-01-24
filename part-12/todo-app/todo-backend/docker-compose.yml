@@ -1,0 +1,6 @@
+services:
+  app:
+    image: fs-todo-backend
+    build: .
+    ports:
+      - 3000:3000
