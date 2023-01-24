@@ -13,7 +13,7 @@
 - [x] 12.9 Set up Redis for the project
 - [x] 12.10 ...
 - [x] 12.11 ...
-- [ ] 12.12 Persisting data in Redis
+- [x] 12.12 Persisting data in Redis
 - [ ] 12.13 Todo application frontend
 - [ ] 12.14 Testing during the build process
 - [ ] 12.15 Set up a frontend development environment
