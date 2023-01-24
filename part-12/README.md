@@ -8,7 +8,7 @@
 - [x] 12.4 Ubuntu 102
 - [x] 12.5 Containerizing a Node application
 - [x] 12.6 Docker compose
-- [ ] 12.7 Little bit of MongoDB coding
+- [x] 12.7 Little bit of MongoDB coding
 - [ ] 12.8 Mongo command-line interface
 - [ ] 12.9 Set up Redis for the project
 - [ ] 12.10 ...
