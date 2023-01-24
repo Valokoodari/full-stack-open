@@ -2,11 +2,11 @@
 
 ## Exercises
 
-- [ ] 12.1 Using a computer (without graphical user interface)
-- [ ] 12.2 Running your second container
-- [ ] 12.3 Ubuntu 101
-- [ ] 12.4 Ubuntu 102
-- [ ] 12.5 Containerizing a Node application
+- [x] 12.1 Using a computer (without graphical user interface)
+- [x] 12.2 Running your second container
+- [x] 12.3 Ubuntu 101
+- [x] 12.4 Ubuntu 102
+- [x] 12.5 Containerizing a Node application
 - [ ] 12.6 Docker compose
 - [ ] 12.7 Little bit of MongoDB coding
 - [ ] 12.8 Mongo command-line interface
