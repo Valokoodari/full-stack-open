@@ -14,7 +14,7 @@
 - [x] 12.10 { name: null }  
 - [x] 12.11 [{ name: null }](script-answers/exercise12_11.txt)  
 - [x] 12.12 Persisting data in Redis  
-- [ ] 12.13 Todo application frontend  
+- [x] 12.13 Todo application frontend  
 - [ ] 12.14 Testing during the build process  
 - [ ] 12.15 Set up a frontend development environment  
 - [ ] 12.16 Run todo-backend in a development container  
