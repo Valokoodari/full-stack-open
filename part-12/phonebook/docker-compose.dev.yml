@@ -18,7 +18,7 @@ services:
       context: backend
       dockerfile: dev.Dockerfile
     environment:
-      MONGODB_URI: mongodb://the_username:the_password@phonebook-mongo-dev:27017/phonebook-dev
+      MONGODB_URI: mongodb://the_username:the_password@phonebook-mongo-dev:27017/phonebook
       PORT: 3000
     volumes:
       - ./backend/:/usr/src/app
@@ -31,7 +31,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: phonebook-dev
+      MONGO_INITDB_DATABASE: phonebook
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - mongo_data_dev:/data/db

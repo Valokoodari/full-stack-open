@@ -11,8 +11,8 @@
 - [x] 12.7 Little bit of MongoDB coding  
 - [x] 12.8 [Mongo command-line interface](script-answers/exercise12_8.txt)  
 - [x] 12.9 Set up Redis for the project  
-- [x] 12.10 { name: null }  
-- [x] 12.11 [{ name: null }](script-answers/exercise12_11.txt)  
+- [x] 12.10 Implement a feature with Redis  
+- [x] 12.11 [Learn to use redis-cli](script-answers/exercise12_11.txt)  
 - [x] 12.12 Persisting data in Redis  
 - [x] 12.13 Todo application frontend  
 - [x] 12.14 Testing during the build process  
@@ -21,6 +21,6 @@
 - [x] 12.17 Set up an Nginx reverse proxy server in front of todo-frontend  
 - [x] 12.18 Configure the Nginx server to be in front of todo-backend  
 - [x] 12.19 Connect the services, todo-frontend with todo-backend  
-- [x] 12.20 { name: null }  
-- [ ] 12.21 { name: null }  
-- [ ] 12.22 { name: null }  
+- [x] 12.20 Set up a containerized production environment
+- [x] 12.21 Containerized development environment for another full stack app  
+- [x] 12.22 Containerized production environment for another full stack app
