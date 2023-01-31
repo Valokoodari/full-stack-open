@@ -1,8 +1,19 @@
 services:
-  mongo:
-    image: mongo:latest
+  todo-back-dev:
+    image: fs-todo-back-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
     ports:
-      - 3456:27017
+      - 3000:3000
+    environment:
+      REDIS_URL: redis://todo-redis-dev:6379
+      MONGO_URL: mongodb://the_username:the_password@todo-mongo-dev:27017/the_database
+    volumes:
+      - ./:/usr/src/app
+    container_name: fs-todo-back-dev
+  todo-mongo-dev:
+    image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
@@ -10,12 +21,14 @@ services:
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - mongo_data:/data/db
-  redis:
+    container_name: fs-todo-mondo-dev
+  todo-redis-dev:
     image: redis:latest
-    ports:
-      - 6379:6379
     volumes:
       - redis_data:/data
+    container_name: fs-todo-redis-dev
+  debug-helper:
+    image: busybox
 
 volumes:
   mongo_data:
