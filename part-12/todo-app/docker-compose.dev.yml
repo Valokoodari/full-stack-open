@@ -1,0 +1,20 @@
+services:
+  todo-front-dev:
+    image: fs-todo-front-dev
+    build:
+      context: todo-frontend
+      dockerfile: dev.Dockerfile
+    environment:
+      REACT_APP_BACKEND_URL: http://127.0.0.1:3000
+    volumes:
+      - ./todo-frontend/:/usr/src/app
+    container_name: fs-todo-front-dev
+  todo-nginx-dev:
+    image: nginx:1.23.3
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: fs-todo-reverse-proxy-dev
+    depends_on:
+      - todo-front-dev
