@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
+const url = process.env.MONGODB_URI + '?retryWrites=true&w=majority'
 
 mongoose.connect(url)
   .then(() => {

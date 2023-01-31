@@ -1,4 +1,3 @@
-require('dotenv').config()
 const Contact = require('./models/contact')
 const express = require('express')
 const morgan = require('morgan')
@@ -25,13 +24,13 @@ app.get('/info', (_, res, next) => {
   }).catch(error => next(error))
 })
 
-app.get('/api/persons/', (_, res, next) => {
+app.get('/persons/', (_, res, next) => {
   Contact.find({}).then(contacts => {
     res.json(contacts)
   }).catch(error => next(error))
 })
 
-app.post('/api/persons/', (req, res, next) => {
+app.post('/persons/', (req, res, next) => {
   const contact = req.body
 
   const newContact = new Contact({
@@ -44,7 +43,7 @@ app.post('/api/persons/', (req, res, next) => {
   }).catch(error => next(error))
 })
 
-app.get('/api/persons/:id', (req, res, next) => {
+app.get('/persons/:id', (req, res, next) => {
   Contact.findById(req.params.id).then(contact => {
     if (contact) {
       res.json(contact)
@@ -54,7 +53,7 @@ app.get('/api/persons/:id', (req, res, next) => {
   }).catch(error => next(error))
 })
 
-app.put('/api/persons/:id', (req, res, next) => {
+app.put('/persons/:id', (req, res, next) => {
   const { name, number } = req.body
 
   Contact.findByIdAndUpdate(
@@ -70,7 +69,7 @@ app.put('/api/persons/:id', (req, res, next) => {
   }).catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (req, res, next) => {
+app.delete('/persons/:id', (req, res, next) => {
   Contact.findByIdAndRemove(req.params.id).then(() => {
     res.status(204).end()
   }).catch(error => next(error))

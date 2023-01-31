@@ -1,0 +1,52 @@
+services:
+  phonebook-front-dev:
+    image: fs-phonebook-front-dev
+    build:
+      context: frontend
+      dockerfile: dev.Dockerfile
+    environment:
+      WATCHPACK_POLLING: true
+      WDS_SOCKET_HOST: 127.0.0.1
+      WDS_SOCKET_PORT: 8080
+    volumes:
+      - ./frontend/:/usr/src/app
+    container_name: fs-phonebook-front-dev
+
+  phonebook-back-dev:
+    image: fs-phonebook-back-dev
+    build:
+      context: backend
+      dockerfile: dev.Dockerfile
+    environment:
+      MONGODB_URI: mongodb://the_username:the_password@phonebook-mongo-dev:27017/phonebook-dev
+      PORT: 3000
+    volumes:
+      - ./backend/:/usr/src/app
+    container_name: fs-phonebook-back-dev
+    depends_on:
+      - phonebook-mongo-dev
+
+  phonebook-mongo-dev:
+    image: mongo:6.0.4
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: phonebook-dev
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongo_data_dev:/data/db
+    container_name: fs-phonebook-mongo-dev
+
+  phonebook-nginx-dev:
+    image: nginx:1.23.3
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: fs-phonebook-nginx-dev
+    depends_on:
+      - phonebook-front-dev
+      - phonebook-back-dev
+
+volumes:
+  mongo_data_dev:
