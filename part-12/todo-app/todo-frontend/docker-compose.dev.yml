@@ -1,0 +1,12 @@
+services:
+  todo-front-dev:
+    image: fs-todo-front-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - 3001:3000
+    environment:
+      REACT_APP_BACKEND_URL: http://127.0.0.1:3000
+    volumes:
+      - ./:/usr/src/app
