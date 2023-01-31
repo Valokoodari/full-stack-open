@@ -5,10 +5,43 @@ services:
       context: todo-frontend
       dockerfile: dev.Dockerfile
     environment:
-      REACT_APP_BACKEND_URL: http://127.0.0.1:3000
+      REACT_APP_BACKEND_URL: http://127.0.0.1:8080/api
     volumes:
       - ./todo-frontend/:/usr/src/app
     container_name: fs-todo-front-dev
+
+  todo-back-dev:
+    image: fs-todo-back-dev
+    build:
+      context: todo-backend
+      dockerfile: dev.Dockerfile
+    environment:
+      REDIS_URL: redis://todo-redis-dev:6379
+      MONGO_URL: mongodb://the_username:the_password@todo-mongo-dev:27017/the_database
+    volumes:
+      - ./todo-backend/:/usr/src/app
+    container_name: fs-todo-back-dev
+    depends_on:
+      - todo-mongo-dev
+      - todo-redis-dev
+
+  todo-mongo-dev:
+    image: mongo:6.0.4
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - ./todo-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongo_data:/data/db
+    container_name: fs-todo-mongo-dev
+
+  todo-redis-dev:
+    image: redis:7.0.8
+    volumes:
+      - redis_data:/data
+    container_name: fs-todo-redis-dev
+
   todo-nginx-dev:
     image: nginx:1.23.3
     volumes:
@@ -18,3 +51,8 @@ services:
     container_name: fs-todo-reverse-proxy-dev
     depends_on:
       - todo-front-dev
+      - todo-back-dev
+
+volumes:
+  mongo_data:
+  redis_data:
