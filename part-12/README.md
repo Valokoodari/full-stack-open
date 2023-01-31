@@ -21,6 +21,6 @@
 - [x] 12.17 Set up an Nginx reverse proxy server in front of todo-frontend  
 - [x] 12.18 Configure the Nginx server to be in front of todo-backend  
 - [x] 12.19 Connect the services, todo-frontend with todo-backend  
-- [ ] 12.20 { name: null }  
+- [x] 12.20 { name: null }  
 - [ ] 12.21 { name: null }  
 - [ ] 12.22 { name: null }  

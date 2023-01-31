@@ -8,7 +8,7 @@ ENV CI=true
 RUN npm test
 
 FROM test as build
-ENV REACT_APP_BACKEND_URL=http://127.0.0.1:3000
+ENV REACT_APP_BACKEND_URL=/api
 RUN npm run build
 
 FROM nginx:1.23.3
