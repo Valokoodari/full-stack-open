@@ -1,0 +1,12 @@
+POST http://127.0.0.1:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "author": "Olaf",
+    "url": "https://www.olaf.blog/2013/why-i-love-summer.html",
+    "title": "Why I love summer?"
+}
+
+###
+
+DELETE http://127.0.0.1:3001/api/blogs/4 HTTP/1.1

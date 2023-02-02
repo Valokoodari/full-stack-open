@@ -1,12 +1,15 @@
 # Part 13 - Using relational databases
 
+- [Bloglist Extended](https://bloglist-extended.valokoodari.eu/)  
+
+
 ## Exercises
 
 ###### a) Using relational databases with Sequelize  
 - [x] 13.1 _Set up an application_  
 - [x] 13.2 _[Initialize the database](commands.sql)_  
-- [x] 13.3 _Add basic functionality to the app_  
-- [ ] 13.4 _Transform the app into a web app_  
+- [x] 13.3 _[Add basic functionality to the app](cli.js)_  
+- [x] 13.4 _Transform the app into a web app_  
 
 ###### b) Join tables and queries  
 - [ ] 13.5 _Restructure the app_  

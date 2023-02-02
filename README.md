@@ -13,6 +13,7 @@ as some parts are only available in English.
 - [Bloglist](https://bloglist.valokoodari.eu/) (Parts 4, 5, 7, and 11)  
 - [rate-repository-app](https://github.com/valolipasto/FullStackOpen/releases/tag/e10.27) (Part 10, Android app)  
 - [Pokédex](https://pokedex.valokoodari.eu) (Part 11)  
+- [Bloglist Extended](https://bloglist-extended.valokoodari.eu/) (Part 13)  
 
 ### Test credentials
 > username: tester  
