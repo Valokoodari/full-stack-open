@@ -1,0 +1,35 @@
+name: Part 13 - Deploy bloglist extended
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: deploy to dokku
+        uses: dokku/github-action@v1.4.0
+        with:
+          git_remote_url: ${{ secrets.DOKKU_BLE_URL }}
+          ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
+      - name: discord failure notification
+        if: failure()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Bloglist Extended
+          title: deployment failed
+      - name: discord success notification
+        if: success()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Bloglist Extended
+          nodetail: true
+          title: A new version of Bloglist Extended was deployed
+          description: View the app at https://bloglist-extended.valokoodari.eu
