@@ -3,7 +3,12 @@
 .env
 
 node_modules/
+requests/
 
+docker-compose.dev.yml
 Dockerfile
 
+commands.sql
 README.md
+cli.js
+

@@ -1,6 +1,6 @@
 # Part 13 - Using relational databases
 
-- [Bloglist Extended](https://bloglist-extended.valokoodari.eu/)  
+- [Bloglist Extended /api/blogs](https://bloglist-extended.valokoodari.eu/api/blogs)  
 
 
 ## Exercises
