@@ -1,0 +1,21 @@
+{
+  "name": "fs-p13-bloglist",
+  "version": "0.0.1",
+  "description": "A bloglist app with a relational database",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "bloglist",
+    "fullstackopen"
+  ],
+  "author": "Valokoodari",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.9.0",
+    "sequelize": "^6.28.0"
+  }
+}

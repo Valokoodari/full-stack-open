@@ -3,7 +3,7 @@
 ## Exercises
 
 ###### a) Using relational databases with Sequelize  
-- [ ] 13.1 _Set up an application_  
+- [x] 13.1 _Set up an application_  
 - [ ] 13.2 _Initialize the database_  
 - [ ] 13.3 _Add basic functionality to the app_  
 - [ ] 13.4 _Transform the app into a web app_  
