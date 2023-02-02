@@ -1,5 +1,8 @@
 # Part 13 - Using relational databases
 
+[![Bloglist Extended](https://github.com/valolipasto/FullStackOpen/actions/workflows/part-13-bloglist.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/part-13-bloglist.yml)
+
+
 - [Bloglist Extended /api/blogs](https://bloglist-extended.valokoodari.eu/api/blogs)  
 
 

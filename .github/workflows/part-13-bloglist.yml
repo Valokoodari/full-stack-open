@@ -1,9 +1,12 @@
-name: Part 13 - Deploy bloglist extended
+name: Bloglist Extended
 
 on:
   push:
     branches:
       - main
+    paths:
+      - part-13/**
+      - .github/workflows/part-13-bloglist.yml
 
 jobs:
   deployment:
