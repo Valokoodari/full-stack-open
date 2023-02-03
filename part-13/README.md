@@ -25,8 +25,8 @@
 - [x] 13.13 _Implement filtering by keyword_  
 - [x] 13.14 _Expand the keyword filter to author_  
 - [x] 13.15 _Return the blogs ordered by likes_  
-- [ ] 13.16 _Add a route to get authors_  
-  - [ ] bonus _Order the authors based on likes_  
+- [x] 13.16 _Add a route to get authors_  
+  - [x] bonus _Order the authors based on likes_  
 
 ###### c) Migrations, many-to-many relationships  
 - [ ] 13.17 _Clear the database and create a migration to initialize it_  
