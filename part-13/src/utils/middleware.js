@@ -1,10 +1,14 @@
-const errorHandler = (err, req, res, next) => {
-  console.error(err.name + ": " + err.message);
+const errorHandler = (err, _, res, next) => {
+  console.error(`${err.name}: ${err.message}`);
 
   if (
     err.name === "SequelizeValidationError" ||
-    err.name === "SequelizeDatabaseError"
+    err.name === "SequelizeDatabaseError" ||
+    err.name === "SequelizeUniqueConstraintError"
   ) {
+    err.errors.forEach((error) => {
+      res.status(400).json({ error: error.message });
+    });
     return res.status(400).json({ error: err.message });
   }
 
@@ -14,6 +18,8 @@ const errorHandler = (err, req, res, next) => {
   ) {
     return res.status(500).json({ error: "Database connection error" });
   }
+
+  console.log(`Unknown error: ${err.name}: ${err.message}`);
 
   next(err);
 };

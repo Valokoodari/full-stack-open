@@ -6,15 +6,15 @@ POST http://127.0.0.1:3001/api/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "olfa",
+    "username": "i-love-summer@olaf.snow",
     "name": "Olaf"
 }
 
 ###
 
-PUT http://127.0.0.1:3001/api/users/olfa HTTP/1.1
+PUT http://127.0.0.1:3001/api/users/i-love-summer@olaf.snow HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "olaf"
+    "username": "olaf@snow.man"
 }

@@ -18,7 +18,7 @@
 - [x] 13.6 _Implement changing the number of likes_  
 - [x] 13.7 _Error handling middleware_  
 - [x] 13.8 _Add support for users_  
-- [ ] 13.9 _Add email validation to user creation_  
+- [x] 13.9 _Add email validation to user creation_  
 - [ ] 13.10 _Add a token to keep the user logged in_  
 - [ ] 13.11 _Only allow a blog to be deleted by the user who added it_  
 - [ ] 13.12 _Add blogs to users and user to blogs_  
