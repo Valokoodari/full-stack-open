@@ -20,6 +20,12 @@ router.post("/", async (req, res, next) => {
   try {
     const { username, name, password } = req.body;
 
+    if (!username || !name || !password) {
+      return res.status(400).json({
+        error: "username, name, and password are required",
+      });
+    }
+
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 

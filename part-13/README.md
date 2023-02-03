@@ -29,7 +29,7 @@
   - [x] bonus _Order the authors based on likes_  
 
 ###### c) Migrations, many-to-many relationships  
-- [ ] 13.17 _Clear the database and create a migration to initialize it_  
+- [x] 13.17 _Clear the database and create a migration to initialize it_  
 - [ ] 13.18 _Add the year of writing to blogs (by migration)_  
 - [ ] 13.19 _Implement reading lists to the db_  
 - [ ] 13.20 _Add reading lists to the app_  
