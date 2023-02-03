@@ -37,4 +37,4 @@ as some parts are only available in English.
 | [Part 10](/part-10) | 16    |
 | [Part 11](/part-11) | 11    |
 | [Part 12](/part-12) | 10    |
-| [Part 13](/part-13) | 5     |
+| [Part 13](/part-13) | 6     |
