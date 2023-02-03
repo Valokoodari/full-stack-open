@@ -6,33 +6,37 @@ const blogFinder = async (req, _, next) => {
     req.blog = await Blog.findByPk(req.params.id);
     next();
   } catch (error) {
-    res.status(500).end();
+    next(error);
   }
 };
 
-router.get("/", async (_, res) => {
+router.get("/", async (_, res, next) => {
   try {
     const blogs = await Blog.findAll();
     res.json(blogs);
   } catch (error) {
-    res.status(500).end();
+    next(error);
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const blog = await Blog.create(req.body);
     res.json(blog);
   } catch (error) {
-    res.status(400).json({ error });
+    next(error);
   }
 });
 
-router.put("/:id", blogFinder, async (req, res) => {
+router.put("/:id", blogFinder, async (req, res, next) => {
   if (req.blog) {
     req.blog.likes = req.body.likes;
-    await req.blog.save();
-    res.json(req.blog);
+    try {
+      await req.blog.save();
+      res.json(req.blog);
+    } catch (error) {
+      next(error);
+    }
   } else {
     res.status(404).end();
   }

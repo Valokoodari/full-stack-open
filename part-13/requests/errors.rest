@@ -1,13 +1,8 @@
-GET http://127.0.0.1:3001/api/blogs/ HTTP/1.1
-
-###
-
 POST http://127.0.0.1:3001/api/blogs/ HTTP/1.1
 content-type: application/json
 
 {
     "author": "Olaf",
-    "url": "https://www.olaf.blog/2013/why-i-love-summer.html",
     "title": "Why I love summer?"
 }
 
@@ -17,9 +12,5 @@ PUT http://127.0.0.1:3001/api/blogs/4 HTTP/1.1
 content-type: application/json
 
 {
-    "likes": 13
+    "likes": "Whee"
 }
-
-###
-
-DELETE http://127.0.0.1:3001/api/blogs/4 HTTP/1.1

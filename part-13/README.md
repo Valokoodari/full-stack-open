@@ -2,7 +2,6 @@
 
 [![Bloglist Extended](https://github.com/valolipasto/FullStackOpen/actions/workflows/part-13-bloglist.yml/badge.svg)](https://github.com/valolipasto/FullStackOpen/actions/workflows/part-13-bloglist.yml)
 
-
 - [Bloglist Extended /api/blogs](https://bloglist-extended.valokoodari.eu/api/blogs)  
 
 
@@ -17,7 +16,7 @@
 ###### b) Join tables and queries  
 - [x] 13.5 _Restructure the app_  
 - [x] 13.6 _Implement changing the number of likes_  
-- [ ] 13.7 _Error handling middleware_  
+- [x] 13.7 _Error handling middleware_  
 - [ ] 13.8 _Add support for users_  
 - [ ] 13.9 _Add email validation to user creation_  
 - [ ] 13.10 _Add a token to keep the user logged in_  
