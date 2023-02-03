@@ -24,7 +24,7 @@
 - [x] 13.12 _Add blogs to users and user to blogs_  
 - [x] 13.13 _Implement filtering by keyword_  
 - [x] 13.14 _Expand the keyword filter to author_  
-- [ ] 13.15 _Return the blogs ordered by likes_  
+- [x] 13.15 _Return the blogs ordered by likes_  
 - [ ] 13.16 _Add a route to get authors_  
   - [ ] bonus _Order the authors based on likes_  
 
