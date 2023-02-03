@@ -14,12 +14,14 @@ const blogFinder = async (req, _, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    console.log("Query: ", req.query);
     let where = {};
 
-    if (req.query.search) {
-      where.title = {
-        [Op.substring]: req.query.search.toLocaleLowerCase(),
+    const search = req.query.search
+      ? { [Op.substring]: req.query.search.toLowerCase() }
+      : null;
+    if (search) {
+      where = {
+        [Op.or]: [{ title: search }, { author: search }],
       };
     }
 
