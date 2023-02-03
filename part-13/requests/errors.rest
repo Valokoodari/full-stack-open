@@ -33,3 +33,14 @@ Content-Type: application/json
 {
     "username": "olaf"
 }
+
+###
+
+POST http://127.0.0.1:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "author": "Olaf",
+    "url": "https://www.olaf.blog/2013/why-i-love-summer.html",
+    "title": "Why I love summer?"
+}

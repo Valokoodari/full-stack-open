@@ -7,7 +7,8 @@ Content-Type: application/json
 
 {
     "username": "i-love-summer@olaf.snow",
-    "name": "Olaf"
+    "name": "Olaf",
+    "password": "Made4Summer"
 }
 
 ###

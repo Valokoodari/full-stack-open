@@ -1,7 +1,12 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../utils/db");
 
-class User extends Model {}
+class User extends Model {
+  toJSON = () => {
+    const { passwordHash, ...rest } = this.get();
+    return rest;
+  };
+}
 
 User.init(
   {
@@ -22,11 +27,18 @@ User.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    passwordHash: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
   {
     sequelize,
     underscored: true,
     modelName: "user",
+    defaultScope: {
+      attributes: { exclude: ["passwordHash"] },
+    },
   }
 );
 
