@@ -53,3 +53,29 @@ DELETE http://127.0.0.1:3001/api/blogs/4 HTTP/1.1
 
 DELETE http://127.0.0.1:3001/api/blogs/4 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsc2FAcXVlZW4uc25vdyIsImlkIjoyLCJpYXQiOjE2NzU0MjQ4Mzh9.l-81dkcuVupbOeA5I4JrSQSaOY94EnkNTzMTC36_naE
+
+###
+
+POST http://127.0.0.1:3001/api/blogs HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9sYWZAc25vdy5tYW4iLCJpZCI6MSwiaWF0IjoxNjc1NDIyODYyfQ.TozRHcdqzyaD57kWr4OR3T1BQ_zkLGfxCtHowShDGPo
+
+{
+    "author": "Olaf",
+    "url": "https://www.olaf.blog/2013/why-i-love-summer.html",
+    "title": "Why I love summer?",
+    "year": 1990
+}
+
+###
+
+POST http://127.0.0.1:3001/api/blogs HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9sYWZAc25vdy5tYW4iLCJpZCI6MSwiaWF0IjoxNjc1NDIyODYyfQ.TozRHcdqzyaD57kWr4OR3T1BQ_zkLGfxCtHowShDGPo
+
+{
+    "author": "Olaf",
+    "url": "https://www.olaf.blog/2013/why-i-love-summer.html",
+    "title": "Why I love summer?",
+    "year": 2024
+}

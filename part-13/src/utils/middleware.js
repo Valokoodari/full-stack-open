@@ -10,7 +10,7 @@ const errorHandler = (err, _, res, next) => {
     err.name === "SequelizeUniqueConstraintError"
   ) {
     err.errors.forEach((error) => {
-      res.status(400).json({ error: error.message });
+      return res.status(400).json({ error: error.message });
     });
     return res.status(400).json({ error: err.message });
   }
