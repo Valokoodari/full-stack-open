@@ -20,7 +20,7 @@
 - [x] 13.8 _Add support for users_  
 - [x] 13.9 _Add email validation to user creation_  
 - [x] 13.10 _Implement token-based authentication_  
-- [ ] 13.11 _Only allow a blog to be deleted by the user who added it_  
+- [x] 13.11 _Only allow a blog to be deleted by the user who added it_  
 - [ ] 13.12 _Add blogs to users and user to blogs_  
 - [ ] 13.13 _Implement filtering by keyword_  
 - [ ] 13.14 _Expand the keyword filter to author_  

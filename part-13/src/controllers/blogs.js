@@ -44,8 +44,12 @@ router.put("/:id", blogFinder, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", blogFinder, async (req, res) => {
+router.delete("/:id", blogFinder, loginExtractor, async (req, res) => {
   if (req.blog) {
+    const user = await User.findByPk(req.user.id);
+    if (req.blog.userId !== user.id) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
     await req.blog.destroy();
   }
   res.status(204).end();
