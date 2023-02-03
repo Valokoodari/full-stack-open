@@ -15,7 +15,7 @@
 - [x] 13.4 _Transform the app into a web app_  
 
 ###### b) Join tables and queries  
-- [ ] 13.5 _Restructure the app_  
+- [x] 13.5 _Restructure the app_  
 - [ ] 13.6 _Implement changing the number of likes_  
 - [ ] 13.7 _Error handling middleware_  
 - [ ] 13.8 _Add support for users_  
