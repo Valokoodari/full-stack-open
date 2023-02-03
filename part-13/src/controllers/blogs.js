@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const router = require("express").Router();
 const { loginExtractor } = require("../utils/middleware");
 const { Blog, User } = require("../models");
@@ -11,14 +12,24 @@ const blogFinder = async (req, _, next) => {
   }
 };
 
-router.get("/", async (_, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
+    console.log("Query: ", req.query);
+    let where = {};
+
+    if (req.query.search) {
+      where.title = {
+        [Op.substring]: req.query.search.toLocaleLowerCase(),
+      };
+    }
+
     const blogs = await Blog.findAll({
       attributes: { exclude: ["userId"] },
       include: {
         model: User,
         attributes: ["name"],
       },
+      where,
     });
     res.json(blogs);
   } catch (error) {

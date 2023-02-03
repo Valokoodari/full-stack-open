@@ -22,7 +22,7 @@
 - [x] 13.10 _Implement token-based authentication_  
 - [x] 13.11 _Only allow a blog to be deleted by the user who added it_  
 - [x] 13.12 _Add blogs to users and user to blogs_  
-- [ ] 13.13 _Implement filtering by keyword_  
+- [x] 13.13 _Implement filtering by keyword_  
 - [ ] 13.14 _Expand the keyword filter to author_  
 - [ ] 13.15 _Return the blogs ordered by likes_  
 - [ ] 13.16 _Add a route to get authors_  
