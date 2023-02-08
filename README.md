@@ -30,7 +30,7 @@ as some parts are only available in English.
 | [Part 3](/part-03)  | 7     |
 | [Part 4](/part-04)  | 10    |
 | [Part 5](/part-05)  | 10    |
-| Part  6             | 8     |
+| [Part 6](/part-06)  | 8     |
 | Part  7             | 14    |
 | Part  8             | 11    |
 | Part  9             | 13    |
