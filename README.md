@@ -28,7 +28,7 @@ as some parts are only available in English.
 | [Part 1](/part-01)  | 2     |
 | Part  2             | 7     |
 | [Part 3](/part-03)  | 7     |
-| Part  4             | 10    |
+| [Part 4](/part-04)  | 10    |
 | Part  5             | 10    |
 | Part  6             | 8     |
 | Part  7             | 14    |
