@@ -25,7 +25,7 @@ as some parts are only available in English.
 |                     | Hours |
 | ---                 |  ---  |
 | [Part 0](/part-00)  | 1     |
-| Part  1             | 2     |
+| [Part 1](/part-01)  | 2     |
 | Part  2             | 7     |
 | Part  3             | 7     |
 | Part  4             | 10    |
