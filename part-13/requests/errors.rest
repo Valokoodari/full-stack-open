@@ -79,3 +79,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9sY
     "title": "Why I love summer?",
     "year": 2024
 }
+
+###
+
+PUT http://127.0.0.1:3001/api/readinglists/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsc2FAcXVlZW4uc25vdyIsImlkIjoyLCJpYXQiOjE2NzU4NjQyNzR9.mAmn6LaQACzrJ-K5JuPVaFb2EL5ZiBCoa-ShQH2i55A
+
+{
+    "read": true
+}
