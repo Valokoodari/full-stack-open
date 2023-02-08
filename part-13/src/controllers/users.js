@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
+const { ExclusionConstraintError } = require("sequelize");
 const router = require("express").Router();
-const { User, Blog } = require("../models");
+const { User, Blog, Favorite } = require("../models");
 
 router.get("/", async (_, res, next) => {
   try {
@@ -11,6 +12,39 @@ router.get("/", async (_, res, next) => {
       },
     });
     res.json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/:username", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { username: req.params.username },
+      attributes: ["username", "name"],
+      include: [
+        {
+          model: Blog,
+          attributes: ["title", "url", "likes"],
+        },
+        {
+          model: Favorite,
+          attributes: ["id", "read"],
+          include: [
+            {
+              model: Blog,
+              attributes: { exclude: ["userId", "createdAt", "updatedAt"] },
+            },
+          ],
+        },
+      ],
+    });
+
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).end();
+    }
   } catch (error) {
     next(error);
   }

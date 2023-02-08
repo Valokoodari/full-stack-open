@@ -1,6 +1,6 @@
-# Full Stack Open 2022 submissions
+# [Full Stack Open](https://fullstackopen.com/en/) submissions
 
-I have already completed the course with six credits, but I'm redoing
+I have previously completed the course with six credits, but I'm redoing
 everything mainly to refresh my memory. Weird how memory fades when not
 used...  
 
@@ -37,4 +37,4 @@ as some parts are only available in English.
 | [Part 10](/part-10) | 16    |
 | [Part 11](/part-11) | 11    |
 | [Part 12](/part-12) | 10    |
-| [Part 13](/part-13) | 9     |
+| [Part 13](/part-13) | 11    |

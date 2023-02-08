@@ -31,9 +31,9 @@
 ###### c) Migrations, many-to-many relationships  
 - [x] 13.17 _Clear the database and create a migration to initialize it_  
 - [x] 13.18 _Add the year of writing to blogs (by migration)_  
-- [ ] 13.19 _Implement reading lists to the db_  
-- [ ] 13.20 _Add reading lists to the app_  
-- [ ] 13.21 _Include the read status of blogs in the single-user route_  
+- [x] 13.19 _Implement reading lists to the db_  
+- [x] 13.20 _Add reading lists to the app_  
+- [x] 13.21 _Include the read status of blogs in the single-user route_  
 - [ ] 13.22 _Allow the user to mark blogs in their reading list as read_  
 - [ ] 13.23 _Modify the single-user route to allow filtering by read status_  
 - [ ] 13.24 _Prevent any actions with an expired or revoked token_  

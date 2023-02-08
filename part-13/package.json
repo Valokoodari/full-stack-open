@@ -1,6 +1,6 @@
 {
   "name": "fs-p13-bloglist",
-  "version": "0.0.18",
+  "version": "0.0.21",
   "description": "A bloglist app with a relational database",
   "main": "src/index.js",
   "scripts": {

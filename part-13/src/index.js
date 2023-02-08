@@ -1,4 +1,5 @@
 const express = require("express");
+const readingListRouter = require("./controllers/favorites");
 const authorsRouter = require("./controllers/authors");
 const { errorHandler } = require("./utils/middleware");
 const { connectToDatabase } = require("./utils/db");
@@ -15,6 +16,7 @@ app.use("/api/blogs", blogsRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/authors", authorsRouter);
+app.use("/api/readinglists", readingListRouter);
 
 app.use(errorHandler);
 
