@@ -31,5 +31,5 @@
 - [x] 5.19 _bloglist end to end testing, step3_  
 - [x] 5.20 _bloglist end to end testing, step4_  
 - [x] 5.21 _bloglist end to end testing, step5_  
+  - [x] bonus _check that other users cannot delete the blog_
 - [x] 5.22 _bloglist end to end testing, step6_  
-- [x] 5.23 _bloglist end to end testing, step7_  
