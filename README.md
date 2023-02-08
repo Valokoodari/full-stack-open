@@ -32,7 +32,7 @@ as some parts are only available in English.
 | [Part 5](/part-05)  | 10    |
 | [Part 6](/part-06)  | 8     |
 | [Part 7](/part-07)  | 14    |
-| Part  8             | 11    |
+| [Part 8](/part-08)  | 11    |
 | Part  9             | 13    |
 | [Part 10](/part-10) | 16    |
 | [Part 11](/part-11) | 11    |
