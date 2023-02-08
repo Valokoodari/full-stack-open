@@ -19,6 +19,12 @@ router.get("/", async (_, res, next) => {
 
 router.get("/:username", async (req, res, next) => {
   try {
+    let where = {};
+
+    if (req.query.read) {
+      where = { read: req.query.read === "true" };
+    }
+
     const user = await User.findOne({
       where: { username: req.params.username },
       attributes: ["username", "name"],
@@ -36,6 +42,7 @@ router.get("/:username", async (req, res, next) => {
               attributes: { exclude: ["userId", "createdAt", "updatedAt"] },
             },
           ],
+          where,
         },
       ],
     });

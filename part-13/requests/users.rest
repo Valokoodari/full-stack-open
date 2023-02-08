@@ -34,3 +34,11 @@ Content-Type: application/json
     "name": "Elsa",
     "password": "LetItGo"
 }
+
+###
+
+GET http://127.0.0.1:3001/api/users/olaf@snow.man?read=true HTTP/1.1
+
+###
+
+GET http://127.0.0.1:3001/api/users/olaf@snow.man?read=false HTTP/1.1
