@@ -26,7 +26,7 @@ as some parts are only available in English.
 | ---                 |  ---  |
 | [Part 0](/part-00)  | 1     |
 | [Part 1](/part-01)  | 2     |
-| Part  2             | 7     |
+| [Part 2](/part-02)  | 7     |
 | [Part 3](/part-03)  | 7     |
 | [Part 4](/part-04)  | 10    |
 | [Part 5](/part-05)  | 10    |
