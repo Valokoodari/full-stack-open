@@ -1,8 +1,9 @@
+const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
 const { SECRET } = require("../utils/config");
-const { User } = require("../models");
+const { User, Session } = require("../models");
 
 router.post("/", async (req, res, next) => {
   try {
@@ -25,12 +26,21 @@ router.post("/", async (req, res, next) => {
       });
     }
 
-    const userForToken = {
+    if (user.disabled) {
+      return res.status(401).json({
+        error: "user is disabled",
+      });
+    }
+
+    const session = await Session.create({ sid: uuid.v4(), userId: user.id });
+
+    const dataForToken = {
       username: user.username,
       id: user.id,
+      sid: session.sid,
     };
 
-    const token = jwt.sign(userForToken, SECRET);
+    const token = jwt.sign(dataForToken, SECRET, { expiresIn: "30d" });
 
     res.status(200).send({ token, username: user.username, name: user.name });
   } catch (error) {

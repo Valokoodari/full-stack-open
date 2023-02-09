@@ -36,4 +36,4 @@
 - [x] 13.21 _Include the read status of blogs in the single-user route_  
 - [x] 13.22 _Allow the user to mark blogs in their reading list as read_  
 - [x] 13.23 _Modify the single-user route to allow filtering by read status_  
-- [ ] 13.24 _Prevent any actions with an expired or revoked token_  
+- [x] 13.24 _Prevent any actions with an expired or revoked token_  

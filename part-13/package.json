@@ -1,6 +1,6 @@
 {
   "name": "fs-p13-bloglist",
-  "version": "0.0.23",
+  "version": "0.13.24",
   "description": "A bloglist app with a relational database",
   "main": "src/index.js",
   "scripts": {
@@ -21,7 +21,8 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "sequelize": "^6.28.0",
-    "umzug": "^3.2.1"
+    "umzug": "^3.2.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
