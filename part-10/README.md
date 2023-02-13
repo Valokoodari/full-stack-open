@@ -37,4 +37,3 @@
 - [x] 10.25 _infinite scrolling for the repository's reviews list_  
 - [x] 10.26 _the user's reviews view_  
 - [x] 10.27 _review actions_  
-  - [x] bonus _[deploy the app](https://github.com/valolipasto/FullStackOpen/releases/tag/e10.27)_
