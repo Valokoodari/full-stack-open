@@ -1,0 +1,38 @@
+name: Deploy Phonebook
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - part-03/**
+      - .github/workflows/phonebook-p3-deploy.yml
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: deploy to dokku
+        uses: dokku/github-action@v1.4.0
+        with:
+          git_remote_url: ssh://dokku@valokoodari.eu:25523/fs-phonebook
+          ssh_private_key: ${{ secrets.DOKKU_PRIVATE_KEY }}
+      - name: discord failure notification
+        if: failure()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Phonebook
+          title: deployment failed
+      - name: discord success notification
+        if: success()
+        uses: sarisia/actions-status-discord@v1.11.0
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          username: FullStackOpen - Phonebook
+          nodetail: true
+          title: A new version of Phonebook was deployed
+          description: View the app at https://phonebook.valokoodari.eu
